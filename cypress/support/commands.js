@@ -10,6 +10,16 @@
 import 'cypress-file-upload';
 require('@4tw/cypress-drag-drop')
 
+Cypress.Commands.add("LoginSpace", (username, password) =>
+{
+    cy.fixture("DOM/space/Login.Page").then((the) =>
+    {
+        username && cy.get(the.username.input).type(username)
+        password && cy.get(the.password.input).type(password)
+        cy.get(the.loginButton).click()
+    })
+})
+
 
 
 // -- This is a parent command --
