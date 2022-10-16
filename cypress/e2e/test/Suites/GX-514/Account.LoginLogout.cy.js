@@ -1,4 +1,0 @@
-describe("whatever", () =>
-{
-    sdsdsdsds
-})
