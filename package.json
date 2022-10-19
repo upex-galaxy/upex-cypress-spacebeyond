@@ -5,8 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "cypress open",
-		"file": "cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsconfig.json --spec",
-		"bdd": "node ./cucumber-html-report.js"
+		"file": "cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsconfig.json --record --key cb500fb3-a4cc-48b3-9b6e-a2863295cb3c --spec"
 	},
 	"keywords": [
 		"cypress",

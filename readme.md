@@ -1,4 +1,4 @@
-[![CYPEX](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/f9y7eu/cypex&style=for-the-badge&logo=cypress)](https://dashboard.cypress.io/projects/f9y7eu/runs)
+[![CYPEX L1 SPACEBEYOND](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/sugqpy&style=for-the-badge&logo=cypress)](https://dashboard.cypress.io/projects/sugqpy/runs)
 
 # Testing Automation - Cypress 10.9.0 + Cucumber
 ![UPEX's Banners (linkedin) (1)](https://user-images.githubusercontent.com/91127281/189470339-acea5782-16f1-4f06-9ce0-df54fd3ead9d.png)
@@ -12,7 +12,7 @@ Cypress es un Framework de Automatización de Next Generation construido para we
 1. **Clona el Proyecto**: `git clone <URLdelRepositorioGitHub>`
 2. **Instala todas las dependencias**: `npm i` (i de install) o puedes usar `npm i -f` (-f de force) por si estás teniendo conflictos al instalar.
 3. **Corre el comando**: `npx cypress open` o `npm test` (ya que en Package.json tenemos la variable "test" como el "cypress open") para abrir Cypress!
-4. **Para correr pruebas en la terminal, ejecuta**: `npm run file */**/<filename>`, donde la variable "**file**" es "cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsconfig.json --record --key {key} --spec", cuyo atajo es para que podamos correr las pruebas de un directorio que especifiquemos, usando el navegador de Chrome, generando 1 Reporte XML para importar a Jira y otro para generar un hermoso html, y adicionalmente actualizar el Cypress Dashboard del Proyecto.
+4. **Para correr pruebas en la terminal, ejecuta**: `npm run file */**/<filename>`, donde la variable "file" es "*cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsconfig.json --record --key {key} --spec*", cuyo atajo es para que podamos correr las pruebas de un directorio que especifiquemos, usando el navegador de Chrome, generando 1 Reporte XML para importar a Jira y otro para generar un hermoso html, y adicionalmente actualizar el Cypress Dashboard del Proyecto.
 
 # Las Guías de UPEX para saber cómo trabajar en un Workspace Real están Confluence: [CYPRESS AL GRANO](https://upexgalaxy1.atlassian.net/wiki/spaces/UG/pages/852822)
 

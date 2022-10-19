@@ -1,8 +1,8 @@
 const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
-	// @Ely: CYPRESS DASHBOARD PARA VER NUESTRAS EJECUCIONES EN LA WEB:
-	projectId: '',
+	// @Ely: AHORA TENEMOS NUESTRO PROPIO CYPRESS DASHBOARD PARA VER NUESTRAS EJECUCIONES EN LA WEB:
+	projectId: 'sugqpy',
 	// 1280×720 is considered to be the most suitable screen resolution for the desktop website version:
 	viewportWidth: 1280,
 	viewportHeight: 720,
@@ -34,6 +34,6 @@ module.exports = defineConfig({
 		specPattern: ['**/*.feature', 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}'],
 		// Url used as prefix for cy.visit() or cy.request() command's url 
 		// (NO USAR BASEURL SI SE EJECUTA UN INDEX.HTML):
-		// baseUrl: 'https://'
+		baseUrl: 'https://demo.testim.io/'
 	}
 })
