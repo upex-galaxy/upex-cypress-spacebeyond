@@ -12,9 +12,24 @@ require('@4tw/cypress-drag-drop')
 
 // 👾🚩🚩🚩NO ESCRIBAS UN NUEVO COMANDO EN ESTA LINEA, DIRÍGETE HASTA LA ÚLTIMA LINEA DISPONIBLE👇🏻👇🏻👇🏻✅
 
-Cypress.Commands.add("React", (element,tag) =>
+Cypress.Commands.add("ReactElement", (element,$tag) => 
 {
-    cy.get(`[data-react-toolbox=${element}] ${tag}`)
+    // Command para buscar elemento de React por primer parent y child.
+    if ($tag !== undefined){
+        cy.get(`[data-react-toolbox='${element}']` + ` ${$tag}`)
+    } else {
+        cy.get(`[data-react-toolbox='${element}']`)
+    }
+})
+Cypress.Commands.add("ReactHaveClass", (element,$class) => 
+{
+    // Command para buscar elemento de React que CONTENGA DICHA CLASE
+        cy.get(`[data-react-toolbox='${element}'][class*='${$class}']`)
+})
+Cypress.Commands.add("ReactHaveNotClass", (element,$class) => 
+{
+    // Command para buscar elemento de React que NO CONTENTA DICHA CLASE
+        cy.get(`[data-react-toolbox='${element}']:not([class*='${$class}'])`)
 })
 
 // 👾🚩🚩🚩☝🏻☝🏻☝🏻COMIENZA A ESCRIBIR TU NUEVO COMMAND AQUÍ! A PARTIR DE ESTA LÍNEA DISPONIBLE☝🏻☝🏻☝🏻✅
