@@ -12,7 +12,10 @@ require('@4tw/cypress-drag-drop')
 
 // 👾🚩🚩🚩NO ESCRIBAS UN NUEVO COMANDO EN ESTA LINEA, DIRÍGETE HASTA LA ÚLTIMA LINEA DISPONIBLE👇🏻👇🏻👇🏻✅
 
-
+Cypress.Commands.add("React", (element,tag) =>
+{
+    cy.get(`[data-react-toolbox=${element}] ${tag}`)
+})
 
 // 👾🚩🚩🚩☝🏻☝🏻☝🏻COMIENZA A ESCRIBIR TU NUEVO COMMAND AQUÍ! A PARTIR DE ESTA LÍNEA DISPONIBLE☝🏻☝🏻☝🏻✅
 
