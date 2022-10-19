@@ -8,6 +8,6 @@
 		"mochaFile": "reports/test-results.xml"
 	},
 	"mochawesomeReporterReporterOptions": {
-		"mochaFile": "cucumber-report.json"
+		"mochaFile": "mochawesome.json"
 	}
 }
