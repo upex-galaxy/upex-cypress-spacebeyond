@@ -64,7 +64,7 @@ describe("SpaceBeyond | Log-In and Log-Out ", () => {
                 let dateName = $el.text()
                 if(dateName=='31')
                 {
-                    cy.wrap($el)
+                    cy.wrap($el).click()
                 } 
             })
             cy.get('.theme__navigation___3eiS- > :nth-child(2)').click({force: true })
@@ -79,16 +79,11 @@ describe("SpaceBeyond | Log-In and Log-Out ", () => {
                 let dateName1 = $el.text()
                 if(dateName1=='31')
                 {
-                    cy.wrap($el)
+                    cy.wrap($el).click({ waitForAnimations: false })
                 } 
             })
             cy.get('.theme__navigation___3eiS- > :nth-child(2)').click({force: true })   
-            cy.get('.Hero__hero___1FDXn > :nth-child(4) > .theme__button___1iKuo').click()     
-    
-        // cy.get('.Hero__form-box___126DY > :nth-child(3) > .theme__input___qUQeP').click()
-        //     cy.get('.theme__active___31xyK > .theme__values___1jS4g > :nth-child(4)').click()
-        //     cy.get(':nth-child(4) > .theme__input___qUQeP > .theme__inputElement___27dyY').click()
-        //     cy.get('.theme__active___31xyK > .theme__values___1jS4g > :nth-child(3)').click({force: true})
-        //     cy.get('.Hero__hero___1FDXn > :nth-child(4) > .theme__button___1iKuo').click()    
+            cy.get('.Hero__hero___1FDXn > :nth-child(4) > .theme__button___1iKuo').click() 
     })
 })
+//cy.wrap($el).invoke('show').click()
