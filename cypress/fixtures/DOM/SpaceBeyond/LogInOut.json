@@ -2,7 +2,8 @@
     "LoginButton": {
         "On": ".NavButton__nav-button___34wHC",
         "Off": "cy.get('.ec_account_right > :nth-child(6) > .ec_account_dashboard_link')",
-        "In": ".Login__button-box___1OzjH > .theme__raised___ONZv6"
+        "In": ".Login__button-box___1OzjH > .theme__raised___ONZv6",
+        "LogOut": ".mui-btn > :nth-child(1)"
     },
     "username": {
         "input": "#login > :nth-child(1) > .theme__inputElement___27dyY",
@@ -17,5 +18,6 @@
             "valid": "password123",
             "invalid": "towTowers"
         }
-    }
+    },
+    "assert": "be.visible" 
 }
