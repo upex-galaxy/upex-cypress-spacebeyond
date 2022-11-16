@@ -3,7 +3,7 @@ describe("SpaceBeyond | Gallery | Clasificar viaje según destino, color y preci
     beforeEach("Precondición: Usuario debe estar situado en el Home Page de la pagina", () =>
     {
         cy.visit("https://demo.testim.io/")
-        cy.contains("YOUR NEXT DESTINATION")
+        cy.contains("")
             .should("be.visible")
         cy.url().should("contain","testim.io")
     })
