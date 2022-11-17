@@ -3,13 +3,17 @@ describe("SpaceBeyond | Gallery | Clasificar viaje según destino, color y preci
     beforeEach("Precondición: Usuario debe estar situado en el Home Page de la pagina", () =>
     {
         cy.visit("https://demo.testim.io/")
-        cy.contains("")
-            .should("be.visible")
-        cy.url().should("contain","testim.io")
+        cy.url().should("contain","testim")
+        cy.login("delia","1")
     })
     it("2827 | TC1: Validar encontrar Destino por tipo y color cuando el precio seleccionado  esta en el rango mínimo", () =>
     {
-        
+                //abrir el dropdown Launch( destino)
+                cy.get("[value='Launch']").eq(0)
+                .click({force:true})
+            cy.get("[data-react-toolbox='dropdown']").eq(3)
+                .should("be.visible")
+    
     })
     it("2827 | TC2: Intentar encontrar Destino por tipo y  precio mínimo cuando el color no hace match con el destino ", () =>
     {
