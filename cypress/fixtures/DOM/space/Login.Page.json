@@ -1,0 +1,12 @@
+{
+    "username": {
+        "input": "[tabindex='1']",
+        "data": "Upex"
+    },
+    "password": {
+        "input": "[tabindex='2']",
+        "data": "Upex"
+    },
+    "loginButton": "[tabindex='3']",
+    "Login": "Hello"
+}
