@@ -1,0 +1,9 @@
+{
+    "DatePicker":"[data-react-toolbox='date-picker']",
+    "DatePickerOpen": "[data-react-toolbox='dialog']",
+    "DayVisible":"[data-react-toolbox='day']:not([class*='disable'])",
+    "ButtonSelectDest":"[data-react-toolbox='button']",
+    "DPAdults":"input[value='Adults (18+)']",
+    "DPChildren":"input[value='Children (0-7)']"
+    
+}
