@@ -5,5 +5,4 @@
     "ButtonSelectDest":"[data-react-toolbox='button']",
     "DPAdults":"input[value='Adults (18+)']",
     "DPChildren":"input[value='Children (0-7)']"
-    
 }
