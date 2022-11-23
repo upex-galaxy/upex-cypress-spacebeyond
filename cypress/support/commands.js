@@ -8,7 +8,12 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 import 'cypress-file-upload';
+import 'cypress-wait-until'
 require('@4tw/cypress-drag-drop')
+require('cypress-downloadfile/lib/downloadFileCommand')
+//require
+//require
+//require
 
 // 👾🚩🚩🚩NO ESCRIBAS UN NUEVO COMANDO EN ESTA LINEA, DIRÍGETE HASTA LA ÚLTIMA LINEA DISPONIBLE👇🏻👇🏻👇🏻✅
 
