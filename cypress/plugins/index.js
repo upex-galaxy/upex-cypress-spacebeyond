@@ -32,10 +32,6 @@ module.exports = (on, config) => {
 			})
 }
 
-//For Cypress New Commands by Dependency:
-const { downloadFile } = require('cypress-downloadfile/lib/addPlugin')
-const { verifyDownloadTasks } = require('cy-verify-downloads');
-
 //For connecting to SQL Server
 //Removed
 
