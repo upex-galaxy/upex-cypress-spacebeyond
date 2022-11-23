@@ -139,6 +139,9 @@
 		"features/**/*.rb",
 		"*specs*/**/.cs",
 		"cypress/2e2/cucumber-test/**/*.js"
+	],
+	"githubPullRequests.ignoredPullRequestBranches": [
+		"cypex"
 	]
 	
 }
