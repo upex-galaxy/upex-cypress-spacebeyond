@@ -8,28 +8,30 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 import 'cypress-file-upload';
+import 'cypress-wait-until'
 require('@4tw/cypress-drag-drop')
+require('cypress-downloadfile/lib/downloadFileCommand')
+//require
+//require
+//require
 
 // 👾🚩🚩🚩NO ESCRIBAS UN NUEVO COMANDO EN ESTA LINEA, DIRÍGETE HASTA LA ÚLTIMA LINEA DISPONIBLE👇🏻👇🏻👇🏻✅
 
-Cypress.Commands.add("ReactElement", (element,$tag) => 
-{
-    // Command para buscar elemento de React por primer parent y child.
-    if ($tag !== undefined){
-        cy.get(`[data-react-toolbox='${element}']` + ` ${$tag}`)
-    } else {
-        cy.get(`[data-react-toolbox='${element}']`)
-    }
+Cypress.Commands.add('ReactElement', (element, $tag) => {
+	// Command para buscar elemento de React por primer parent y child.
+	if ($tag !== undefined) {
+		cy.get(`[data-react-toolbox='${element}']` + ` ${$tag}`)
+	} else {
+		cy.get(`[data-react-toolbox='${element}']`)
+	}
 })
-Cypress.Commands.add("ReactHaveClass", (element,$class) => 
-{
-    // Command para buscar elemento de React que CONTENGA DICHA CLASE
-        cy.get(`[data-react-toolbox='${element}'][class*='${$class}']`)
+Cypress.Commands.add('ReactHaveClass', (element, $class) => {
+	// Command para buscar elemento de React que CONTENGA DICHA CLASE
+	cy.get(`[data-react-toolbox='${element}'][class*='${$class}']`)
 })
-Cypress.Commands.add("ReactHaveNotClass", (element,$class) => 
-{
-    // Command para buscar elemento de React que NO CONTENTA DICHA CLASE
-        cy.get(`[data-react-toolbox='${element}']:not([class*='${$class}'])`)
+Cypress.Commands.add('ReactHaveNotClass', (element, $class) => {
+	// Command para buscar elemento de React que NO CONTENTA DICHA CLASE
+	cy.get(`[data-react-toolbox='${element}']:not([class*='${$class}'])`)
 })
 
 // 👾🚩🚩🚩☝🏻☝🏻☝🏻COMIENZA A ESCRIBIR TU NUEVO COMMAND AQUÍ! A PARTIR DE ESTA LÍNEA DISPONIBLE☝🏻☝🏻☝🏻✅
@@ -48,3 +50,18 @@ Cypress.Commands.add("ReactHaveNotClass", (element,$class) =>
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login', (username, password) => {
+	cy.fixture('DOM/Account/LoginLogout.Page').then((the) => {
+		username && cy.get(the.username.input).type(username)
+		password && cy.get(the.password.input).type(password)
+		cy.get(the.button.input).click()
+	})
+})
+
+Cypress.Commands.add('logout', () => {
+	cy.fixture('DOM/Account/LoginLogout.Page').then((the) => {
+		cy.get(the.buttonDropDownList).click()
+		cy.get(the.buttonLogout).click()
+	})
+})
