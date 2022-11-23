@@ -23,6 +23,7 @@ jobs:
               uses: cypress-io/github-action@v4
               with:
                   browser: chrome
+                  config-file: cypress.config.js
                   command: |
                     npm run file */**/GX-2/*.cy.js
                   record: true
