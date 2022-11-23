@@ -250,12 +250,41 @@ describe("SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasajer
     })
     it("2317 | TC08: Verificar que usuario pueda buscar destino con fecha de partida invalida", () =>
     {
-
+        cy.fixture("DOM/Datepicker/dataDatePicker.Page").then((the)=>{
+            cy.get(the.DatePicker).eq(0).click() //Dp Departing
+            cy.get(the.DatePickerOpen).should("be.visible")
+            
+            /* Seleeciona un dia */
+            cy.get(the.DatePickerOpen).within((datePicker)=>{
+                cy.get(the.DayNotVisible).then(($days)=>{
+                    const list = $days.length - 1
+                    const dayRandom = Math.floor(Math.random() * list)
+                    cy.wrap(dayRandom).as("SelectDia")
+                    cy.wrap($days).eq(dayRandom).then(($Day)=>{
+                        var day = $Day.text()
+                        cy.log(day)
+                        cy.wrap($Day).click()
+                       // cy.get($Day).eq(0).should('have.attr','div','active')
+                    })
+                    cy.log(this.SelectDia)
+                })
+                cy.contains("Ok").click()
+            })
+            cy.wait(1000)
+         
+            cy.get(the.ButtonSelectDest).eq(0).should('have.text','Select Destination')
+            cy.get(the.ButtonSelectDest).eq(0).should("be.visible").click()
+          
+        })
     })
+
     it("2317 | TC09: Verificar que usuario pueda buscar destino con fecha de retorno invalida", () =>
     {
+      
+      
     })
-    it.only("2317 | TC10: Verificar que usuario pueda buscar destino solo por fecha valida de partida", () =>
+
+    it("2317 | TC10: Verificar que usuario pueda buscar destino solo por fecha valida de partida", () =>
     {
         cy.fixture("DOM/Datepicker/dataDatePicker.Page").then((the)=>{
             cy.get(the.DatePicker).eq(0).click() //Dp Departing
@@ -270,6 +299,7 @@ describe("SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasajer
                         const day = $Day.text()
                         cy.log(day)
                         cy.wrap($Day).click()
+                        cy.get(the.ButtonSelectDest).eq(0).should('have.text','Select Destination')
                     })
                 })
                 cy.contains("Ok").click()
@@ -282,7 +312,7 @@ describe("SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasajer
             cy.get("[data-react-toolbox='input']").eq(2).children('input').should("have.attr","value","Adults (18+)")
         })
     })
-    it.only("2317 | TC11: Verificar que usuario pueda buscar destino solo por fecha valida retorno", () =>
+    it("2317 | TC11: Verificar que usuario pueda buscar destino solo por fecha valida retorno", () =>
     {
         cy.fixture("DOM/Datepicker/dataDatePicker.Page").then((the)=>{
             /* Seleeciona un Retorno */
