@@ -1,0 +1,19 @@
+{
+    "input": 
+    {
+        "LoginButton":"Log in",
+        "username": "[tabindex='1']", 
+        "password": "[tabindex='2']",
+        "LogIn": "[tabindex='3']" ,
+        "Launch":"input[value='Launch']",
+        "PlanetColor":"input[value='Planet color']", 
+        "Precio":"[data-react-toolbox='progress-bar']",
+        "Card":"[data-react-toolbox='card']"
+    },
+    "data": 
+    {
+        "username": "delia", 
+        "password": "1"      
+    }
+}
+
