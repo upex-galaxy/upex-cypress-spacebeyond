@@ -13,7 +13,7 @@ Cypress es un Framework de Automatización de Next Generation construido para we
     ```
     git clone https://github.com/upex-galaxy/L1-cypex-spacebeyond.git
     ````
-
+__
 2. **Instala todas las dependencias**: 
     ```
     npm i
@@ -24,12 +24,13 @@ Cypress es un Framework de Automatización de Next Generation construido para we
         npm i -f
         ``` 
         * (usa el parámetro `-f` de force) por si estás teniendo conflictos al instalar.
+__
 3. **Para abrir la App de Cypress, corre el comando**: 
     ```
     npm test
     ``` 
     * también puede usar `npx cypress open` (ya que en Package.json tenemos la variable "test" como el "cypress open") para abrir Cypress!
-
+__
 4. **Para correr pruebas y generar Reportes XML y HTML, ejecuta**: 
     ```
     npm run file */**/<filename>
@@ -37,9 +38,10 @@ Cypress es un Framework de Automatización de Next Generation construido para we
     * donde la variable "file" es:
      `cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsconfig.json --record --key {key} --spec`, 
      cuyo atajo es para que podamos correr las pruebas de un directorio que especifiquemos, usando el navegador de Chrome, generando 1 Reporte XML para importar a Jira y otro para generar un hermoso html, y adicionalmente actualizar el Cypress Dashboard del Proyecto.
+__
 5. AHORA CON **CYPRESS DASHBOARD**, puedes ver todas las ejecuciones y resultados de prueba del proyecto!
 Visita: [CYPRESS DASHBOARD](https://dashboard.cypress.io/projects/2pw67q/analytics/runs-over-time)
-
+__
 ## APRENDE Y GANA EXPERIENCIA TRABAJANDO COMO QA AUTOMATION EN GALAXY: 
 # LEE ESTA GUÍA: [CYPRESS AL GRANO](https://upexgalaxy3.atlassian.net/wiki/spaces/UG/pages/1410643)
 

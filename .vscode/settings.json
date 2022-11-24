@@ -70,7 +70,6 @@
 		"*.tx.js": "Test-jsx",
 		"*.cy.js": "Test-js",
 		"*.Page.json": "3d",
-		"*.Page.js": "3d",
 		"*.js": "Cypress",
 		"commands.js": "webpack",
 		"*.json": "Cypress",
@@ -79,7 +78,13 @@
 		"cucumber-json-formatter.exe": "cucumber",
 		"cucumber-report.json": "cucumber",
 		"jsconfig.json": "Javascript-map",
-		"settings.json": "Vscode"
+		"settings.json": "Vscode",
+		"*.Page.js": "3d",
+		"*.yml": "todo",
+		"scripts.js": "console",
+		"launch.json": "http",
+		"package-lock.json": "npm",
+		"package.json": "npm"
 	},
 	"material-icon-theme.folders.associations": {
 		"api-testing": "api",
@@ -93,6 +98,7 @@
 		"cucumber-json": "Resolver",
 		"cucumber-report.html": "Resolver",
 		"Features": "Resolver",
+		"Step-Definitions": "test",
 		"DOM": "class",
 		"POM": "context",
 		"Pages": "context",
