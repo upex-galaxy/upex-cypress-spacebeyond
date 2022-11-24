@@ -1,4 +1,6 @@
-const { defineConfig } = require('cypress');
+const {defineConfig} = require('cypress')
+const {downloadFile} = require('cypress-downloadfile/lib/addPlugin')
+const { verifyDownloadTasks } = require('cy-verify-downloads');
 
 module.exports = defineConfig({
 	// @Ely: AHORA TENEMOS NUESTRO PROPIO CYPRESS DASHBOARD PARA VER NUESTRAS EJECUCIONES EN LA WEB:
@@ -28,6 +30,8 @@ module.exports = defineConfig({
 		experimentalSessionAndOrigin: true, // Para poder ver el Test Run de pruebas API, ésto debe estar en FALSE.
 		// Use Cypress plugins:
 		setupNodeEvents(on, config) {
+			on('task', {downloadFile})
+			on('task', verifyDownloadTasks);
 			return require('./cypress/plugins/index.js')(on, config)			
 		},		
 		// Glob pattern to determine what test files to load:
