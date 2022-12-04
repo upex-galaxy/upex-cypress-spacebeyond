@@ -37,8 +37,6 @@ module.exports = (on, config) => {
 
 // Modules
 module.exports = (on, config) => {
-	on('task', { downloadFile }) //Cypress file Download
-	on('task', { verifyDownloadTasks })
 	on('file:preprocessor', selectTestsWithGrep(config)) //Adding Tags to Tests
 	on('task', {
 		queryDb: (query) => {
