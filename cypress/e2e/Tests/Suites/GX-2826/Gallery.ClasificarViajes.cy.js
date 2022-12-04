@@ -1,7 +1,4 @@
-const { xorBy } = require("cypress/types/lodash")
-const { wrap } = require("module")
-
-describe('SpaceBeyond | Gallery | Clasificar viaje según destino, color y precio', () => 
+describe.skip('SpaceBeyond | Gallery | Clasificar viaje según destino, color y precio', () => 
 {
 	let the
 
