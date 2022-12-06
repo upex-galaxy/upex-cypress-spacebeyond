@@ -182,3 +182,5 @@ Cypress.Commands.add('logout', () => {
 		cy.get(the.buttonLogout).click()
 	})
 })
+
+
