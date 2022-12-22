@@ -1,6 +1,6 @@
 [![CYPEX L1 SPACEBEYOND](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/sugqpy&style=for-the-badge&logo=cypress)](https://dashboard.cypress.io/projects/sugqpy/runs)
 
-# 🧪Testing Automation - Cypress 10.9.0 + Cucumber
+# 🧪Testing Automation - Cypress 12👾 + Cucumber
 ![UPEX's Banners (linkedin) (1)](https://user-images.githubusercontent.com/91127281/189470339-acea5782-16f1-4f06-9ce0-df54fd3ead9d.png)
 
 Cypress es el MEJOR FRAMEWORK DE AUTOMATION E2E actualmente! No hay rival! Además de que es el framework más amigable para aprender! 
@@ -12,7 +12,7 @@ Cypress es un Framework de Automatización de Next Generation construido para we
 
 1. **Clona el Proyecto**: 
     ```
-    git clone https://github.com/upex-galaxy/cypress-cucumber.git
+    git clone https://github.com/upex-galaxy/L1-cypex-spacebeyond.git
     ````
 ___
 2. **Instala todas las dependencias**: 
@@ -20,11 +20,6 @@ ___
     npm i
     ``` 
     * (la letra `i` es de `install`)
-    o puedes usar:
-        ```
-        npm i -f
-        ``` 
-        * (usa el parámetro `-f` de force) por si estás teniendo conflictos al instalar.
 ___
 3. **Para abrir la App de Cypress, corre el comando**: 
     ```

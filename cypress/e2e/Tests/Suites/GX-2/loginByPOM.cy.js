@@ -1,4 +1,4 @@
-const { If } = require('../../../../support/POM/Login.Page')
+const { login } = require('@pages/Login.Page')
 
 describe('US Example | Test Page Object Model', () => {
     beforeEach(() => {
@@ -7,8 +7,8 @@ describe('US Example | Test Page Object Model', () => {
         cy.url().should("contain","login")
     });
     it('test the login page', () => {
-        If.enterUsername("UPEX")
-        If.enterPassword("123456")
-        If.submit()
+        login.enterUsername("UPEX")
+        login.enterPassword("123456")
+        login.submit()
     });
 });
