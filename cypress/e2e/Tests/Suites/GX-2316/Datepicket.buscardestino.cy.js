@@ -249,65 +249,65 @@ describe("SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasajer
     //         cy.get("[data-react-toolbox='input']").eq(3).children('input').should("have.attr","value","Children (0-7)")
     //         cy.get("[data-react-toolbox='input']").eq(2).children('input').should("have.attr","value","Adults (18+)")
             
-    //     })
-    // })
-    // it("2317 | TC08: Verificar que usuario pueda buscar destino con fecha de partida invalida", () =>
-    // {
+        })
+    })
+    it("2317 | TC08: Verificar que usuario pueda buscar destino con fecha de partida invalida", () =>
+    {
 
-    // })
-    // it("2317 | TC09: Verificar que usuario pueda buscar destino con fecha de retorno invalida", () =>
-    // {
-    // })
-    // it.only("2317 | TC10: Verificar que usuario pueda buscar destino solo por fecha valida de partida", () =>
-    // {
-    //     cy.fixture("DOM/Datepicker/dataDatePicker.Page").then((the)=>{
-    //         cy.get(the.DatePicker).eq(0).click() //Dp Departing
-    //         cy.get(the.DatePickerOpen).should("be.visible")
+    })
+    it("2317 | TC09: Verificar que usuario pueda buscar destino con fecha de retorno invalida", () =>
+    {
+    })
+    it.only("2317 | TC10: Verificar que usuario pueda buscar destino solo por fecha valida de partida", () =>
+    {
+        cy.fixture("DOM/Datepicker/dataDatePicker.Page").then((the)=>{
+            cy.get(the.DatePicker).eq(0).click() //Dp Departing
+            cy.get(the.DatePickerOpen).should("be.visible")
             
-    //         /* Seleeciona un dia */
-    //         cy.get(the.DatePickerOpen).within((datePicker)=>{
-    //             cy.get(the.DayVisible).then(($days)=>{
-    //                 const list = $days.length - 1
-    //                 const dayRandom = Math.floor(Math.random() * list)
-    //                 cy.wrap($days).eq(dayRandom).then(($Day)=>{
-    //                     const day = $Day.text()
-    //                     cy.log(day)
-    //                     cy.wrap($Day).click()
-    //                 })
-    //             })
-    //             cy.contains("Ok").click()
-    //         })
-    //         cy.wait(1000)
+            /* Seleeciona un dia */
+            cy.get(the.DatePickerOpen).within((datePicker)=>{
+                cy.get(the.DayVisible).then(($days)=>{
+                    const list = $days.length - 1
+                    const dayRandom = Math.floor(Math.random() * list)
+                    cy.wrap($days).eq(dayRandom).then(($Day)=>{
+                        const day = $Day.text()
+                        cy.log(day)
+                        cy.wrap($Day).click()
+                    })
+                })
+                cy.contains("Ok").click()
+            })
+            cy.wait(1000)
 
-    //         cy.get(the.ButtonSelectDest).eq(0).should('have.text','Select Destination')
-    //         cy.get(the.ButtonSelectDest).eq(0).should("be.visible").click()
-    //         cy.get("[data-react-toolbox='input']").eq(3).children('input').should("have.attr","value","Children (0-7)")
-    //         cy.get("[data-react-toolbox='input']").eq(2).children('input').should("have.attr","value","Adults (18+)")
-    //     })
-    // })
-    // it.only("2317 | TC11: Verificar que usuario pueda buscar destino solo por fecha valida retorno", () =>
-    // {
-    //     cy.fixture("DOM/Datepicker/dataDatePicker.Page").then((the)=>{
-    //         /* Seleeciona un Retorno */
-    //         cy.get(the.DatePicker).eq(1).click() //Dp Returning
-    //         /* Seleeciona un dia */
-    //         cy.get(the.DatePickerOpen).within((datePicker)=>{
-    //             cy.get(the.DayVisible).then(($days)=>{
-    //                 const list = $days.length - 1
-    //                 const dayRandom = Math.floor(Math.random() * list)
-    //                 cy.wrap($days).eq(dayRandom).then(($Day)=>{
-    //                     const day = $Day.text()
-    //                     cy.log(day)
-    //                     cy.wrap($Day).click()
-    //                 })
-    //             })
-    //             cy.contains("Ok").click()
-    //         })
-    //         cy.get(the.ButtonSelectDest).eq(0).should('have.text','Select Destination')
-    //         cy.get(the.ButtonSelectDest).eq(0).should("be.visible").click()
-    //         cy.get("[data-react-toolbox='input']").eq(3).children('input').should("have.attr","value","Children (0-7)")
-    //         cy.get("[data-react-toolbox='input']").eq(2).children('input').should("have.attr","value","Adults (18+)")
-    //     })
-    // })
+            cy.get(the.ButtonSelectDest).eq(0).should('have.text','Select Destination')
+            cy.get(the.ButtonSelectDest).eq(0).should("be.visible").click()
+            cy.get("[data-react-toolbox='input']").eq(3).children('input').should("have.attr","value","Children (0-7)")
+            cy.get("[data-react-toolbox='input']").eq(2).children('input').should("have.attr","value","Adults (18+)")
+        })
+    })
+    it.only("2317 | TC11: Verificar que usuario pueda buscar destino solo por fecha valida retorno", () =>
+    {
+        cy.fixture("DOM/Datepicker/dataDatePicker.Page").then((the)=>{
+            /* Seleeciona un Retorno */
+            cy.get(the.DatePicker).eq(1).click() //Dp Returning
+            /* Seleeciona un dia */
+            cy.get(the.DatePickerOpen).within((datePicker)=>{
+                cy.get(the.DayVisible).then(($days)=>{
+                    const list = $days.length - 1
+                    const dayRandom = Math.floor(Math.random() * list)
+                    cy.wrap($days).eq(dayRandom).then(($Day)=>{
+                        const day = $Day.text()
+                        cy.log(day)
+                        cy.wrap($Day).click()
+                    })
+                })
+                cy.contains("Ok").click()
+            })
+            cy.get(the.ButtonSelectDest).eq(0).should('have.text','Select Destination')
+            cy.get(the.ButtonSelectDest).eq(0).should("be.visible").click()
+            cy.get("[data-react-toolbox='input']").eq(3).children('input').should("have.attr","value","Children (0-7)")
+            cy.get("[data-react-toolbox='input']").eq(2).children('input').should("have.attr","value","Adults (18+)")
+        })
+    })
     
 })
