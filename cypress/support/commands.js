@@ -15,6 +15,17 @@ import {login} from '@pages/Login.Page'
 const {authLogin, dashboardIndex} = Cypress.env('endpoint')
 import {signin} from '@pages/SignIn.Page.js'
 
+//Login SpaceBeyond
+Cypress.Commands.add("loginSpace", (username, password) =>
+{
+    cy.fixture("DOM/space/Login.Page").then((the) =>
+    {
+        username && cy.get(the.username.input).type(username)
+        password && cy.get(the.password.input).type(password)
+        cy.get(the.loginButton).click()
+    })
+    
+})
 
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
