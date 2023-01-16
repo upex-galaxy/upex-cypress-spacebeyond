@@ -50,7 +50,7 @@ export default defineConfig({
 		// baseUrl: ""
 	},
 	env:{
-
+		baseUrl: "https://demo.testim.io/",
 		AdminUser:{
 
 			username: "Admin",
@@ -66,6 +66,5 @@ export default defineConfig({
 			email: "sai@upextesting.com",
 			password: "1234567"
 		},
-		baseUrl: "https://demo.testim.io/"
 	}
 })
