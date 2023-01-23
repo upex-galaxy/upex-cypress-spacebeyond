@@ -21,5 +21,4 @@ class Login{
         this.get.submitButton().click()
     }
 }
-
 export const login = new Login; 
