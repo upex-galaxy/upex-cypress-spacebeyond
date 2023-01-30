@@ -72,7 +72,7 @@ describe("Login and Logout", () => {
         });
 
         it.skip("7545 | TC06: Validate password > 30 characters - unsuccessfully", () => {
-            // TC6:  Validar no pueda loguearse con ‘password’ de más de 30 caracteres
+            // TC6: Validar no pueda loguearse con ‘password’ de más de 30 caracteres
 
             login.enterUsername(username);
             login.enterPassword("1234567890123456789012345678901");
