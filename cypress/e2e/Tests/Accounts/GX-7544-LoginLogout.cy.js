@@ -93,7 +93,7 @@ describe("Login and Logout", () => {
             cy.get('[type="button"] > span:first-child').should(
                 "contain",
                 "Hello"
-            );git
+            );
             login.logoutClick();
             cy.url().should("not.contain", "login");
         });
