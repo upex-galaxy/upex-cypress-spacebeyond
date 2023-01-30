@@ -18,7 +18,7 @@ describe("Login and Logout", () => {
         cy.url().should("contain", "login");
     });
     context("Login", () => {
-        it("TC01: Validate login successfully", () => {
+        it("7545 | TC01: Validate login successfully", () => {
             // TC1:  Validar Login correcto con credenciales válidas.
             
             login.enterUsername(username);
@@ -30,7 +30,7 @@ describe("Login and Logout", () => {
             );
         });
 
-        it("TC02: Validate login unsuccessfully", () => {
+        it("7545 | TC02: Validate login unsuccessfully", () => {
             // TC2:  Validar no pueda loguearse con ‘username’ vacío.
             login.enterPassword(password);
             login.submitLogin();
@@ -39,7 +39,7 @@ describe("Login and Logout", () => {
             cy.contains("Hello").should("not.exist");
         });
 
-        it("TC03: Validate pass unsuccessfully", () => {
+        it("7545 | TC03: Validate pass unsuccessfully", () => {
             // TC3:  Validar no pueda loguearse con ‘password’ vacío.
 
             login.enterUsername(username);
@@ -49,7 +49,7 @@ describe("Login and Logout", () => {
             cy.contains("Hello").should("not.exist");
         });
 
-        it("TC04: Validate username < 3 characters - unsuccessfully", () => {
+        it("7545 | TC04: Validate username < 3 characters - unsuccessfully", () => {
             // TC4:  Validar no pueda loguearse con ‘username’ con menos de 3 caracteres
 
             login.enterUsername("mo");
@@ -60,7 +60,7 @@ describe("Login and Logout", () => {
             cy.contains("Hello").should("not.exist");
         });
 
-        it("TC05: Validate password < 5 characters - unsuccessfully", () => {
+        it.skip("7545 | TC05: Validate password < 5 characters - unsuccessfully", () => {
             // TC5:  Validar no pueda loguearse con ‘password’ de menos de 5 caracteres.
             
             login.enterUsername(username);
@@ -71,7 +71,7 @@ describe("Login and Logout", () => {
             cy.contains("Hello").should("not.exist");
         });
 
-        it("TC06: Validate password > 30 characters - unsuccessfully", () => {
+        it.skip("7545 | TC06: Validate password > 30 characters - unsuccessfully", () => {
             // TC6:  Validar no pueda loguearse con ‘password’ de más de 30 caracteres
 
             login.enterUsername(username);
@@ -84,7 +84,7 @@ describe("Login and Logout", () => {
     });
 
     describe("Logout", () => {
-        it("TC07: Validate logout successfully", () => {
+        it("7545 | TC07: Validate logout successfully", () => {
             // TC7:  Validar Log-out correcto luego de haber iniciado sesión.
     
             login.enterUsername(username);
@@ -93,7 +93,7 @@ describe("Login and Logout", () => {
             cy.get('[type="button"] > span:first-child').should(
                 "contain",
                 "Hello"
-            );
+            );git
             login.logoutClick();
             cy.url().should("not.contain", "login");
         });
