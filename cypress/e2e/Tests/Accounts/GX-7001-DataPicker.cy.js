@@ -1,3 +1,4 @@
+import { pickerData } from '@pages/Date.Page'
 const {baseUrl} = Cypress.env()
 describe('✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasajeros', () => {
 	beforeEach('PRC: El usuario esta situado en el home del site Space&Beyond', () => {
@@ -5,9 +6,9 @@ describe('✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasa
 	})
 	it.only('Validar usuario busca destino por fecha de partida y retorno junto con tipo de pasajero.', () => {//PRIMER TEST CASE//////
 		// Starts:
-		cy.get("[data-react-toolbox='date-picker'] input").eq(0).click() // Open Departing: // LISTO
+		cy.get("[data-react-toolbox='date-picker'] input").first().click()//pickerData.departing() // Open Departing: 
 		//Select Random Date enabled for this month
-		cy.get("[data-react-toolbox='dialog']").within((datePicker) => {
+		cy.get("[data-react-toolbox='dialog']").first().click().within((datePicker) => {//pickerData.dialog()
 			cy.get('[data-react-toolbox="day"]:not([class*=disable]):not([class*=active])').then((days) => {
 				cy.log(days)
 				if (!expect(days.length).be.greaterThan(0)) {
@@ -43,8 +44,7 @@ describe('✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasa
 			cy.get("[data-react-toolbox='button']").contains('Ok').click()
 		}) // FIN DEL DEPARTING (WITHIN)
 		cy.wait(400)
-		cy.get("[data-react-toolbox='date-picker'] input")
-			.eq(0)
+		cy.get("[data-react-toolbox='date-picker'] input").first().click() 		
 			.its('val')
 			.then((val) => {
 				Cypress.env('DepartingDate', val)
@@ -52,8 +52,7 @@ describe('✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasa
 			})
 		// Second Datepicker:
 		cy.get("[data-react-toolbox='date-picker'] input").eq(1).click() // Open Returning:
-		cy.get("[data-react-toolbox='dialog']")
-			.first()
+		cy.get("[data-react-toolbox='dialog']").eq(0).click()
 			.within((datePicker) => {
 				cy.get('[data-react-toolbox="day"]:not([class*=disable]):not([class*=active])').then((days) => {
 					cy.log(days)
@@ -90,17 +89,15 @@ describe('✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasa
 				cy.get("[data-react-toolbox='button']").contains('Ok').click()
 			}) //WITHIN RETURNING
 		cy.wait(400)
-		cy.get("[data-react-toolbox='date-picker'] input")
-			.eq(1)
+		cy.get("[data-react-toolbox='date-picker'] input").eq(1).click()
 			.its('val')
 			.then((val) => {
 				Cypress.env('ReturningDate', val)
 				cy.log(val)
 			})
-		cy.get('[data-react-toolbox="dropdown"]').first().click() // Open Dropdown
+		cy.get("[data-react-toolbox='dropdown']").first().click()// Open Dropdown
 		//Select Random Age for Adult person
-		cy.get("ul[class*='WhiteDropDown']")
-			.first()
+		cy.get("ul[class*='WhiteDropDown']").first().click()
 			.children()
 			.then(($options) => {
 				cy.log($options)
@@ -113,14 +110,14 @@ describe('✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasa
 					.eq(randomAge)
 					.then(($age) => {
 						cy.wrap($age).click({ force: true })
-						cy.get('[data-react-toolbox="dropdown"] input').first().should('have.value', randomAge)
+						pickerData.adults
+						.should('have.value', randomAge)
 					})
 
 				// Select cant for children
-				cy.get('[data-react-toolbox="dropdown"]').eq(1).click() // Open Dropdown
+				cy.get("[data-react-toolbox='dropdown']").eq(1).click() // Open Dropdown
 				//Select Random Age for Children person
-				cy.get("ul[class*='WhiteDropDown']")
-					.last()
+				cy.get("ul[class*='WhiteDropDown']").last().click()
 					.children()
 					.then(($options) => {
 						cy.log($options)
@@ -137,9 +134,7 @@ describe('✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasa
 							})
 					})
 				//SEARCH TRAVEL
-				cy.get('[class*="CTAButton"]')
-					.first()
-					.click()
+				cy.get("[class*='CTAButton']").first().click()
 					.then(() => {
 						//ASSERTION PASAJEROS NIÑOS + ADULTOS
 						cy.log(Cypress.env('AdultsQty'))
@@ -304,4 +299,5 @@ describe('✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasa
 	})
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	it('Validar usuario busca destino por misma fecha de partida y retorno', () => {})
+
 })
