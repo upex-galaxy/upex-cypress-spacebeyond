@@ -69,7 +69,7 @@ describe('✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasa
 		
 	})
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	it.only('Validar usuario busca destino solo por fecha de partida y retorno.', () => {
+	it('Validar usuario busca destino solo por fecha de partida y retorno.', () => {
 		//SEGUNDO TEST CASE/////////////////////////////////////
 		// Starts:
 		pickerDate.departing() // Open Departing:
