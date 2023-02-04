@@ -133,11 +133,11 @@ describe('✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasa
 					.then(() => {
 						//ASSERTION PASAJEROS NIÑOS + ADULTOS
 						cy.log(Cypress.env('AdultsQty'))
-						// cy.log(Cypress.env('childrenQty'))
+						cy.log(Cypress.env('childrenQty'))
 						const AdultsNum = parseInt(Cypress.env('AdultsQty'))
-						// const ChildrenNum = parseInt(Cypress.env('childrenQty'))
-						// const TotalTrav = AdultsNum + ChildrenNum
-						// cy.log(TotalTrav)
+						const ChildrenNum = parseInt(Cypress.env('childrenQty'))
+						const TotalTrav = AdultsNum + ChildrenNum
+						cy.log(TotalTrav)
 						console.log(Cypress.env('DepartingDate'))
 						console.log(Cypress.env('ReturningDate'))
 						cy.get('h3').should('contain', AdultsNum)
@@ -152,7 +152,7 @@ describe('✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasa
 			
 	})
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	it('7002 | TC4: Validar usuario busca destino por misma fecha de partida y retorno', () => {
+	it('7002  TC4: Validar usuario busca destino por misma fecha de partida y retorno', () => {
 		/// Starts:
 		pickerDate.departing() // Open Departing:
 		// Select RandomDate enabled for this month but if day is disabled find day active another month.
