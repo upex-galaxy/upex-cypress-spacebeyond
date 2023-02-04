@@ -4,7 +4,7 @@ describe('✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasa
 	beforeEach('PRC: El usuario esta situado en el home del site Space&Beyond', () => {
 		cy.visit(baseUrl)
 	})
-	it('Validar usuario busca destino por fecha de partida y retorno junto con tipo de pasajero.', () => {
+	it('GX-7002 Validar usuario busca destino por fecha de partida y retorno junto con tipo de pasajero.', () => {
 		//PRIMER TEST CASE//////
 		// Starts:
 		pickerDate.departing() // Open Departing:
@@ -69,7 +69,7 @@ describe('✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasa
 		
 	})
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	it('Validar usuario busca destino solo por fecha de partida y retorno.', () => {
+	it('GX-7002 Validar usuario busca destino solo por fecha de partida y retorno.', () => {
 		//SEGUNDO TEST CASE/////////////////////////////////////
 		// Starts:
 		pickerDate.departing() // Open Departing:
@@ -117,7 +117,7 @@ describe('✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasa
 			})
 	})
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	it('Validar usuario busca destino solo por cantidad y tipo de pasajeros.', () => {
+	it('GX-7002 Validar usuario busca destino solo por cantidad y tipo de pasajeros.', () => {
 		//TERCER TEST CASE /////////////////////////////////
 		pickerDate.adults() // Open Dropdown
 		//Select Random Age for Adult person
@@ -152,7 +152,7 @@ describe('✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasa
 			
 	})
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	it('Validar usuario busca destino por misma fecha de partida y retorno', () => {
+	it('GX-7002 Validar usuario busca destino por misma fecha de partida y retorno', () => {
 		/// Starts:
 		pickerDate.departing() // Open Departing:
 		// Select RandomDate enabled for this month but if day is disabled find day active another month.
