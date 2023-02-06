@@ -66,5 +66,9 @@ export default defineConfig({
 			email: "sai@upextesting.com",
 			password: "1234567"
 		},
+		userLogin: {
+			username: "usuario",
+			password: "moni1234",
+		}
 	}
 })
