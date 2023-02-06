@@ -27,6 +27,7 @@ Cypress.Commands.add("loginSpace", (username, password) =>
     
 })
 
+
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
 //
