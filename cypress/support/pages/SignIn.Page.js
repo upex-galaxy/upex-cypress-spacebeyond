@@ -4,7 +4,7 @@ class SignIn{
         usernameInput: ()=> cy.contains('Username / Email').next(),
         passwordInput: ()=> cy.contains('Password').next(),
         LoginBtn: ()=> cy.get('button').contains('login'),
-        LoginTab: ()=> cy.get('div').contains('LOGIN')
+        LoginTab: ()=> cy.get('div').contains('Log in')
     }
 
     goToLoginTab(){
