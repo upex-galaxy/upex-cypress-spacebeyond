@@ -3,6 +3,19 @@
     "password": "12345678",
     "name": "John Cena",
     "email": "johncena09@gmail.com",
+    "invalidEmail": "testing9.com",
     "socialSecurityNumber": "318-44-5630",
-    "phoneNumber": "6027918826"
+    "invalidsocialSecurityNumber": "321414321",
+    "phoneNumber": "6027918826",
+    "invalidPhoneNumber": "852934",
+    "healthInsurancePath": "images/upexlogo.png",
+    "checkoutTitle": "Checkout",
+    "checkboxClassCheck": "theme__checked___2NQ9n",
+    "checkboxClassUnCheck": "theme__check___2B20W",
+    "successfulMessage": "successful purchase confirmation",
+    "nameRequiedMsj": "Name is a required field.",
+    "invalidEmailMsj": "Enter a valid e-mail address.",
+    "invalidSocialSecurityNumberMsj": "Enter a valid Social Security number (xxx-xx-xxxx).",
+    "invalidPhoneNumberMsj": "Enter a valid US phone number."
+
   }
