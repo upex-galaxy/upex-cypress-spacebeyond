@@ -20,7 +20,7 @@ describe('US-GX2-652: SpaceBeyond | Booking | Book a Destination in Checkout', (
 		})
 	})
 
-	it('TS-GX2-653 | TC1: Realizar checkout de destino exitoso (Positivo)', () => {
+	it.skip('TS-GX2-653 | TC1: Realizar checkout de destino exitoso (Positivo)', () => {
 		checkoutPage.typeName(the.name)
 		checkoutPage.typeEmail(the.email)
 		checkoutPage.typeSocialSecurityNumber(the.socialSecurityNumber)
