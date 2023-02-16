@@ -20,6 +20,7 @@ class HomePage {
     }
 
     chooseRandomDestination(){
+        //Funcion que elige un destino aleatorio
         this.elements.destinosCards().then((destinations) => {
 			let randomIndex = Math.floor(Math.random() * destinations.length)
 			let randomDestination = destinations.eq(randomIndex)

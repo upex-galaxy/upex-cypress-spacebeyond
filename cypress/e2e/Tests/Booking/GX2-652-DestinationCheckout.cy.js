@@ -21,6 +21,7 @@ describe('US-GX2-652: SpaceBeyond | Booking | Book a Destination in Checkout', (
 	})
 
 	it.skip('TS-GX2-653 | TC1: Realizar checkout de destino exitoso (Positivo)', () => {
+		//Este TC esta omitido porque se encontro un defecto que al hacer click en el boton "PAY NOW" el sistema no finaliza el flujo de Checkout
 		checkoutPage.typeName(the.name)
 		checkoutPage.typeEmail(the.email)
 		checkoutPage.typeSocialSecurityNumber(the.socialSecurityNumber)
@@ -41,6 +42,7 @@ describe('US-GX2-652: SpaceBeyond | Booking | Book a Destination in Checkout', (
 		checkoutPage.elements.termAndConditionsCheckbox().click().should('have.class', the.checkboxClassCheck)
 		checkoutPage.elements.healthInsuranceBox().attachFile(the.healthInsurancePath)
 		checkoutPage.elements.payNowBtn().should('not.be.enabled')
+		//Validar que al dejar el campo "Name" vacio se muestre mensaje indicando que el campo "Name" es requido.
 		checkoutPage.elements.nameRequiredMsj().should("be.visible").and("have.text",the.nameRequiedMsj)
 	})
 
@@ -52,6 +54,7 @@ describe('US-GX2-652: SpaceBeyond | Booking | Book a Destination in Checkout', (
 		checkoutPage.elements.termAndConditionsCheckbox().click().should('have.class', the.checkboxClassCheck)
 		checkoutPage.elements.healthInsuranceBox().attachFile(the.healthInsurancePath)
 		checkoutPage.elements.payNowBtn().should('not.be.enabled')
+		//Validar que al dejar el campo "Email" vacio se muestre mensaje indicando que el campo "Email" es requido.
 		checkoutPage.elements.invalidEmailMsj().should("be.visible").and("have.text",the.invalidEmailMsj)
 	})
 
@@ -63,6 +66,7 @@ describe('US-GX2-652: SpaceBeyond | Booking | Book a Destination in Checkout', (
 		checkoutPage.elements.termAndConditionsCheckbox().click().should('have.class', the.checkboxClassCheck)
 		checkoutPage.elements.healthInsuranceBox().attachFile(the.healthInsurancePath)
 		checkoutPage.elements.payNowBtn().should('not.be.enabled')
+		//Validar que al ingresar el social security number en el formato incorrecto se muestre mensaje indicando el formato requido.
 		checkoutPage.elements.invalidSocialSecurityNumberMsj().should("be.visible").and("have.text",the.invalidSocialSecurityNumberMsj)
 	})
 
@@ -74,6 +78,7 @@ describe('US-GX2-652: SpaceBeyond | Booking | Book a Destination in Checkout', (
 		checkoutPage.elements.termAndConditionsCheckbox().click().should('have.class', the.checkboxClassCheck)
 		checkoutPage.elements.healthInsuranceBox().attachFile(the.healthInsurancePath)
 		checkoutPage.elements.payNowBtn().should('not.be.enabled')
+		//Validar que al ingresar el Phone number en el formato incorrecto se muestre mensaje indicando el formato requido.
 		checkoutPage.elements.invalidPhoneNumberMsj().should("be.visible").and("have.text",the.invalidPhoneNumberMsj)
 	})
 
@@ -84,6 +89,7 @@ describe('US-GX2-652: SpaceBeyond | Booking | Book a Destination in Checkout', (
 		checkoutPage.typePhoneNumber(the.phoneNumber)
 		checkoutPage.elements.termAndConditionsCheckbox().should('not.have.class', the.checkboxClassCheck)
 		checkoutPage.elements.healthInsuranceBox().attachFile(the.healthInsurancePath)
+		//Validar que al no hacer click en el checkbox de terminos y condiciones el boton "PAY NOW" se muestre deshabilitado.
 		checkoutPage.elements.payNowBtn().should('not.be.enabled')
 	})
 
