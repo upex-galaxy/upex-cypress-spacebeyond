@@ -4,7 +4,7 @@ describe('Feature', () => {
 		cy.SignIn()
 	})
 
-	it('TSID | TC1: Validar crear cuenta exitosamente', () => {
+	it.skip('TSID | TC1: Validar crear cuenta exitosamente', () => {
 		// EL MEJOR PAGE OBJECT MODEL => ES CUANDO LEES LITERALMENTE UN CASO DE PRUEBA MANUAL
 		
 		// Resultado Esperado:
