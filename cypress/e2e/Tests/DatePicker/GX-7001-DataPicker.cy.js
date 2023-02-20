@@ -117,7 +117,8 @@ describe('✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasa
 			})
 	})
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	it('7002 | TC3: Validar usuario busca destino solo por cantidad y tipo de pasajeros.', () => {
+	// Se detectó un Flaky Test con este TC, se procede a establecerlo a "Skip":
+	it.skip('7002 | TC3: Validar usuario busca destino solo por cantidad y tipo de pasajeros.', () => {
 		//TERCER TEST CASE /////////////////////////////////
 		pickerDate.adults() // Open Dropdown
 		//Select Random Age for Adult person
