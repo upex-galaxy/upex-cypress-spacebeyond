@@ -1,9 +1,9 @@
 # 🧙🏻‍♂️BIENVENIDO A LOS PIPELINES DE CONTINUOUS INTEGRATION DE "ARI - Hija de Aurora"!
-# 🤖Este Pipeline de CI se activa al hacer MERGE a la rama "QA" o "CYPEX",
+# 🤖Este Pipeline de CI se activa al hacer MERGE a la rama "QA" o "MAIN",
 # 🧪Consiste en ejecutar TODOS los tests del Repo e importar los resultados a Jira!🚀
 # 👩🏻‍🔬Este Pipeline de CI NO DEBE EDITARSE sin permiso del QA Lead.
 
-name: 🤖CI run Regression in QA🧪 After Merging⚡
+name: 🤖CI run Regression in QA🧪
 run-name: ${{github.actor}}👨🏻‍🔬 run Regression in ${{github.ref_name}}
 
 on:
@@ -27,8 +27,9 @@ jobs:
 
             - name: 🧬Install All Dependencies
               run: |
-                npm install
-                npm list 
+                npm install -g yarn
+                yarn
+                yarn list 
 
             - name: 🔌Cucumber Preprocessor JSON Setup
               uses: DamianReeves/write-file-action@master
@@ -55,23 +56,23 @@ jobs:
               with:
                   browser: chrome
                   command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
-                    npm run regression
+                    yarn regression
 
             - name: 📬Generate XML Regression Report
               if: always()
               run: |
-                npm run report:xml
+                yarn report:xml
 
-            - name: ✅Import Test Results to Xray
-              if: always()
-              uses: mikepenz/xray-action@v2
-              with: #EDITAR AQUÍ EL TEST EXECUTION DE JIRA DONDE SE CARGARÁN LOS TESTS:
-                  username: ${{secrets.XRAY_CLIENT_ID}}
-                  password: ${{secrets.XRAY_CLIENT_SECRET}}
-                  testFormat: 'junit'
-                  testPaths: 'reports/regression-report.xml'
-                  testExecKey: 'GX-5539'
-                  projectKey: 'GX'
+            # - name: ✅Import Test Results to Xray
+            #   if: always()
+            #   uses: mikepenz/xray-action@v2
+            #   with: #EDITAR AQUÍ EL TEST EXECUTION DE JIRA DONDE SE CARGARÁN LOS TESTS:
+            #       username: ${{secrets.XRAY_CLIENT_ID}}
+            #       password: ${{secrets.XRAY_CLIENT_SECRET}}
+            #       testFormat: 'junit'
+            #       testPaths: 'reports/regression-report.xml'
+            #       testExecKey: 'GX-5539'
+            #       projectKey: 'GX'
 
             - name: 🔔Slack Notification of Done
               if: always()
@@ -98,8 +99,9 @@ jobs:
 
             - name: 🧬Install All Dependencies
               run: |
-                npm install
-                npm list 
+                npm install -g yarn
+                yarn
+                yarn list 
                 
             - name: 🔌Cucumber Preprocessor JSON Setup
               uses: DamianReeves/write-file-action@master
@@ -126,13 +128,13 @@ jobs:
               with:
                   browser: chrome
                   command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
-                    npm run regression:report
+                    yarn regression:report
 
             - name: 📬Generate HTML Regression Report
               if: always()
               run: |
-                npm run report:json
-                npm run report:html
+                yarn report:json
+                yarn report:html
 
             - name: 📊Upload Artifact HTML Report
               if: always()
@@ -155,7 +157,7 @@ jobs:
                 owner,
                 repo,
                 head: '${{ github.ref_name }}',
-                base: 'cypex',
+                base: 'main',
                 body: [
                     'Update branch by Automation Pipeline',
                     '- (CI) Build Test Execution is Done✅',
@@ -179,7 +181,6 @@ jobs:
           with:
             type: now
             label_name: 'autoPullRequest'
-            target_branch: 'cypex' #ESTE ES LA RAMA PRINCIPAL DEL REPOSITORIO PRESENTE
+            target_branch: 'main' #ESTE ES LA RAMA PRINCIPAL DEL REPOSITORIO PRESENTE
             github_token: ${{ github.token }}
-
 

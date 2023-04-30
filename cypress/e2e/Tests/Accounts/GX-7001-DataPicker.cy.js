@@ -1,7 +1,6 @@
-const {baseUrl} = Cypress.env()
 describe('✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasajeros', () => {
 	beforeEach('PRC: El usuario esta situado en el home del site Space&Beyond', () => {
-		cy.visit(baseUrl)
+		cy.visit('/')
 	})
 	it.only('Validar usuario busca destino por fecha de partida y retorno junto con tipo de pasajero.', () => {//PRIMER TEST CASE//////
 		// Starts:
