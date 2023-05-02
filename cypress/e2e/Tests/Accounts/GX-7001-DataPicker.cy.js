@@ -1,8 +1,9 @@
-describe('✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasajeros', () => {
+describe.skip('✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasajeros', () => {
 	beforeEach('PRC: El usuario esta situado en el home del site Space&Beyond', () => {
 		cy.visit('/')
 	})
-	it.only('Validar usuario busca destino por fecha de partida y retorno junto con tipo de pasajero.', () => {//PRIMER TEST CASE//////
+	it.only('Validar usuario busca destino por fecha de partida y retorno junto con tipo de pasajero.', () => {
+		//PRIMER TEST CASE//////
 		// Starts:
 		cy.get("[data-react-toolbox='date-picker'] input").eq(0).click() // Open Departing: // LISTO
 		//Select Random Date enabled for this month
@@ -158,12 +159,13 @@ describe('✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasa
 						let Returning = new Date(date_returning)
 						let dateReturning = Returning.toLocaleDateString('default', { month: 'short', day: 'numeric' })
 						cy.get('h3').should('have.to', `${dateDeparting - dateReturning}`)
-						})
-				})
+					})
 			})
-			
+	})
+
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	it('Validar usuario busca destino solo por fecha de partida y retorno.', () => { //SEGUNDO TEST CASE/////////////////////////////////////
+	it('Validar usuario busca destino solo por fecha de partida y retorno.', () => {
+		//SEGUNDO TEST CASE/////////////////////////////////////
 
 		cy.get("[data-react-toolbox='date-picker'] input").eq(0).click() // Open Departing: // LISTO
 		//Select Random Date enabled for this month
@@ -259,7 +261,8 @@ describe('✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasa
 			})
 	})
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	it('Validar usuario busca destino solo por cantidad y tipo de pasajeros.', () => { //TERCER TEST CASE /////////////////////////////////
+	it('Validar usuario busca destino solo por cantidad y tipo de pasajeros.', () => {
+		//TERCER TEST CASE /////////////////////////////////
 		cy.get('[data-react-toolbox="dropdown"]').first().click() // Open Dropdown
 		//Select Random Age for Adult person
 		cy.get("ul[class*='WhiteDropDown']")

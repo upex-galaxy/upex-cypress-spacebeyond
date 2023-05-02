@@ -1,8 +1,7 @@
 import { pickerDate } from '@pages/Date.Page'
-const { baseUrl } = Cypress.env()
 describe('✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasajeros', () => {
 	beforeEach('PRC: El usuario esta situado en el home del site Space&Beyond', () => {
-		cy.visit(baseUrl)
+		cy.visit('/')
 	})
 	it('7002 | TC1: Validar usuario busca destino por fecha de partida y retorno junto con tipo de pasajero.', () => {
 		//PRIMER TEST CASE//////
@@ -41,32 +40,30 @@ describe('✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasa
 		pickerDate.randomChild()
 		//SEARCH TRAVEL + ASSERTION DE PASAJEROS Y DATE
 		cy.get("[class*='CTAButton']")
-		.first()
-		.click()
-		.then(() => {
-			//ASSERTION PASAJEROS NIÑOS + ADULTOS
-			cy.log(Cypress.env('AdultsQty'))
-			cy.log(Cypress.env('childrenQty'))
-			const AdultsNum = parseInt(Cypress.env('AdultsQty'))
-			const ChildrenNum = parseInt(Cypress.env('childrenQty'))
-			const TotalTrav = AdultsNum + ChildrenNum
-			cy.log(TotalTrav)
-			// this.get.AssertionTrav()
-			cy.get('h3').should('contain', `${TotalTrav} travelers`)
-			//ASSERTION DATE MES - DIA DE DEPARTING AND RETURNING
-			console.log(Cypress.env('DepartingDate'))
-			console.log(Cypress.env('ReturningDate'))
-			let date_departing = Cypress.env('DepartingDate')
-			let Departing = new Date(date_departing)
-			let dateDeparting = Departing.toLocaleDateString('default', { month: 'short', day: 'numeric' })
-			let date_returning = Cypress.env('ReturningDate')
-			let Returning = new Date(date_returning)
-			let dateReturning = Returning.toLocaleDateString('default', { month: 'short', day: 'numeric' })
-			// this.get.AssertionDate()
-			cy.get('h3').should('have.to', `${dateDeparting - dateReturning}`)
-			})           
-			
-		
+			.first()
+			.click()
+			.then(() => {
+				//ASSERTION PASAJEROS NIÑOS + ADULTOS
+				cy.log(Cypress.env('AdultsQty'))
+				cy.log(Cypress.env('childrenQty'))
+				const AdultsNum = parseInt(Cypress.env('AdultsQty'))
+				const ChildrenNum = parseInt(Cypress.env('childrenQty'))
+				const TotalTrav = AdultsNum + ChildrenNum
+				cy.log(TotalTrav)
+				// this.get.AssertionTrav()
+				cy.get('h3').should('contain', `${TotalTrav} travelers`)
+				//ASSERTION DATE MES - DIA DE DEPARTING AND RETURNING
+				console.log(Cypress.env('DepartingDate'))
+				console.log(Cypress.env('ReturningDate'))
+				let date_departing = Cypress.env('DepartingDate')
+				let Departing = new Date(date_departing)
+				let dateDeparting = Departing.toLocaleDateString('default', { month: 'short', day: 'numeric' })
+				let date_returning = Cypress.env('ReturningDate')
+				let Returning = new Date(date_returning)
+				let dateReturning = Returning.toLocaleDateString('default', { month: 'short', day: 'numeric' })
+				// this.get.AssertionDate()
+				cy.get('h3').should('have.to', `${dateDeparting - dateReturning}`)
+			})
 	})
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	it('7002 | TC2: Validar usuario busca destino solo por fecha de partida y retorno.', () => {
@@ -129,28 +126,27 @@ describe('✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasa
 		pickerDate.randomChild()
 		//SEARCH TRAVEL + ASSERTION DE PASAJEROS Y DATE
 		cy.get("[class*='CTAButton']")
-					.first()
-					.click()
-					.then(() => {
-						//ASSERTION PASAJEROS NIÑOS + ADULTOS
-						cy.log(Cypress.env('AdultsQty'))
-						// cy.log(Cypress.env('childrenQty'))
-						const AdultsNum = parseInt(Cypress.env('AdultsQty'))
-						// const ChildrenNum = parseInt(Cypress.env('childrenQty'))
-						// const TotalTrav = AdultsNum + ChildrenNum
-						// cy.log(TotalTrav)
-						console.log(Cypress.env('DepartingDate'))
-						console.log(Cypress.env('ReturningDate'))
-						cy.get('h3').should('contain', AdultsNum)
-						let date_departing = Cypress.env('DepartingDate')
-						let Departing = new Date(date_departing)
-						let dateDeparting = Departing.toLocaleDateString('default', { month: 'short', day: 'numeric' })
-						let date_returning = Cypress.env('ReturningDate')
-						let Returning = new Date(date_returning)
-						let dateReturning = Returning.toLocaleDateString('default', { month: 'short', day: 'numeric' })
-						cy.get('h3').should('have.to', `${dateDeparting - dateReturning}`)
-					})
-			
+			.first()
+			.click()
+			.then(() => {
+				//ASSERTION PASAJEROS NIÑOS + ADULTOS
+				cy.log(Cypress.env('AdultsQty'))
+				// cy.log(Cypress.env('childrenQty'))
+				const AdultsNum = parseInt(Cypress.env('AdultsQty'))
+				// const ChildrenNum = parseInt(Cypress.env('childrenQty'))
+				// const TotalTrav = AdultsNum + ChildrenNum
+				// cy.log(TotalTrav)
+				console.log(Cypress.env('DepartingDate'))
+				console.log(Cypress.env('ReturningDate'))
+				cy.get('h3').should('contain', AdultsNum)
+				let date_departing = Cypress.env('DepartingDate')
+				let Departing = new Date(date_departing)
+				let dateDeparting = Departing.toLocaleDateString('default', { month: 'short', day: 'numeric' })
+				let date_returning = Cypress.env('ReturningDate')
+				let Returning = new Date(date_returning)
+				let dateReturning = Returning.toLocaleDateString('default', { month: 'short', day: 'numeric' })
+				cy.get('h3').should('have.to', `${dateDeparting - dateReturning}`)
+			})
 	})
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	it('7002 | TC4: Validar usuario busca destino por misma fecha de partida y retorno', () => {
@@ -187,33 +183,32 @@ describe('✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasa
 		//Select Random Age for Children person
 		pickerDate.randomChild()
 		//SEARCH TRAVEL
-		cy.get("[class*='CTAButton']")
-			.then(() => {
-				//ASSERTION PASAJEROS NIÑOS + ADULTOS
-				cy.log(Cypress.env('AdultsQty'))
-				cy.log(Cypress.env('childrenQty'))
-				const AdultsNum = parseInt(Cypress.env('AdultsQty'))
-				const ChildrenNum = parseInt(Cypress.env('childrenQty'))
-				const TotalTrav = AdultsNum + ChildrenNum
-				cy.log(TotalTrav)
-				cy.get('h3').should('contain', `${TotalTrav} travelers`)
-				//ASSERTION DATE MES - DIA DE DEPARTING AND RETURNING
-				console.log(Cypress.env('DepartingDate'))
-				console.log(Cypress.env('ReturningDate'))
-				let date_departing = Cypress.env('DepartingDate')
-				let Departing = new Date(date_departing)
-				let dateDeparting = Departing.toLocaleDateString('default', { month: 'short', day: 'numeric' })
-				let date_returning = Cypress.env('ReturningDate')
-				let Returning = new Date(date_returning)
-				let dateReturning = Returning.toLocaleDateString('default', { month: 'short', day: 'numeric' })
-				cy.get('h3').should('have.to', `${dateDeparting - dateReturning}`)
-				// Comparar fechas
-				if (Departing.getTime() === Returning.getTime()) {
-					// Si son iguales, sumar un día a la fecha de partida
-					Departing.setDate(Departing.getDate() + 1)
-					date_departing = Departing.toISOString()
-					dateDeparting = Departing.toLocaleDateString('default', { month: 'short', day: 'numeric' })
-				}
-			})
+		cy.get("[class*='CTAButton']").then(() => {
+			//ASSERTION PASAJEROS NIÑOS + ADULTOS
+			cy.log(Cypress.env('AdultsQty'))
+			cy.log(Cypress.env('childrenQty'))
+			const AdultsNum = parseInt(Cypress.env('AdultsQty'))
+			const ChildrenNum = parseInt(Cypress.env('childrenQty'))
+			const TotalTrav = AdultsNum + ChildrenNum
+			cy.log(TotalTrav)
+			cy.get('h3').should('contain', `${TotalTrav} travelers`)
+			//ASSERTION DATE MES - DIA DE DEPARTING AND RETURNING
+			console.log(Cypress.env('DepartingDate'))
+			console.log(Cypress.env('ReturningDate'))
+			let date_departing = Cypress.env('DepartingDate')
+			let Departing = new Date(date_departing)
+			let dateDeparting = Departing.toLocaleDateString('default', { month: 'short', day: 'numeric' })
+			let date_returning = Cypress.env('ReturningDate')
+			let Returning = new Date(date_returning)
+			let dateReturning = Returning.toLocaleDateString('default', { month: 'short', day: 'numeric' })
+			cy.get('h3').should('have.to', `${dateDeparting - dateReturning}`)
+			// Comparar fechas
+			if (Departing.getTime() === Returning.getTime()) {
+				// Si son iguales, sumar un día a la fecha de partida
+				Departing.setDate(Departing.getDate() + 1)
+				date_departing = Departing.toISOString()
+				dateDeparting = Departing.toLocaleDateString('default', { month: 'short', day: 'numeric' })
+			}
+		})
 	})
 })
