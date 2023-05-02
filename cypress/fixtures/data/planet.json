@@ -1,0 +1,45 @@
+{
+	"Madan": {
+		"planetName": "Mandan",
+		"planetColor": "Green"
+	},
+	"Shenji": {
+		"planetName": "Shenji",
+		"planetColor": "Red"
+	},
+	"Tongli": {
+		"planetName": "Tongli",
+		"planetColor": "Blue"
+	},
+	"Sant Cugat Del Valles": {
+		"planetName": "Sant Cugat Del Valles",
+		"planetColor": "Red"
+	},
+	"Shaheying": {
+		"planetName": "Shaheying",
+		"planetColor": "Purple"
+	},
+	"Flagstaff": {
+		"planetName": "Flagstaff",
+		"planetColor": "Brown"
+	},
+	"Tayabamba": {
+		"planetName": "Tayabamba",
+		"planetColor": "Blue"
+	},
+	"Babahoyo": {
+		"planetName": "Babahoyo",
+		"planetColor": "Blue"
+	},
+	"Cuozhou": {
+		"planetName": "Cuozhou",
+		"planetColor": "Brown"
+	},
+	"planetColor": {
+		"Green": "Madan",
+		"Red": "Shenji, Sant Cugat Del Valles",
+		"Blue": "Tongli, Tayabamba, Babahoyo",
+		"Brown": "Flagstaff, Cuozhou",
+		"Purple": "Shaheying"
+	}
+}
