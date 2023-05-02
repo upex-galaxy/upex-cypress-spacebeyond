@@ -6,7 +6,7 @@
 #     3ro: guarda los cambios en el repositorio local (git add + git commit) y envíalos al Repo Remoto (git push)
 #     Expected Result: Debería ejecutarse este Pipeline de GitHub Actions y correr cada uno de los Jobs declarados aquí.
 
-name: 🤖CI run Test Suite Execution⚡
+name: 🤖CI run (BUILD) Test Suite Execution⚡
 run-name: ${{github.actor}}👨🏻‍🔬 run Test Suite in ${{github.ref_name}}
 
 on: # This Run is a template. The correct "Run On" should be: Any except QA and Main
@@ -30,9 +30,8 @@ jobs:
 
             - name: 🧬Install All Dependencies
               run: |
-                  npm install -g yarn
-                  yarn
-                  yarn list
+                  npm ci
+                  npm list
 
             - name: 💾Download Cucumber-Formatter
               uses: suisei-cn/actions-download-file@v1.3.0
@@ -71,19 +70,19 @@ jobs:
               with:
                   browser: chrome
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-                      yarn file cypress/e2e/Tests/How-to/UI-testing/typescript.cy.ts
+                      npm run file cypress/e2e/Tests/DatePicker/GX-7001-DataPicker.cy.js
 
-            # - name: ✅Import Test Results to Xray
-            #   if: always()
-            #   uses: mikepenz/xray-action@v2
-            #   with: #OPCIONES PARA IMPORTAR LOS RESULTADOS DE PRUEBA A JIRA XRAY:
-            #       username: ${{secrets.XRAY_CLIENT_ID}}
-            #       password: ${{secrets.XRAY_CLIENT_SECRET}}
-            #       testFormat: 'junit' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
-            #       testPaths: 'reports/test-results.xml' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
-            #       testExecKey: 'GX2-1359' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
-            #       projectKey: 'GX2' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
-            #       testEnvironments: 'Chrome' #ELEGIR EL AMBIENTE DE PRUEBAS (Igual al TX).
+            - name: ✅Import Test Results to Xray
+              if: always()
+              uses: mikepenz/xray-action@v2
+              with: #OPCIONES PARA IMPORTAR LOS RESULTADOS DE PRUEBA A JIRA XRAY:
+                  username: ${{secrets.XRAY_CLIENT_ID}}
+                  password: ${{secrets.XRAY_CLIENT_SECRET}}
+                  testFormat: 'junit' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
+                  testPaths: 'reports/test-results.xml' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
+                  testExecKey: 'GX-7003' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
+                  projectKey: 'GX' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
+                  testEnvironments: 'Chrome' #ELEGIR EL AMBIENTE DE PRUEBAS (Igual al TX).
 
             - name: 🔧Generate Cucumber HTML Report
               if: always()
@@ -109,6 +108,6 @@ jobs:
               env:
                   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
                   SLACK_USERNAME: Ari✨
-                  SLACK_MESSAGE: ':test_tube: Tests run in Space & Beyond: User Story Test Execution is Done and updated in Jira :rocket:'
+                  SLACK_MESSAGE: ':test_tube: Tests run in ToolsQA: User Story Test Execution is Done and updated in Jira :rocket:'
                   SLACK_COLOR: ${{ job.status }}
                   SLACK_ICON: https://i.imgur.com/q9kvQCp_d.webp?maxwidth=760&fidelity=grand
