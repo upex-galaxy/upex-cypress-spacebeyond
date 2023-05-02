@@ -11,9 +11,6 @@ import 'cypress-file-upload'
 import 'cypress-wait-until'
 import '@4tw/cypress-drag-drop'
 import 'cypress-downloadfile/lib/downloadFileCommand'
-import {login} from '@pages/Login.Page'
-const {authLogin, dashboardIndex} = Cypress.env('endpoint')
-import {signin} from '@pages/SignIn.Page.js'
 
 //Login SpaceBeyond
 Cypress.Commands.add("loginSpace", (username, password) =>
@@ -42,29 +39,3 @@ Cypress.Commands.add("loginSpace", (username, password) =>
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-
-Cypress.Commands.add('Login',(username,password)=>{
-    cy.session('login',()=>{
-        cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php")
-        cy.url().should("contain", authLogin)
-        username && login.enterUsername(username)
-        password && login.enterPassword(password)
-        login.submitLogin()
-
-        cy.url().should("contain", dashboardIndex)
-        
-    })
-})
-
-
-Cypress.Commands.add('SignIn', ()=>{
-    const { username, password } = Cypress.env('user')
-    const { signUp } = Cypress.env('endpoint')
-    cy.session('signIn',()=>{
-        cy.visit(signUp)
-        signin.goToLoginTab()
-        signin.enterUsername(username)
-        signin.enterPassword(password)
-        signin.submitLogin()
-    })
-})
