@@ -30,8 +30,7 @@ jobs:
 
             - name: 🧬Install All Dependencies
               run: |
-                  yarn ci
-                  yarn list
+                  yarn
 
             - name: 💾Download Cucumber-Formatter
               uses: suisei-cn/actions-download-file@v1.3.0
