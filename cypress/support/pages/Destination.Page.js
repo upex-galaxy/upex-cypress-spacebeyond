@@ -9,7 +9,7 @@ class DestinationPage {
 		cardPlanetPrice: () => cy.get('[class*=cardActions]'),
 		planetSelected: () => cy.get('[class*=selected]').contains('Launch').parent(),
 		planetColorSelected: () => cy.get('[class*=selected]').contains('Planet color').parent(),
-		planetCard: () => cy.get('[data-react-toolbox="card"]'),
+		planetCardVisible: () => cy.get('[data-react-toolbox="card"]:not([class*="--hidden"])'),
 		slider: () => cy.get('[class*=PurpleSlider__knob]'),
 	}
 	selectRandomPlanet() {
@@ -36,7 +36,7 @@ class DestinationPage {
 	getPlanetsNameVisibleInDestinationPage() {
 		let planetsName = []
 		this.get
-			.planetCard()
+			.planetCardVisible()
 			.children('[class*=cardTitle]')
 			.each((planetName) => {
 				planetsName.push(planetName.text())
@@ -46,7 +46,7 @@ class DestinationPage {
 	getPlanetsPriceVisibleInDestinationPage() {
 		let planetsPrice = []
 		this.get
-			.planetCard()
+			.planetCardVisible()
 			.children('[class*=cardTitle]')
 			.each((planetPrice) => {
 				const priceValue = planetPrice.text()
@@ -102,6 +102,44 @@ class DestinationPage {
 		let priceConvert = (valuePrice * 100) / 1800
 		cy.log(priceConvert)
 		this.get.slider().invoke('attr', 'style', `left: ${priceConvert}%`).click()
+	}
+	selectPlanetRandomInTheGroup(planetColorSelect) {
+		let planetName = []
+		const planetsGroup = this.searchGroupPlanetByColor(planetColorSelect)
+		cy.get('*').then(() => {
+			const randomPlanet = Cypress._.random(0, planetsGroup.length - 1)
+			this.get.planetSelected().children().next().contains(planetsGroup[randomPlanet]).click({ force: true })
+			planetName.push(planetsGroup[randomPlanet])
+			cy.log(planetsGroup)
+			cy.log(planetsGroup[randomPlanet])
+			cy.log(randomPlanet)
+		})
+		return planetName
+	}
+	selectPlanetDifferentColor(planetColorSelect) {
+		let planetsValue
+		if (planetColorSelect.toString() === 'Green') {
+			planetsValue = [this.get.purple, this.get.blue, this.get.brown, this.get.red]
+		}
+		if (planetColorSelect.toString() === 'Red') {
+			planetsValue = [this.get.purple, this.get.blue, this.get.brown, this.get.green]
+		}
+		if (planetColorSelect.toString() === 'Blue') {
+			planetsValue = [this.get.purple, this.get.brown, this.get.red, this.get.green]
+		}
+		if (planetColorSelect.toString() === 'Brown') {
+			planetsValue = [this.get.purple, this.get.blue, this.get.red, this.get.green]
+		}
+		if (planetColorSelect.toString() === 'Purple') {
+			planetsValue = [this.get.blue, this.get.brown, this.get.red, this.get.green]
+		}
+		const fisrtArrayRandomPlanet = Cypress._.random(0, planetsValue.length - 1)
+		const randomPlanet = planetsValue[fisrtArrayRandomPlanet]
+		cy.log(randomPlanet)
+		const secondArrayRandomPlanet = Cypress._.random(0, randomPlanet.length - 1)
+		cy.log(randomPlanet[secondArrayRandomPlanet])
+		const RandomPlanet = randomPlanet[secondArrayRandomPlanet]
+		return RandomPlanet
 	}
 }
 export const destinationPage = new DestinationPage()

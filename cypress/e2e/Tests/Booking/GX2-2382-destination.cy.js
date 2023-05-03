@@ -25,7 +25,33 @@ describe('test', () => {
 		const planetsPriceVisible = destinationPage.getPlanetsPriceVisibleInDestinationPage()
 		cy.get('*').then(() => {
 			destinationPage.moveSliderPrice(planetsPriceVisible[1])
-			destinationPage.get.planetCard().should('not.exist')
+			destinationPage.get.planetCardVisible().should('not.exist')
+		})
+	})
+	it('2383 | TC4: select a random planet color validate that is visible one selected planet random and not visible after by setting a lower maximum price', () => {
+		const planetColorSelect = destinationPage.selectRandomPlanetColor()
+		cy.get('*').then(() => {
+			destinationPage.selectPlanetRandomInTheGroup(planetColorSelect)
+			destinationPage.get.planetCardVisible().then((card) => {
+				//expect only visible one card planet
+				expect(card.length).to.equal(1)
+			})
+			const planetsPriceVisible = destinationPage.getPlanetsPriceVisibleInDestinationPage()
+			cy.get('*').then(() => {
+				//settings max price
+				destinationPage.moveSliderPrice(planetsPriceVisible[1])
+				//expect not card visible because price max selected is more lower than its price
+				destinationPage.get.planetCardVisible().should('not.exist')
+			})
+		})
+	})
+	it('2383 | TC5: select random planet color and validate destination cards empty by selected random planet of different color', () => {
+		const planetColorSelect = destinationPage.selectRandomPlanetColor()
+		cy.get('*').then(() => {
+			const planetDifferentColor = destinationPage.selectPlanetDifferentColor(planetColorSelect)
+			destinationPage.get.planetSelected().children().next().contains(planetDifferentColor).click({ force: true })
+			//expect not card visible because selected random plant with different color
+			destinationPage.get.planetCardVisible().should('not.exist')
 		})
 	})
 })
