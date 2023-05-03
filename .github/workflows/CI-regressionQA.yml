@@ -27,8 +27,7 @@ jobs:
 
             - name: 🧬Install All Dependencies
               run: |
-                  npm ci
-                  npm list
+                  yarn
 
             - name: 🔌Cucumber Preprocessor JSON Setup
               uses: DamianReeves/write-file-action@master
@@ -55,12 +54,12 @@ jobs:
               with:
                   browser: chrome
                   command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
-                      npm run regression
+                      yarn run regression
 
             - name: 📬Generate XML Regression Report
               if: always()
               run: |
-                  npm run report:xml
+                  yarn run report:xml
 
             - name: ✅Import Test Results to Xray
               if: always()
@@ -98,8 +97,7 @@ jobs:
 
             - name: 🧬Install All Dependencies
               run: |
-                  npm ci
-                  npm list
+                  yarn
 
             - name: 🔌Cucumber Preprocessor JSON Setup
               uses: DamianReeves/write-file-action@master
@@ -126,13 +124,13 @@ jobs:
               with:
                   browser: chrome
                   command: | #NO EDITAR. Es para correr todas las pruebas del Repo.
-                      npm run regression:report
+                      yarn run regression:report
 
             - name: 📬Generate HTML Regression Report
               if: always()
               run: |
-                  npm run report:json
-                  npm run report:html
+                  yarn run report:json
+                  yarn run report:html
 
             - name: 📊Upload Artifact HTML Report
               if: always()
