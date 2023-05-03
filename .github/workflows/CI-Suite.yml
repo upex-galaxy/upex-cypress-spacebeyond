@@ -83,10 +83,10 @@ jobs:
                   projectKey: 'GX' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
                   testEnvironments: 'Chrome' #ELEGIR EL AMBIENTE DE PRUEBAS (Igual al TX).
 
-            - name: 🔧Generate Cucumber HTML Report
-              if: always()
-              run: |
-                  yarn run report:cucumber
+            # - name: 🔧Generate Cucumber HTML Report
+            #   if: always()
+            #   run: |
+            #       yarn run report:cucumber
 
             - name: 📊Upload Artifact 🍵Cucumber HTML Report
               uses: actions/upload-artifact@v3
