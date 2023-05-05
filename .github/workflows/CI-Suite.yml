@@ -81,10 +81,10 @@ jobs:
                   testPaths: 'reports/test-results.xml' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
                   testExecKey: 'GX2-2536' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
 
-            # - name: 🔧Generate Cucumber HTML Report
-            #   if: always()
-            #   run: |
-            #       yarn run report:cucumber
+            - name: 🔧Generate Cucumber HTML Report
+              if: always()
+              run: |
+                  yarn run report:cucumber
 
             - name: 📊Upload Artifact 🍵Cucumber HTML Report
               uses: actions/upload-artifact@v3
@@ -105,6 +105,6 @@ jobs:
               env:
                   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
                   SLACK_USERNAME: Ari✨
-                  SLACK_MESSAGE: ':test_tube: Tests run in ToolsQA: User Story Test Execution is Done and updated in Jira :rocket:'
+                  SLACK_MESSAGE: ':test_tube: Tests run in SpaceBeyond: User Story Test Execution is Done and updated in Jira :rocket:'
                   SLACK_COLOR: ${{ job.status }}
                   SLACK_ICON: https://i.imgur.com/q9kvQCp_d.webp?maxwidth=760&fidelity=grand
