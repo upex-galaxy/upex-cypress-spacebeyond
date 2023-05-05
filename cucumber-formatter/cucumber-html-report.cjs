@@ -1,4 +1,4 @@
-import { generate } from 'multiple-cucumber-html-reporter'
+const { generate } = require('multiple-cucumber-html-reporter')
 
 generate({
 	jsonDir: 'reports',
