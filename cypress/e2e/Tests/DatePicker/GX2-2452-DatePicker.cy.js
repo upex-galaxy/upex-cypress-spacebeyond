@@ -3,28 +3,47 @@ describe('first history', () => {
 		cy.visit('https://demo.testim.io/')
 	})
 
-	it('2453 | TC1: validate select a departing date and this is the same as the one selected', () => {
+	it('2453 | TC1: validate select a Departing date and this is the same as the one selected', () => {
 		const dateSelected = datePicker.selectRandomDate({ datePickerName: 'Departing' })
+		datePicker.get
+			.selectDatePicker('Departing')
+			.children('[role="input"]')
+			.invoke('val')
+			.then((DepartingDate) => {
+				expect(DepartingDate).to.deep.equal(dateSelected.toString())
+			})
+	})
+	it('2453 | TC2: validate select a Returning date and this is the same as the one selected', () => {
+		const dateSelected = datePicker.selectRandomDate({ datePickerName: 'Returning' })
+		datePicker.get
+			.selectDatePicker('Returning')
+			.children('[role="input"]')
+			.invoke('val')
+			.then((ReturningDate) => {
+				expect(ReturningDate).to.deep.equal(dateSelected.toString())
+				cy.log(dateSelected)
+			})
+	})
+	it.only('2453 | TC3: validate select departing, returning date and travelers is equal to search', () => {
+		const departingDateSelected = datePicker.selectRandomDate({ datePickerName: 'Departing' })
 		cy.get('*').then(() => {
-			cy.log(dateSelected)
+			const returningDateSelected = datePicker.selectRandomDate({ datePickerName: 'Returning', dateDepartingSelected: departingDateSelected })
+			datePicker.get.resultInput().then((searchValue) => {
+				let Departing = new Date(departingDateSelected)
+				let dateDeparting = Departing.toLocaleDateString('default', { month: 'short', day: 'numeric' })
+				let Returning = new Date(returningDateSelected)
+				let dateReturning = Returning.toLocaleDateString('default', { month: 'short', day: 'numeric' })
+				const date = searchValue.text().split(',')
+				expect(date[1]).to.deep.include(`${dateDeparting}`)
+				expect(date[2]).to.deep.include(`${dateReturning}`)
+			})
 		})
 	})
-	it.skip('2453 | TC1: validate select a returning date and this is the same as the one selected', () => {
-		datePicker.get.selectDatePicker('Returning').click()
-		const availableMonthsYear = datePicker.getAvailableMonthsYear()
+
+	it('2453 | TC2: validate no select same date Departing and Returning', () => {
+		const dateDeparting = datePicker.selectRandomDate({ datePickerName: 'Departing' })
 		cy.get('*').then(() => {
-			const randomMonthYear = datePicker.getRandomMonthYear(availableMonthsYear)
-			cy.get('*').then(() => {
-				const year = datePicker.selectCorrespondYear(randomMonthYear)
-				const month = datePicker.selectMonth(randomMonthYear)
-				const day = datePicker.selectRandomDayAvailable()
-				datePicker.get.buttonOKofDatePicker().click()
-				const datePickerValue = datePicker.getDatePickerValue('Returning')
-				cy.get('*').then(() => {
-					const dateSelected = [`${day} ${month} ${year}`]
-					expect(dateSelected).to.deep.equal(datePickerValue)
-				})
-			})
+			datePicker.selectSpecificDate({ nameDatePicker: 'Returning', dateSelect: dateDeparting })
 		})
 	})
 })

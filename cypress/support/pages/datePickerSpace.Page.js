@@ -10,6 +10,7 @@ class DatePicker {
 		Years: () => cy.get('[data-react-toolbox="years"]'),
 		yearsInput: () => cy.get('#years'),
 		buttonOKofDatePicker: () => cy.get('[data-react-toolbox="button"]').contains('Ok'),
+		resultInput: () => cy.get('h3'),
 	}
 	getAvailableMonthsYear() {
 		let availableMonthsYear = []
@@ -56,22 +57,19 @@ class DatePicker {
 	selectCorrespondYear(availableMonthsYear) {
 		const yearAvailable = availableMonthsYear[1]
 		this.get.yearsInput().click()
-		this.get
-			.Years()
-			.children('[class*=active]')
-			.then((yearValue) => {
-				if (yearValue.text() === yearAvailable) {
-					cy.log('a;o seleccionado es igual')
-				} else {
-					this.get.Years().children().contains(yearAvailable).click({ force: true })
-				}
-			})
+		this.get.Years().children().contains(yearAvailable).click({ force: true })
 		return yearAvailable
 	}
-	getRandomMonthYear(availableMonthsYear) {
-		const randomIndex = Cypress._.random(0, availableMonthsYear.length - 1)
-		const monthYearSelected = availableMonthsYear[randomIndex].split(' ') //separar mes del a;o en dos array
-		return monthYearSelected
+	getRandomMonthYear({ MonthsYear, nameDatePicker }) {
+		if (nameDatePicker === 'Returning') {
+			const randomIndex = Cypress._.random(1, MonthsYear.length - 1)
+			const monthYearSelected = MonthsYear[randomIndex].split(' ') //separar mes del a;o en dos array
+			return monthYearSelected
+		} else {
+			const randomIndex = Cypress._.random(0, MonthsYear.length - 2)
+			const monthYearSelected = MonthsYear[randomIndex].split(' ') //separar mes del a;o en dos array
+			return monthYearSelected
+		}
 	}
 	selectRandomDayAvailable() {
 		let daySelect = []
@@ -103,7 +101,7 @@ class DatePicker {
 		this.get.selectDatePicker(datePickerName).click()
 		const availableMonthsYear = this.getAvailableMonthsYear()
 		cy.get('*').then(() => {
-			const randomMonthYear = this.getRandomMonthYear(availableMonthsYear)
+			const randomMonthYear = this.getRandomMonthYear({ MonthsYear: availableMonthsYear, nameDatePicker: datePickerName })
 			cy.get('*').then(() => {
 				const year = this.selectCorrespondYear(randomMonthYear)
 				const month = this.selectMonth(randomMonthYear)
@@ -116,6 +114,19 @@ class DatePicker {
 			})
 		})
 		return date
+	}
+	selectSpecificDate({ nameDatePicker, dateSelect }) {
+		const datePattern = /(\d{1,2})\s(\w+)\s(\d{4})/ // Expresión regular para buscar patrones de fechas en formato dd month yyyy
+		const dateMatch = datePattern.exec(dateSelect) // Ejecutar la expresión regular en el string y guardar los resultados en un array
+		const day = dateMatch[1]
+		const monthYear = [dateMatch[2], dateMatch[3]]
+		this.get.selectDatePicker(nameDatePicker).click()
+		this.selectMonth(monthYear)
+		this.selectCorrespondYear(monthYear)
+		this.get.activeDay().contains(day).click()
+		this.get.buttonOKofDatePicker().click()
+		cy.log(monthYear)
+		cy.log(day)
 	}
 }
 export const datePicker = new DatePicker()
