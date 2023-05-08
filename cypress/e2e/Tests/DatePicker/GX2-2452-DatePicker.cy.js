@@ -1,5 +1,5 @@
-describe('first history', () => {
-	beforeEach('Precondition', () => {
+describe('GX2-2452 ✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasajeros', () => {
+	beforeEach('Precondition go to web Page', () => {
 		cy.visit('https://demo.testim.io/')
 	})
 
