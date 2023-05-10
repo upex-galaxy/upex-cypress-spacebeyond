@@ -1,10 +1,5 @@
 class DestinationPage {
 	get = {
-		green: ['Madan'],
-		red: ['Shenji', 'Sant Cugat Del Valles'],
-		blue: ['Tongli', 'Tayabamba', 'Babahoyo'],
-		brown: ['Flagstaff', 'Cuozhou'],
-		purple: ['Shaheying'],
 		cardPlanetName: () => cy.get('[class*=cardTitle]'),
 		cardPlanetPrice: () => cy.get('[class*=cardActions]'),
 		planetSelected: () => cy.get('[class*=selected]').contains('Launch').parent(),
@@ -46,16 +41,17 @@ class DestinationPage {
 	}
 	getVisiblePlanetPrices() {
 		let planetsPrice = []
-		this.get
-			.planetCardVisible()
-			.children('[class*=cardTitle]')
+		return this.get
+			.cardPlanetPrice()
+			.children('[class*=price-tag]')
 			.each((planetPrice) => {
 				const priceValue = planetPrice.text()
-				planetsPrice.push(priceValue)
 				const newPriceValue = priceValue.replace('$', '')
 				planetsPrice.push(newPriceValue)
 			})
-		return planetsPrice
+			.then(() => {
+				return planetsPrice
+			})
 	}
 	selectRandomPlanetColor() {
 		return this.get
@@ -76,69 +72,15 @@ class DestinationPage {
 					})
 			})
 	}
-	searchGroupPlanetByColor(planetColorSelect) {
-		let planetColorGroup = []
 
-		if (planetColorSelect.toString() === 'Green') {
-			planetColorGroup = this.get.green
-		}
-		if (planetColorSelect.toString() === 'Red') {
-			planetColorGroup = this.get.red
-		}
-		if (planetColorSelect.toString() === 'Blue') {
-			planetColorGroup = this.get.blue
-		}
-		if (planetColorSelect.toString() === 'Brown') {
-			planetColorGroup = this.get.brown
-		}
-		if (planetColorSelect.toString() === 'Purple') {
-			planetColorGroup = this.get.purple
-		}
-		return planetColorGroup
-	}
 	moveSliderPrice(value) {
 		let valuePrice = value.toString() - 110 //como el minimo es 100, para evaluar en un real 100% restamos 100 + 10 que representan la dif minima
 		let priceConvert = (valuePrice * 100) / 1800
 		cy.log(priceConvert)
 		this.get.slider().invoke('attr', 'style', `left: ${priceConvert}%`).click()
 	}
-	selectPlanetRandomInTheGroup(planetColorSelect) {
-		let planetName = []
-		const planetsGroup = this.searchGroupPlanetByColor(planetColorSelect)
-		cy.get('*').then(() => {
-			const randomPlanet = Cypress._.random(0, planetsGroup.length - 1)
-			this.get.planetSelected().children().next().contains(planetsGroup[randomPlanet]).click({ force: true })
-			planetName.push(planetsGroup[randomPlanet])
-			cy.log(planetsGroup)
-			cy.log(planetsGroup[randomPlanet])
-			cy.log(randomPlanet)
-		})
-		return planetName
-	}
-	selectPlanetDifferentColor(planetColorSelect) {
-		let planetsValue
-		if (planetColorSelect.toString() === 'Green') {
-			planetsValue = [this.get.purple, this.get.blue, this.get.brown, this.get.red]
-		}
-		if (planetColorSelect.toString() === 'Red') {
-			planetsValue = [this.get.purple, this.get.blue, this.get.brown, this.get.green]
-		}
-		if (planetColorSelect.toString() === 'Blue') {
-			planetsValue = [this.get.purple, this.get.brown, this.get.red, this.get.green]
-		}
-		if (planetColorSelect.toString() === 'Brown') {
-			planetsValue = [this.get.purple, this.get.blue, this.get.red, this.get.green]
-		}
-		if (planetColorSelect.toString() === 'Purple') {
-			planetsValue = [this.get.blue, this.get.brown, this.get.red, this.get.green]
-		}
-		const fisrtArrayRandomPlanet = Cypress._.random(0, planetsValue.length - 1)
-		const randomPlanet = planetsValue[fisrtArrayRandomPlanet]
-		cy.log(randomPlanet)
-		const secondArrayRandomPlanet = Cypress._.random(0, randomPlanet.length - 1)
-		cy.log(randomPlanet[secondArrayRandomPlanet])
-		const RandomPlanet = randomPlanet[secondArrayRandomPlanet]
-		return RandomPlanet
+	selectPlanet(planetColorSelect) {
+		this.get.planetSelected().children().next().contains(planetColorSelect).click({ force: true })
 	}
 }
 export const destinationPage = new DestinationPage()
