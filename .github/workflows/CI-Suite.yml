@@ -64,16 +64,13 @@ jobs:
                         }
                       }
 
+
             - name: 🧪Cypress Run Test Coverage in Chrome
               uses: cypress-io/github-action@v4
               with:
                   browser: chrome
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-<<<<<<< HEAD
-                      yarn run file cypress/e2e/Tests/Accounts/GX-6230-LoginLogout.cy.js
-=======
                       yarn run file cypress/e2e/Tests/Booking/GX2-2382-destination.cy.js
->>>>>>> 0d169ba1020948d3ea2bd7ceca4b08ef2f8a9f90
 
             - name: ✅Import Test Results to Xray
               if: always()
@@ -83,14 +80,9 @@ jobs:
                   password: ${{secrets.XRAY_CLIENT_SECRET}}
                   testFormat: 'junit' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
                   testPaths: 'reports/test-results.xml' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
-<<<<<<< HEAD
-                  testExecKey: 'GX2-2536' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
-=======
                   testExecKey: 'GX2-2384' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
                   projectKey: 'GX2' #EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
                   testEnvironments: 'Chrome' #ELEGIR EL AMBIENTE DE PRUEBAS (Igual al TX).
->>>>>>> 0d169ba1020948d3ea2bd7ceca4b08ef2f8a9f90
-
             - name: 🔧Generate Cucumber HTML Report
               if: always()
               run: |
