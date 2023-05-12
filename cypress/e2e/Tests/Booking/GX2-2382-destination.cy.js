@@ -1,5 +1,5 @@
-describe('test', () => {
-	beforeEach('Precondition', () => {
+describe('GX2-2382 | TS: ✅SpaceBeyond | Gallery | Clasificar viaje según destino, color y precio', () => {
+	beforeEach('Precondition go to the page', () => {
 		cy.visit('https://demo.testim.io/')
 	})
 
