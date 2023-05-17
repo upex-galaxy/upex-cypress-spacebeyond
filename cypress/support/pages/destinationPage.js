@@ -5,10 +5,13 @@ class DestinationPage {
 		selectDestinationBtn: () => cy.contains('button', 'Select Destination'),
 		launch: () => cy.get('input[value="Launch"]'),
 		card1: () => cy.get('div[data-react-toolbox="card"]').first(),
+		cards: () => cy.get('div[data-react-toolbox="card"]'),
 		titleCard: () => cy.get('.theme__title___35Wsy'),
 		dropdownlist: () => cy.get('div[class^="theme__dropdown"]'),
 		themeInputElement: () => cy.get('input[class^="theme__inputElement"]'),
 		priceCardItem: () => cy.get('span[class="GalleryItem__price-tag___3q0Al"]'),
+		galleryItems: () => cy.get('div[class*="Gallery__items-box___2hOZl'),
+		priceSlider: () => cy.get('div[class^="theme__knob"]'),
 	}
 
 	clickSelectDestBtn() {
@@ -41,7 +44,7 @@ class DestinationPage {
 			})
 	}
 	selectRandomPlanetColor() {
-		this.get
+		return this.get
 			.dropdownlist()
 			.eq(3)
 			.click()
@@ -59,24 +62,25 @@ class DestinationPage {
 					})
 			})
 	}
+
 	colorCardsSelected() {
 		return this.get
 			.dropdownlist()
 			.eq(3)
 			.then(() => {
-				const redItems = data.item.filter(function (obj) {
+				const colorItems = data.item.filter(function (obj) {
 					return obj.color === Cypress.env('itemColor')
 				})
-				cy.log(redItems)
-				cy.wrap(redItems)
+				cy.log(colorItems)
+				cy.wrap(colorItems)
 			})
 	}
 	randomPriceRange() {
 		const min = '0'
 		const max = '100'
 		const random = Math.random() * (max - min + 1)
-		return cy
-			.get('div[class^="theme__knob"]')
+		return this.get
+			.priceSlider()
 			.invoke('attr', 'style', 'left: ' + random + '%')
 			.trigger('change')
 			.click({ force: true })
@@ -95,21 +99,11 @@ class DestinationPage {
 					})
 			})
 	}
-	checkPriceCart() {
-		return this.get.priceCardItem().each(($cartPrice) => {
-			cy.wrap($cartPrice)
-				.invoke('text')
-				.then((precios) => {
-					const prices = precios.split('$')[1]
-					return prices
-				})
-				.then(($precios) => {
-					Cypress.env('precios', $precios)
-				})
-				.then(parseInt)
-				.should('exist')
-				.should('be.below', Cypress.env('price'))
-		})
+	changePriceSliderMinimum() {
+		this.get.priceSlider().invoke('attr', 'style', 'left: 0%').trigger('change').click({ force: true })
+	}
+	changePriceSliderMaximum() {
+		this.get.priceSlider().invoke('attr', 'style', 'left: 100%').trigger('change').click({ force: true })
 	}
 }
 
