@@ -39,7 +39,7 @@ describe('GX2-2915 | ✅SpaceBeyond | Booking | Book a Destination in Checkout',
 		checkout.clickPayNowBtn()
 		checkout.get.errorMsg().should('be.visible').should('have.text', data.checkout.errorMsgName)
 	})
-	it('GX2-2916 | TC4: Validate filled out the form with an invalid Email ', () => {
+	it('GX2-2916 | TC3: Validate filled out the form with an invalid Email ', () => {
 		checkout.completeName(data.checkout.name)
 		checkout.completeEmail(data.checkout.invalidEmail)
 		checkout.completeSocialSecNum(data.checkout.socialSecNum)
@@ -49,7 +49,7 @@ describe('GX2-2915 | ✅SpaceBeyond | Booking | Book a Destination in Checkout',
 		checkout.clickPayNowBtn()
 		checkout.get.errorMsg().should('be.visible').should('have.text', data.checkout.errorMsg)
 	})
-	it('GX2-2916 | TC5: Validate filled out the form with an invalid Social Security Number', () => {
+	it('GX2-2916 | TC4: Validate filled out the form with an invalid Social Security Number', () => {
 		checkout.completeName(data.checkout.name)
 		checkout.completeEmail(data.checkout.email)
 		checkout.completeSocialSecNum(data.checkout.invalidSocialSecNum)
@@ -59,7 +59,7 @@ describe('GX2-2915 | ✅SpaceBeyond | Booking | Book a Destination in Checkout',
 		checkout.clickPayNowBtn()
 		checkout.get.errorMsg().should('be.visible').should('have.text', data.checkout.errorMsgSocialNum)
 	})
-	it('GX2-2916 | TC6: Validate filled out the form with an invalid Phone Number', () => {
+	it('GX2-2916 | TC5: Validate filled out the form with an invalid Phone Number', () => {
 		checkout.completeName(data.checkout.name)
 		checkout.completeEmail(data.checkout.email)
 		checkout.completeSocialSecNum(data.checkout.socialSecNum)
@@ -69,17 +69,8 @@ describe('GX2-2915 | ✅SpaceBeyond | Booking | Book a Destination in Checkout',
 		checkout.clickPayNowBtn()
 		checkout.get.errorMsg().should('be.visible').should('have.text', data.checkout.errorMsgPhoneNum)
 	})
-	it('GX2-2916 | TC6: Validate filled out the form with an invalid Phone Number', () => {
-		checkout.completeName(data.checkout.name)
-		checkout.completeEmail(data.checkout.email)
-		checkout.completeSocialSecNum(data.checkout.socialSecNum)
-		checkout.completePhoneNum(data.checkout.invalidPhoneNum)
-		checkout.get.healthInsuranceContainer().attachFile('images/upexgalaxy.gif')
-		checkout.checkAgreeTerms()
-		checkout.clickPayNowBtn()
-		checkout.get.errorMsg().should('be.visible').should('have.text', data.checkout.errorMsgPhoneNum)
-	})
-	it('GX2-2916 | TC7: Validate finish the checkout without accepting "Terms and conditions".', () => {
+	
+	it('GX2-2916 | TC6: Validate finish the checkout without accepting "Terms and conditions".', () => {
 		checkout.completeName(data.checkout.name)
 		checkout.completeEmail(data.checkout.email)
 		checkout.completeSocialSecNum(data.checkout.socialSecNum)
@@ -89,7 +80,7 @@ describe('GX2-2915 | ✅SpaceBeyond | Booking | Book a Destination in Checkout',
 		checkout.get.termsAndCond().should('be.visible').should('contain', data.checkout.termsMsg)
 	})
 
-	it('GX2-2916 | TC8: Validate finish the checkout without uploading the health insurance information.', () => {
+	it('GX2-2916 | TC7: Validate finish the checkout without uploading the health insurance information.', () => {
 		checkout.completeName(data.checkout.name)
 		checkout.completeEmail(data.checkout.email)
 		checkout.completeSocialSecNum(data.checkout.socialSecNum)
