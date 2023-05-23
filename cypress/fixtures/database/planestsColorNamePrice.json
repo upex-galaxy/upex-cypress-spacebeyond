@@ -1,0 +1,56 @@
+[
+	{
+		"id": 1,
+		"name": "Madan",
+		"color": "Green",
+		"price": 1183.46
+	},
+	{
+		"id": 2,
+		"name": "Shenji",
+		"color": "Red",
+		"price": 1089.07
+	},
+	{
+		"id": 3,
+		"name": "Sant Cugat Del Valles",
+		"color": "Red",
+		"price": 1243.73
+	},
+	{
+		"id": 4,
+		"name": "Tongli",
+		"color": "Blue",
+		"price": 192.64
+	},
+	{
+		"id": 5,
+		"name": "Tayabamba",
+		"color": "Blue",
+		"price": 418.31
+	},
+	{
+		"id": 6,
+		"name": "Babahoyo",
+		"color": "Blue",
+		"price": 770.76
+	},
+	{
+		"id": 7,
+		"name": "Flagstaff",
+		"color": "Brown",
+		"price": 346.68
+	},
+	{
+		"id": 8,
+		"name": "Cuozhou",
+		"color": "Brown",
+		"price": 1756.71
+	},
+	{
+		"id": 9,
+		"name": "Shaheying",
+		"color": "Purple",
+		"price": 215.38
+	}
+]
