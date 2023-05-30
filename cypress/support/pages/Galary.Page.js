@@ -24,7 +24,7 @@ class GaleryDestination {
 					.children()
 					.next()
 					.eq(randomPlanet)
-					.click()
+					.click({ force: true })
 					.then((planetNameSelect) => {
 						const planetName = planetNameSelect.text()
 						return planetName
