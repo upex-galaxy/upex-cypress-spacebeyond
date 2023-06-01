@@ -1,8 +1,8 @@
 //import { galeryDestination } from '@pages/Galary.Page'
 import { galeryDestination } from '@pages/Galery.Page'
 
-describe('', () => {
-	beforeEach('', () => {
+describe('GX2-3416 Clasificar Viajes por planeta, color y precio', () => {
+	beforeEach('Login Spacebeyon', () => {
 		cy.visit('https://demo.testim.io/')
 		cy.url().should('contain', 'testim')
 		cy.contains('Log in').should('be.visible').click()
