@@ -1,11 +1,29 @@
 class GaleryDestination {
 	get = {
+		//campos login
+		user: () => cy.get('[type="text"]').eq(4),
+		password: () => cy.get('[type="password"]'),
+		submit: () => cy.get('button[type="submit"]'),
+		helloJonh: () => cy.get('[class="mui-dropdown "]'),
+
 		dropLaunch: () => cy.get('[role="input"]').eq(4),
 		selectedPlanet: () => cy.get('[class^="theme__values"]').eq(2),
 		selectedColor: () => cy.get('[class^="theme__values"]').eq(3),
 		cardPlanetName: () => cy.get('[class*=cardTitle]'),
 		cardPlanetPrice: () => cy.get('[class*=cardActions]'),
 		planetCardVisible: () => cy.get('[data-react-toolbox="card"]:not([class*="--hidden"])'),
+		Slider: () => cy.get('[class="theme__inputElement___27dyY theme__filled___1UI7Z"]:not([name="name"])'),
+	}
+
+	inputUser() {
+		this.get.user().type('Lucas')
+	}
+	inputPassword() {
+		this.get.password().type('Casco')
+	}
+
+	clickSubmitButton() {
+		this.get.submit().click()
 	}
 
 	clickDropLaunch() {

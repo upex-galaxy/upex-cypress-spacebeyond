@@ -8,11 +8,11 @@ describe('GX2-3416 Clasificar Viajes por planeta, color y precio', () => {
 		cy.contains('Log in').should('be.visible').click()
 		cy.url().should('contain', 'login')
 
-		//login
-		cy.get('[type="text"]').eq(4).type('Hola')
-		cy.get('[type="password"]').type('Lucas')
-		cy.get('button[type="submit"]').click()
-		cy.get('[class="mui-dropdown "]').contains('Hello, John')
+		//login con POM solicitado por Dany
+		galeryDestination.inputUser()
+		galeryDestination.inputPassword()
+		galeryDestination.clickSubmitButton()
+		galeryDestination.get.helloJonh().should('contain.text', 'Hello, John')
 	})
 
 	it('3417|TC01 Validar destino con seleccion random de dropdow Planet Launch', () => {
@@ -39,7 +39,9 @@ describe('GX2-3416 Clasificar Viajes por planeta, color y precio', () => {
 	it('3417|TC03 Validar destino seleccionado rango de precio', () => {
 		cy.fixture('database/planestsColorNamePrice').then((data) => {
 			const numberRandomSlider = Cypress._.random(193, 1800)
-			cy.get('[class="theme__inputElement___27dyY theme__filled___1UI7Z"]:not([name="name"])')
+			//cy.get('[class="theme__inputElement___27dyY theme__filled___1UI7Z"]:not([name="name"])')
+			galeryDestination.get
+				.Slider()
 				.clear()
 				.type(numberRandomSlider + '{enter}')
 
