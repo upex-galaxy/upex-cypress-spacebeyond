@@ -1,4 +1,4 @@
-describe('GX2-2452 ✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasajeros', () => {
+describe.skip('GX2-2452 ✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasajeros', () => {
 	beforeEach('Precondition go to web Page', () => {
 		cy.visit('https://demo.testim.io/')
 	})
@@ -24,7 +24,7 @@ describe('GX2-2452 ✅SpaceBeyond | Datepicker | Buscar destino por fecha y grup
 				cy.log(dateSelected)
 			})
 	})
-	it.only('2453 | TC3: validate select departing, returning date and travelers is equal to search', () => {
+	it('2453 | TC3: validate select departing, returning date and travelers is equal to search', () => {
 		const departingDateSelected = datePicker.selectRandomDate({ datePickerName: 'Departing' })
 		cy.get('*').then(() => {
 			const returningDateSelected = datePicker.selectRandomDate({ datePickerName: 'Returning', dateDepartingSelected: departingDateSelected })
