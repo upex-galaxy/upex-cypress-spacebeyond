@@ -11,7 +11,7 @@ class Checkout {
 		phoneNumInput: () => cy.get(':nth-child(4) > .theme__inputElement___27dyY'),
 		healthInsuranceContainer: () => cy.get('input[type="file'),
 		agreeTerms: () => cy.get('input[type="checkbox"]'),
-		payNowBtn: () => cy.contains('button', 'Pay now'),
+		payNowBtn: () => cy.get('button[class*="OrderSummary__pay-button___1CG2e"]'),
 		errorMsg: () => cy.get('.theme__error___3ilni'),
 		termsAndCond: () => cy.get('section[class*="Dialog__body"'),
 	}
@@ -28,7 +28,7 @@ class Checkout {
 		this.get.loginBtn().click()
 	}
 	clickBookBtn() {
-		this.get.bookBtn().click()
+		this.get.bookBtn().eq(0).click()
 	}
 	completeName(data) {
 		return this.get.nameInput().type(data)
