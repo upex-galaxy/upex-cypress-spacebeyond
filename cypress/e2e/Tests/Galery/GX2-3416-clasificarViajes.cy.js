@@ -1,4 +1,3 @@
-//import { galeryDestination } from '@pages/Galary.Page'
 import { galeryDestination } from '@pages/Galery.Page'
 
 describe('GX2-3416 Clasificar Viajes por planeta, color y precio', () => {
@@ -39,7 +38,7 @@ describe('GX2-3416 Clasificar Viajes por planeta, color y precio', () => {
 	it('3417|TC03 Validar destino seleccionado rango de precio', () => {
 		cy.fixture('database/planestsColorNamePrice').then((data) => {
 			const numberRandomSlider = Cypress._.random(193, 1800)
-			//cy.get('[class="theme__inputElement___27dyY theme__filled___1UI7Z"]:not([name="name"])')
+
 			galeryDestination.get
 				.Slider()
 				.clear()
