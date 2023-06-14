@@ -43,7 +43,7 @@ class SearchDestiny {
 				.then(() => {
 					random = arrayDays[Math.floor(Math.random() * arrayDays.length - 1)]
 					Cypress.env('randomDay', random)
-					searchDestiny.get.dayCalendar().children().eq(Cypress.env('randomDay')).click()
+					searchDestiny.get.dayCalendar().children().eq(Cypress.env('randomDay'), { timeout: 10000 }).click()
 				})
 		})
 	}

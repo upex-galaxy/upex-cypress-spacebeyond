@@ -3,7 +3,7 @@ describe('GX2-3711 | SpaceBeyond | Datepicker | Buscar destino por fecha y grupo
 	beforeEach('User must be located in the website "SpaceBeyond', () => {
 		cy.visit('/')
 	})
-	it.skip('3712 | TC1: Validate "Your next destination" session update when user search a destiny by departing day, returning day and passenger', () => {
+	it('3712 | TC1: Validate "Your next destination" session update when user search a destiny by departing day, returning day and passenger', () => {
 		searchDestiny.clickDepartingDate().then(() => {
 			searchDestiny.selectYear()
 			searchDestiny.selectMonth()
@@ -53,7 +53,7 @@ describe('GX2-3711 | SpaceBeyond | Datepicker | Buscar destino por fecha y grupo
 			})
 		})
 	})
-	it.skip('3712 | TC2: Validate "Your next destination" session update when user search a destiny by departing day and  returning day', () => {
+	it('3712 | TC2: Validate "Your next destination" session update when user search a destiny by departing day and  returning day', () => {
 		searchDestiny.clickDepartingDate().then(() => {
 			searchDestiny.selectYear()
 			searchDestiny.selectMonth()
