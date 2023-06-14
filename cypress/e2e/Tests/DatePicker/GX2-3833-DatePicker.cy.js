@@ -1,6 +1,6 @@
 import { datepicker } from '@pages/DatePicker'
 import { tripDatabase } from '@pages/DatePicker'
-import { months } from '@pages/DatePicker'
+
 describe('GX2-3833|✅SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasajeros', () => {
 	beforeEach('Preconditions', () => {
 		cy.visit('/')
@@ -10,47 +10,71 @@ describe('GX2-3833|✅SpaceBeyond | Datepicker | Buscar destino por fecha y grup
 		datepicker.get.datePickerModal().should('exist')
 		datepicker.selectDeparture()
 		datepicker.clickOK()
-		cy.wait(1000)
+		cy.wait(500)
 		datepicker.clickReturnpicker()
+		datepicker.get.datePickerModal().should('exist')
 		datepicker.selectReturn()
 		datepicker.clickOK()
-
 		datepicker.clickAdultsdropdown()
 		datepicker.selectAdultnumber()
 		datepicker.clickChildrenDropdown()
 		datepicker.selectChildrenumber()
-
+		datepicker.get.selectDestinationButton().should('be.enabled').and('exist')
 		datepicker.clickSelectDestination()
-
-		cy.wrap(months).then((depmonth, retmonth) => {
-			if (months.depmonth != months.retmonth) {
-				datepicker.get.customerTripInfo().then((info) => {
-					cy.wrap(info)
-						.invoke('text')
-						.then((info) => {
-							cy.wrap(tripDatabase).then((departureDate, returnDate, numberOfchildren, numberOfadults, totalPassengers) => {
-								cy.wrap(info).should(
-									'equal',
-									`${tripDatabase.totalPassengers} travelers, ${tripDatabase.departureDate} – ${tripDatabase.returnDate}`
-								)
-							})
-						})
-				})
+		datepicker.getWebTripData()
+		cy.wrap(tripDatabase).then(() => {
+			if (tripDatabase.departureMonth != tripDatabase.returningMonth) {
+				expect(tripDatabase.webTripData).contains(tripDatabase.totalPassengers)
+				expect(tripDatabase.webTripData).contains(tripDatabase.departureDate)
+				expect(tripDatabase.webTripData).contains(tripDatabase.returnDate)
 			} else {
-				datepicker.get.customerTripInfo().then((info) => {
-					cy.wrap(info)
-						.invoke('text')
-						.then((info) => {
-							cy.wrap(tripDatabase).then(
-								(departureDate, returnDate, numberOfchildren, numberOfadults, totalPassengers, returnDateSliced) => {
-									cy.wrap(info).should(
-										'equal',
-										`${tripDatabase.totalPassengers} travelers, ${tripDatabase.departureDate} –${tripDatabase.returnDateSliced}`
-									)
-								}
-							)
-						})
-				})
+				expect(tripDatabase.webTripData).contains(tripDatabase.totalPassengers)
+				expect(tripDatabase.webTripData).contains(tripDatabase.departureDate)
+				expect(tripDatabase.webTripData).contains(tripDatabase.returnDateSliced)
+			}
+		})
+	})
+	it('3834 | TC2: Validate that the user searches for destination by departure and return date.', () => {
+		datepicker.clickDeparturepicker()
+		datepicker.get.datePickerModal().should('exist')
+		datepicker.selectDeparture()
+		datepicker.clickOK()
+		cy.wait(500)
+		datepicker.clickReturnpicker()
+		datepicker.get.datePickerModal().should('exist')
+		datepicker.selectReturn()
+		datepicker.clickOK()
+		datepicker.get.selectDestinationButton().should('be.enabled').and('exist')
+		datepicker.clickSelectDestination()
+		datepicker.getWebTripData()
+		cy.wrap(tripDatabase).then(() => {
+			if (tripDatabase.departureMonth != tripDatabase.returningMonth) {
+				expect(tripDatabase.webTripData).contains(tripDatabase.departureDate)
+				expect(tripDatabase.webTripData).contains(tripDatabase.returnDate)
+			} else {
+				expect(tripDatabase.webTripData).contains(tripDatabase.departureDate)
+				expect(tripDatabase.webTripData).contains(tripDatabase.returnDateSliced)
+			}
+		})
+	})
+	it('3834 | TC3: Validate that the user searches for destination by quantity and type of passenger', () => {
+		datepicker.clickAdultsdropdown()
+		datepicker.selectAdultnumber()
+		datepicker.clickChildrenDropdown()
+		datepicker.selectChildrenumber()
+		datepicker.get.selectDestinationButton().should('be.enabled').and('exist')
+		datepicker.clickSelectDestination()
+		datepicker.retrieveDefaultDates()
+		datepicker.getWebTripData()
+		cy.wrap(tripDatabase).then(() => {
+			if (tripDatabase.departureMonth != tripDatabase.returningMonth) {
+				expect(tripDatabase.webTripData).contains(tripDatabase.departureDate)
+				expect(tripDatabase.webTripData).contains(`${tripDatabase.totalPassengers} travelers`)
+				expect(tripDatabase.webTripData).contains(tripDatabase.returningDate)
+			} else {
+				expect(tripDatabase.webTripData).contains(`${tripDatabase.totalPassengers} travelers`)
+				expect(tripDatabase.webTripData).contains(tripDatabase.departureDate)
+				expect(tripDatabase.webTripData).contains(tripDatabase.returningDateSliced)
 			}
 		})
 	})
