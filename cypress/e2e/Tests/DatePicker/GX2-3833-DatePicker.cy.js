@@ -24,7 +24,7 @@ describe('GX2-3833|✅SpaceBeyond | Datepicker | Buscar destino por fecha y grup
 		datepicker.getWebTripData()
 		cy.wrap(tripDatabase).then(() => {
 			if (tripDatabase.departureMonth != tripDatabase.returningMonth) {
-				expect(tripDatabase.webTripData).contains(tripDatabase.totalPassengers)
+				expect(tripDatabase.webTripData).contains(`${tripDatabase.totalPassengers} travelers`)
 				expect(tripDatabase.webTripData).contains(tripDatabase.departureDate)
 				expect(tripDatabase.webTripData).contains(tripDatabase.returnDate)
 			} else {
@@ -76,6 +76,24 @@ describe('GX2-3833|✅SpaceBeyond | Datepicker | Buscar destino por fecha y grup
 				expect(tripDatabase.webTripData).contains(tripDatabase.departureDate)
 				expect(tripDatabase.webTripData).contains(tripDatabase.returningDateSliced)
 			}
+		})
+	})
+	it('3834 | TC4: Validate that the user searches for destination by the same departure and return date', () => {
+		datepicker.clickDeparturepicker()
+		datepicker.get.datePickerModal().should('exist')
+		datepicker.selectDeparture()
+		datepicker.clickOK()
+		datepicker.retrieveFullDepartureDate()
+		cy.wait(500)
+		datepicker.clickReturnpicker()
+		datepicker.waitForAsyncOperationsToComplete().then(() => {
+			datepicker.selectReturnSameDate()
+		})
+		datepicker.clickOK()
+		datepicker.retrieveFullDepartureDateAfter()
+		cy.wrap(tripDatabase).then(() => {
+			expect(tripDatabase.fullDepartureDate).not.equal(tripDatabase.fullDepartureDateAfter)
+			cy.log('**The departure date has changed!**')
 		})
 	})
 })

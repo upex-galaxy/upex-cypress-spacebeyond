@@ -4,31 +4,43 @@ let ranadultnum
 let ranchildnum
 let numberOfchildInt
 let numberOfAdultInt
+export let selectedDayNumber
 export let tripDatabase = {}
+
 class DatePicker {
 	get = {
 		datePickerModal: () => cy.get('[class$="dialog___1RQhu"]'),
 		datePickers: () => cy.get('[class$="___RaqVV"]'),
 		dates: () => cy.get('[class$="filled___1UI7Z"]'),
 		okButton: () => cy.get('button[class~="theme__button___3HGWm"]').eq(1),
-		availableDays: () => cy.get('[class="theme__day___3cb3g"]'),
+		availableDays: () => cy.get('div[class="theme__day___3cb3g"]'),
 		dateHeader: () => cy.get('[class="theme__date___2R1Ad"]'),
 		adultsDropdown: () => cy.get('[class^="theme__dropdown___co-4M"]').first(),
 		dropDownvalues: () => cy.get('li:not([class$="selected___3y0b0"])'),
 		childrenDropdown: () => cy.get('[class^="theme__dropdown___co-4M"]').eq(1),
 		selectDestinationButton: () => cy.get('button[class$="Hero__cta-button___9VskW"]'),
 		customerTripInfo: () => cy.get('h3[class="Gallery__headline-2___3amRj"]'),
+		fullSelectedDates: () => cy.get('[class$="theme__filled___1UI7Z"]'),
+		monthYearTitle: () => cy.get('[class="theme__title___2Ue3-"]'),
+		leftArrowMonth: () => cy.get('[id="left"]'),
+		selectedDay: () => cy.get('[class$="theme__active___2k63V"]'),
 	}
 	clickDeparturepicker() {
 		this.get.datePickers().first().click()
+		this.get.monthYearTitle().then((title) => Cypress.env('month&yearDepart', title.text()))
 	}
 	selectDeparture() {
-		return this.get
+		this.get
 			.availableDays()
 			.then((days) => {
 				rday = Cypress._.random(0, days.length - 1)
 				Cypress.env('rday', rday)
 				cy.wrap(days).eq(rday).click()
+				this.get.selectedDay().then((daynumber) => {
+					selectedDayNumber = daynumber.text()
+					Cypress.env.selectedNumber = selectedDayNumber
+				})
+
 				this.get
 					.dateHeader()
 					.then((date) => {
@@ -36,7 +48,7 @@ class DatePicker {
 						tripDatabase.departureMonth = Cypress.env('depmonth', date.text().slice(0, -3).substring(5))
 					})
 					.then(() => {
-						return Cypress.env('depdate')
+						Cypress.env('depdate')
 					})
 			})
 			.then(() => {
@@ -46,8 +58,36 @@ class DatePicker {
 	clickOK() {
 		this.get.okButton().should('be.visible').click()
 	}
+	retrieveFullDepartureDate() {
+		this.get
+			.fullSelectedDates()
+			.first()
+			.then((fulldate) => {
+				cy.wrap(fulldate)
+					.invoke('val')
+					.then((value) => {
+						Cypress.env('fullDepartureDate', value)
+						cy.log(Cypress.env('fullDepartureDate'))
+						tripDatabase.fullDepartureDate = Cypress.env('fullDepartureDate')
+					})
+			})
+	}
+	retrieveFullDepartureDateAfter() {
+		this.get
+			.fullSelectedDates()
+			.first()
+			.then((fulldate) => {
+				cy.wrap(fulldate)
+					.invoke('val')
+					.then((value) => {
+						Cypress.env('fullDepartureDate', value)
+						tripDatabase.fullDepartureDateAfter = Cypress.env('fullDepartureDate')
+					})
+			})
+	}
 	clickReturnpicker() {
 		this.get.datePickers().last().click()
+		this.get.monthYearTitle().then((title) => Cypress.env('month&yearReturn', title.text()))
 	}
 	selectReturn() {
 		return this.get
@@ -154,6 +194,17 @@ class DatePicker {
 		})
 		this.get.okButton().click()
 		cy.log('**The departure and return dates have been selected by default!**')
+	}
+	waitForAsyncOperationsToComplete() {
+		return cy.wrap(true) // Dummy Cypress command to wait for completion
+	}
+	selectReturnSameDate() {
+		if (Cypress.env('month&yearDepart') != Cypress.env('month&yearReturn')) {
+			this.get.leftArrowMonth().click()
+			this.get.availableDays().contains(Cypress.env.selectedNumber).click()
+		} else {
+			this.get.availableDays().contains(Cypress.env.selectedNumber).click()
+		}
 	}
 }
 export const datepicker = new DatePicker()
