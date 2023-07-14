@@ -69,7 +69,7 @@ jobs:
               with:
                   browser: chrome
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-                      yarn run file /cypress/e2e/cucumber-test/stepDefinitions/GX2-4843-Login-Logout.js
+                      yarn run file cypress/e2e/cucumber-test/Gherkin/GX2-4843-Logout-Login.feature
 
             - name: ✅Import Test Results to Xray
               if: always()
