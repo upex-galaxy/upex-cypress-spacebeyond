@@ -1,0 +1,12 @@
+{
+	"URLSpaceBeyond": "https://demo.testim.io/",
+	"NameDom": "testim",
+	"User": {
+		"Username": "John",
+		"Password": "John123"
+	},
+	"login": "login",
+	"Saludo": "Hello, John",
+	"Destino": ["Launch", "Madan", "Shenji", "Tongli", "Flagstaff", "Sant Cugat Del Valles", "Shaheying", "Tayabamba", "Babahoyo", "Cuozhou"],
+	"ClassSelected": "theme__selected___2Uc3r"
+}
