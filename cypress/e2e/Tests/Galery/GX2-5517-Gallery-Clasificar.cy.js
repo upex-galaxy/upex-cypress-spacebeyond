@@ -23,16 +23,24 @@ describe('GX2-5517-✅-space-beyond-gallery-clasificar-viaje-segun-destino-color
 		Filtros.get
 			.Launch()
 			.invoke('val')
-			.then((val) => {
-				expect(val).to.equal(the.Destino[Cypress.env('Index')])
-				Filtros.get
-					.TitleCards()
-					.invoke('text')
-					.then((text) => {
-						expect(text).to.equal(val)
-					})
+			.then((Planet) => {
+				expect(Planet).to.equal(Filtros.PlanetNameSelected())
+				Filtros.NamePlanet().then((Title) => {
+					expect(Title).to.equal(Planet)
+				})
 				Filtros.ClickOnLaunch()
 				Filtros.get.LaunchOptions().eq(Cypress.env('Index')).should('contain.class', the.ClassSelected)
 			})
+	})
+	it('5518 | TC02: Validar que al seleccionar aleatoriamente un "Planet Color" se visualizan los plantes de ese color', () => {
+		//Abrimos el Dropdown y seleccionamos una opción aleatoria
+		Filtros.ClickOnPlanetColor()
+		Filtros.SelectedOptionColor()
+		// Validamos que la selección funciona correctamente
+		Filtros.PlanetsFilteredColor().then((names) => {
+			expect(names).deep.equal(Filtros.SameColorPlanet())
+			Filtros.ClickOnPlanetColor()
+			Filtros.get.OptionsColor().eq(Cypress.env('IndexColor')).should('contain.class', the.ClassSelected)
+		})
 	})
 })
