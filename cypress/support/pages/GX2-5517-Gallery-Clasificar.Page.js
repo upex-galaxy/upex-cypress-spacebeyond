@@ -30,16 +30,22 @@ class Filtro {
 		PlanetColor: () => cy.get('[class*="BlackDropDown__inputInputElement___3hD6U"]').eq(1),
 		OptionsColor: () => cy.get('[class="theme__values___1jS4g"]').eq(1).children(),
 		PlanetVisible: () => cy.get('[data-react-toolbox="card"]:not([class$="GalleryItem__--hidden___DvgH8"])'),
+		SliderPrice: () => cy.get('[class$=PurpleSlider__knob___lSlRq'),
+		InputPrice: () => cy.get('[class="theme__inputElement___27dyY theme__filled___1UI7Z"]'),
+		ButtonLoadMore: () => cy.get('[class$=Gallery__cta-button___3kPlJ'),
 	}
 	ClickOnLaunch() {
 		this.get.Launch().click()
 	}
 	SelectedOptionLaunch() {
-		this.get.LaunchOptions().then((length) => {
-			let Index = Cypress._.random(1, length.length - 1)
-			this.get.LaunchOptions().eq(Index).click()
-			Cypress.env('Index', Index)
-		})
+		this.get
+			.LaunchOptions()
+			.should('be.visible')
+			.then((length) => {
+				let Index = Cypress._.random(1, length.length - 1)
+				this.get.LaunchOptions().eq(Index).click()
+				Cypress.env('Index', Index)
+			})
 	}
 	PlanetNameSelected() {
 		const planet = the.Destino[Cypress.env('Index')]
@@ -53,20 +59,23 @@ class Filtro {
 		this.get.PlanetColor().click()
 	}
 	SelectedOptionColor() {
-		this.get.OptionsColor().then((length) => {
-			let Index = Cypress._.random(1, length.length - 1)
-			this.get.OptionsColor().eq(Index).click()
-			Cypress.env('IndexColor', Index)
-			this.get
-				.PlanetColor()
-				.invoke('val')
-				.then((ColorSelected) => {
-					cy.log(ColorSelected)
-					Cypress.env('Color', ColorSelected)
-				})
-		})
+		this.get
+			.OptionsColor()
+			.should('be.visible')
+			.then((length) => {
+				let Index = Cypress._.random(1, length.length - 1)
+				this.get.OptionsColor().eq(Index).click()
+				Cypress.env('IndexColor', Index)
+				this.get
+					.PlanetColor()
+					.invoke('val')
+					.then((ColorSelected) => {
+						cy.log(ColorSelected)
+						Cypress.env('Color', ColorSelected)
+					})
+			})
 	}
-	PlanetsFilteredColor() {
+	PlanetsFiltered() {
 		let NamePlanets = []
 		return this.get
 			.TitleCards()
@@ -81,6 +90,24 @@ class Filtro {
 		const SelectPlanetColor = the.Destino.filter(({ color }) => color === Cypress.env('Color'))
 		const NamesOfPlanets = SelectPlanetColor.map(({ name }) => name)
 		return NamesOfPlanets
+	}
+	RandomMoveSlider() {
+		const RandomPrice = Cypress._.random(192.46, 1800)
+		const SliderPorcentaje = (RandomPrice * 100) / 1800
+		this.get.SliderPrice().should('be.visible').invoke('attr', 'style', `left: ${SliderPorcentaje}%`).click()
+		this.get
+			.InputPrice()
+			.eq(1)
+			.should('be.visible')
+			.invoke('val')
+			.then((val) => {
+				const SelectPlanetPrice = the.Destino.filter(({ price }) => 100 < price && price < val)
+				const NamesOfPlanets = SelectPlanetPrice.map(({ name }) => name)
+				Cypress.env('NameOfPricePlanets', NamesOfPlanets)
+			})
+	}
+	ClickOnLoadMore() {
+		this.get.ButtonLoadMore().click()
 	}
 }
 
