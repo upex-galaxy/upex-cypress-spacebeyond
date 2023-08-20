@@ -1,0 +1,5 @@
+{
+	"HomeURL": "https://demo.testim.io/",
+	"LoginEndpoint": "https://demo.testim.io/login",
+	"LoginTxt": "Log in"
+}
