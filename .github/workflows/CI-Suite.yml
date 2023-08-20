@@ -69,7 +69,7 @@ jobs:
               with:
                   browser: chrome
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-                      yarn run file cypress/e2e/cucumber-test/Gherkin/GX2-4843-Logout-Login.feature
+                      yarn run file cypress/e2e/Tests/Galery/GX2-5517-Gallery-Clasificar.cy.js
 
             - name: ✅Import Test Results to Xray
               if: always()
@@ -77,9 +77,8 @@ jobs:
               with: #OPCIONES PARA IMPORTAR LOS RESULTADOS DE PRUEBA A JIRA XRAY:
                   username: ${{secrets.XRAY_CLIENT_ID}}
                   password: ${{secrets.XRAY_CLIENT_SECRET}}
-                  testFormat: 'json' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
-                  testPaths: 'reports/cucumber-report.json' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
-                  testExecKey: 'GX2-4845' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
+                  testFormat: 'junit' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
+                  testPaths: 'reports/test-results.xml' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
                   projectKey: 'GX2' #EDITAR KEY DE PROYECTO
 
             - name: 🔧Generate Cucumber HTML Report
