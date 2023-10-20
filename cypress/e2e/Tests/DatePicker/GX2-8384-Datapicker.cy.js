@@ -23,8 +23,16 @@ describe('SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasajer
 								.ReturningInput()
 								.invoke('val')
 								.then((currentTxtReturning) => {
-									// expect(currentTxt.substring(0,2)).to.eq(dayValue)
 									expect(currentTxtReturning.split(' ')[0]).to.eq(dayRandomReturning)
+									spaceBeyondPage.getTxtNumberAdults().then(([txtNumberAdult, index]) => {
+										spaceBeyondPage.selectNumberAdults({ index })
+										spaceBeyondPage.get
+											.DropdownAdults()
+											.invoke('val')
+											.then((currentNumberOfAdults) => {
+												expect(currentNumberOfAdults).to.eq(txtNumberAdult)
+											})
+									})
 								})
 						})
 					})

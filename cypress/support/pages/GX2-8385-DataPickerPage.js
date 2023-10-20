@@ -59,5 +59,24 @@ class DataPicker {
 			return ListDaysText[randomIndex]
 		})
 	}
+
+	selectNumberAdults({ index: index }) {
+		this.get.AllAdultsOptions().then((adultOptions) => {
+			cy.wrap(adultOptions).eq(index).click()
+		})
+	}
+
+	getTxtNumberAdults() {
+		this.get.DropdownAdults().click()
+		return this.get.AllAdultsOptions().then((adultOptions) => {
+			let index = Cypress._.random(1, adultOptions.length - 1)
+			cy.wrap(adultOptions)
+				.eq(index)
+				.invoke('text')
+				.then((txt) => {
+					return [txt, index]
+				})
+		})
+	}
 }
 export const spaceBeyondPage = new DataPicker()
