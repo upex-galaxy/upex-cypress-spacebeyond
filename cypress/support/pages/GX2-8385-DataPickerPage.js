@@ -52,5 +52,12 @@ class DataPicker {
 			})
 		})
 	}
+	ListActiveDay() {
+		return this.get.DaysActiveOptions().then(($daysOptions) => {
+			const ListDaysText = $daysOptions.map((index, element) => element.innerText)
+			const randomIndex = Cypress._.random(2, ListDaysText.length - 1)
+			return ListDaysText[randomIndex]
+		})
+	}
 }
 export const spaceBeyondPage = new DataPicker()

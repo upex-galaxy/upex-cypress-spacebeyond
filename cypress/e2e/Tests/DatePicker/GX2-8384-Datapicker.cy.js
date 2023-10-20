@@ -14,6 +14,20 @@ describe('SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasajer
 				.invoke('val')
 				.then((currentTxtDeparting) => {
 					expect(currentTxtDeparting.split(' ')[0]).to.eq(dayValueDeparting)
+					cy.wait(1000)
+					spaceBeyondPage.clickReturningInput()
+					spaceBeyondPage.ListActiveDay().then((dayRandomReturning) => {
+						spaceBeyondPage.clickDayOnReturningInput({ day: dayRandomReturning }).then(() => {
+							spaceBeyondPage.clickButtonOk()
+							spaceBeyondPage.get
+								.ReturningInput()
+								.invoke('val')
+								.then((currentTxtReturning) => {
+									// expect(currentTxt.substring(0,2)).to.eq(dayValue)
+									expect(currentTxtReturning.split(' ')[0]).to.eq(dayRandomReturning)
+								})
+						})
+					})
 				})
 		})
 	})
