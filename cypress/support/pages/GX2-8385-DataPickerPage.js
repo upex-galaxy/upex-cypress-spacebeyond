@@ -33,4 +33,24 @@ class DataPicker {
 	clickDropdownChildren() {
 		this.get.DropdownChildren().click()
 	}
+	clickDayOnDepartingInput() {
+		return this.get.DaysActiveOptions().then(($daysOptions) => {
+			const optionsText = $daysOptions.map((index, element) => element.innerText)
+			const randomIndex = Cypress._.random(2, optionsText.length - 1)
+			cy.wrap($daysOptions).eq(randomIndex).click()
+			return cy.wrap($daysOptions).eq(randomIndex).invoke('text')
+		})
+	}
+
+	clickDayOnReturningInput({ day: day }) {
+		return this.get.DaysActiveOptions().then((daysOptions) => {
+			daysOptions.each((index, daysOptions) => {
+				let text = daysOptions.innerText
+				if (text == day) {
+					cy.wrap(daysOptions).click()
+				}
+			})
+		})
+	}
 }
+export const spaceBeyondPage = new DataPicker()
