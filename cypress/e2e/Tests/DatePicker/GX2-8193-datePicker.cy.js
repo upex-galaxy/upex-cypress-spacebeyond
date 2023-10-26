@@ -6,8 +6,11 @@ describe('GX2-8193-SpaceBeyond | Datepicker | Buscar destino por fecha y grupo d
 		cy.visit('/')
 		cy.url().should('contain', 'demo.testim.io/')
 	})
-	it('asd', () => {
-		homePage.selectDeparting()
+	it('GX2-8194 | TC1: Validar buscar destino por fecha de partida, fecha de retorno y tipo de pasajero.', () => {
+		homePage.selectDepartingDate()
+		homePage.selectReturningDate()
+		homePage.selectAdults()
+		homePage.selectChildren()
 	})
 })
 
