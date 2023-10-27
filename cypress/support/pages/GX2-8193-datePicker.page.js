@@ -21,6 +21,65 @@ class HomePage {
 		textValidation: () => cy.get('[class = Gallery__headline-2___3amRj]'),
 	}
 
+	selectDateAndPassengers() {
+		let departingDay, departingMonth, returningMonth, returningDay, adultsPassengers, childrenPassengers
+		return cy
+			.get('*')
+			.then(() => {
+				this.selectDepartingDate().then((date) => {
+					departingMonth = date.departingMonth
+					departingDay = date.departingDay
+				})
+				this.selectReturningDate().then((date) => {
+					returningMonth = date.returningMonth
+					returningDay = date.returningDay
+				})
+				this.selectAdults().then((value) => {
+					adultsPassengers = value
+				})
+				this.selectChildren().then((value) => {
+					childrenPassengers = value
+				})
+				this.clickOnSelectDestination()
+			})
+			.then(() => {
+				return {
+					departingDay: departingDay,
+					departingMonth: departingMonth,
+					returningDay: returningDay,
+					returningMonth: returningMonth,
+					adultsPassengers: adultsPassengers,
+					childrenPassengers: childrenPassengers,
+				}
+			})
+	}
+
+	selectDepartingAndReturningDate() {
+		let departingDay, departingMonth, returningMonth, returningDay
+		return cy
+			.get('*')
+			.then(() => {
+				this.selectDepartingDate().then((date) => {
+					departingMonth = date.departingMonth
+					departingDay = date.departingDay
+				})
+				this.selectReturningDate().then((date) => {
+					returningMonth = date.returningMonth
+					returningDay = date.returningDay
+				})
+				this.clickOnSelectDestination()
+				this.get.inputDropdownAdults().should('have.value', '1')
+			})
+			.then(() => {
+				return {
+					departingDay: departingDay,
+					departingMonth: departingMonth,
+					returningDay: returningDay,
+					returningMonth: returningMonth,
+				}
+			})
+	}
+
 	selectDepartingDate() {
 		let departingMonth, departingDay
 		const randomMonth = Cypress._.random(0, 4)
@@ -45,12 +104,15 @@ class HomePage {
 				})
 			})
 			.then(() => {
-				return [departingMonth, departingDay]
+				return {
+					departingMonth: departingMonth,
+					departingDay: departingDay,
+				}
 			})
 	}
 	selectReturningDate() {
 		let returningMonth, returningDay
-		const randomMonth = Cypress._.random(0, 1)
+		const randomMonth = Cypress._.random(1, 2)
 		cy.wait(800)
 		this.get.returningPicker().click()
 		return this.get
@@ -72,7 +134,10 @@ class HomePage {
 				})
 			})
 			.then(() => {
-				return [returningMonth, returningDay]
+				return {
+					returningMonth: returningMonth,
+					returningDay: returningDay,
+				}
 			})
 	}
 	selectAdults() {
