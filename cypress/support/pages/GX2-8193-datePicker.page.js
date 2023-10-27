@@ -8,6 +8,7 @@ class HomePage {
 		selectDestinationButton: () => cy.get('[class^=theme__button___1iKuo ]').eq(0),
 		//Pop up calendar
 		popUpCalendar: () => cy.get('[class ^= theme__dialog]'),
+		inputDatePicker: () => cy.get('[class^=theme__inputElement][class*=theme__inputElement___1oBGc]'),
 		calendarDays: () => cy.get('[class^= theme__day___3cb3g]').not('[class$=theme__disabled___2N4Gy]'),
 		rightButton: () => cy.get('[id=right]'),
 		leftButton: () => cy.get('[id=left]'),
@@ -20,66 +21,6 @@ class HomePage {
 		//text
 		textValidation: () => cy.get('[class = Gallery__headline-2___3amRj]'),
 	}
-
-	selectDateAndPassengers() {
-		let departingDay, departingMonth, returningMonth, returningDay, adultsPassengers, childrenPassengers
-		return cy
-			.get('*')
-			.then(() => {
-				this.selectDepartingDate().then((date) => {
-					departingMonth = date.departingMonth
-					departingDay = date.departingDay
-				})
-				this.selectReturningDate().then((date) => {
-					returningMonth = date.returningMonth
-					returningDay = date.returningDay
-				})
-				this.selectAdults().then((value) => {
-					adultsPassengers = value
-				})
-				this.selectChildren().then((value) => {
-					childrenPassengers = value
-				})
-				this.clickOnSelectDestination()
-			})
-			.then(() => {
-				return {
-					departingDay: departingDay,
-					departingMonth: departingMonth,
-					returningDay: returningDay,
-					returningMonth: returningMonth,
-					adultsPassengers: adultsPassengers,
-					childrenPassengers: childrenPassengers,
-				}
-			})
-	}
-
-	selectDepartingAndReturningDate() {
-		let departingDay, departingMonth, returningMonth, returningDay
-		return cy
-			.get('*')
-			.then(() => {
-				this.selectDepartingDate().then((date) => {
-					departingMonth = date.departingMonth
-					departingDay = date.departingDay
-				})
-				this.selectReturningDate().then((date) => {
-					returningMonth = date.returningMonth
-					returningDay = date.returningDay
-				})
-				this.clickOnSelectDestination()
-				this.get.inputDropdownAdults().should('have.value', '1')
-			})
-			.then(() => {
-				return {
-					departingDay: departingDay,
-					departingMonth: departingMonth,
-					returningDay: returningDay,
-					returningMonth: returningMonth,
-				}
-			})
-	}
-
 	selectDepartingDate() {
 		let departingMonth, departingDay
 		const randomMonth = Cypress._.random(0, 4)
@@ -178,6 +119,149 @@ class HomePage {
 	}
 	clickOnSelectDestination() {
 		this.get.selectDestinationButton().click()
+	}
+	selectDateAndPassengers() {
+		let departingDay, departingMonth, returningMonth, returningDay, adultsPassengers, childrenPassengers
+		return cy
+			.get('*')
+			.then(() => {
+				this.selectDepartingDate().then((date) => {
+					departingMonth = date.departingMonth
+					departingDay = date.departingDay
+				})
+				this.selectReturningDate().then((date) => {
+					returningMonth = date.returningMonth
+					returningDay = date.returningDay
+				})
+				this.selectAdults().then((value) => {
+					adultsPassengers = value
+				})
+				this.selectChildren().then((value) => {
+					childrenPassengers = value
+				})
+				this.clickOnSelectDestination()
+			})
+			.then(() => {
+				return {
+					departingDay: departingDay,
+					departingMonth: departingMonth,
+					returningDay: returningDay,
+					returningMonth: returningMonth,
+					adultsPassengers: adultsPassengers,
+					childrenPassengers: childrenPassengers,
+				}
+			})
+	}
+	selectDepartingAndReturningDate() {
+		let departingDay, departingMonth, returningMonth, returningDay
+		return cy
+			.get('*')
+			.then(() => {
+				this.selectDepartingDate().then((date) => {
+					departingMonth = date.departingMonth
+					departingDay = date.departingDay
+				})
+				this.selectReturningDate().then((date) => {
+					returningMonth = date.returningMonth
+					returningDay = date.returningDay
+				})
+				this.clickOnSelectDestination()
+				this.get.inputDropdownAdults().should('have.value', '1')
+			})
+			.then(() => {
+				return {
+					departingDay: departingDay,
+					departingMonth: departingMonth,
+					returningDay: returningDay,
+					returningMonth: returningMonth,
+				}
+			})
+	}
+
+	selectAdultAndChildrenPassengers() {
+		let departingDay, departingMonth, returningMonth, returningDay, adultsPassengers, childrenPassengers
+		return cy
+			.get('*')
+			.then(() => {
+				this.selectAdults().then((value) => {
+					adultsPassengers = value
+				})
+				this.selectChildren().then((value) => {
+					childrenPassengers = value
+				})
+				this.clickOnSelectDestination()
+				this.get
+					.inputDatePicker()
+					.eq(0)
+					.then((value) => {
+						departingMonth = value[0].value.slice(3, 6)
+						departingDay = parseInt(value[0].value.slice(0, 2))
+					})
+				this.get
+					.inputDatePicker()
+					.eq(1)
+					.then((value) => {
+						returningMonth = value[0].value.slice(2, 5)
+						returningDay = parseInt(value[0].value.slice(0, 2))
+					})
+			})
+			.then(() => {
+				return {
+					departingDay: departingDay,
+					departingMonth: departingMonth,
+					returningDay: returningDay,
+					returningMonth: returningMonth,
+					adultsPassengers: adultsPassengers,
+					childrenPassengers: childrenPassengers,
+				}
+			})
+	}
+	selectSameDepartingAndReturningDate() {
+		let departingDay, departingMonth, returningMonth, returningDay, adultsPassengers, childrenPassengers
+
+		this.get.departingPicker().click()
+		this.get.popUpCalendar().should('be.visible')
+		return cy
+			.get('*')
+			.then(() => {
+				this.get.popUpCalendar().should('be.visible')
+				cy.wait(800)
+				this.get.calendarDays().then(() => {
+					this.get.calendarDays().eq(0).click()
+					this.get.okButton().click()
+				})
+				this.get.returningPicker().click()
+				this.get.popUpCalendar().should('be.visible')
+				this.get.popUpCalendar().then(() => {
+					this.get.popUpCalendar().should('be.visible')
+					cy.wait(800)
+					this.get.calendarDays().then(() => {
+						this.get.leftButton().click()
+						this.get.calendarDays().eq(0).click()
+						this.get.month().then((date) => {
+							returningMonth = date.text().slice(5, 8)
+							returningDay = date.text().slice(9, 11)
+						})
+						this.get.okButton().click()
+					})
+				})
+				this.clickOnSelectDestination()
+				this.get
+					.inputDatePicker()
+					.eq(0)
+					.then((value) => {
+						departingMonth = value[0].value.slice(3, 6)
+						departingDay = parseInt(value[0].value.slice(0, 2))
+					})
+			})
+			.then(() => {
+				return {
+					departingDay: departingDay,
+					departingMonth: departingMonth,
+					returningDay: returningDay,
+					returningMonth: returningMonth,
+				}
+			})
 	}
 }
 

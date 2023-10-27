@@ -8,7 +8,6 @@ describe('GX2-8193-SpaceBeyond | Datepicker | Buscar destino por fecha y grupo d
 	})
 	it('GX2-8194 | TC1: Validar buscar destino por fecha de partida, fecha de retorno y tipo de pasajero.', () => {
 		let departingDay, departingMonth, returningMonth, returningDay, adultsPassengers, childrenPassengers, totalPassengers
-
 		homePage.selectDateAndPassengers().then((data) => {
 			departingDay = data.departingDay
 			departingMonth = data.departingMonth
@@ -33,6 +32,41 @@ describe('GX2-8193-SpaceBeyond | Datepicker | Buscar destino por fecha y grupo d
 			departingMonth = data.departingMonth
 			returningDay = data.returningDay
 			returningMonth = data.returningMonth
+			if (departingMonth === returningMonth) {
+				homePage.get.textValidation().should('have.text', `1 traveler, ${departingMonth} ${departingDay} – ${returningDay}`)
+			} else {
+				homePage.get.textValidation().should('have.text', `1 traveler, ${departingMonth} ${departingDay} – ${returningMonth} ${returningDay}`)
+			}
+		})
+	})
+	it('GX2-8194 | TC3: Validar buscar destino por cantidad y tipo de pasajero.', () => {
+		let departingDay, departingMonth, returningMonth, returningDay, adultsPassengers, childrenPassengers, totalPassengers
+		homePage.selectAdultAndChildrenPassengers().then((data) => {
+			departingDay = data.departingDay
+			departingMonth = data.departingMonth
+			returningDay = data.returningDay
+			returningMonth = data.returningMonth
+			adultsPassengers = data.adultsPassengers
+			childrenPassengers = data.childrenPassengers
+			totalPassengers = adultsPassengers + childrenPassengers
+			if (departingMonth === returningMonth) {
+				homePage.get.textValidation().should('have.text', `${totalPassengers} travelers, ${departingMonth} ${departingDay} – ${returningDay}`)
+			} else {
+				homePage.get
+					.textValidation()
+					.should('have.text', `${totalPassengers} travelers, ${departingMonth} ${departingDay} – ${returningMonth} ${returningDay}`)
+			}
+		})
+	})
+	it('GX2-8194 | TC4: Validar buscar destino por misma fecha de partida y retorno.', () => {
+		homePage.selectSameDepartingAndReturningDate().then((data) => {
+			departingDay = data.departingDay
+			departingMonth = data.departingMonth
+			returningDay = data.returningDay
+			returningMonth = data.returningMonth
+			adultsPassengers = data.adultsPassengers
+			childrenPassengers = data.childrenPassengers
+			totalPassengers = adultsPassengers + childrenPassengers
 			if (departingMonth === returningMonth) {
 				homePage.get.textValidation().should('have.text', `1 traveler, ${departingMonth} ${departingDay} – ${returningDay}`)
 			} else {
