@@ -96,6 +96,27 @@ describe('SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasajer
 				expect(parseInt(currentValAdult)).to.be.greaterThan(0).and.to.eq(1)
 			})
 	})
-	it('8385 | TC3: Validar asignación de fecha automáticamente cuando solo se busca destino por pasajeros', () => {})
+	it('8385 | TC3: Validar asignación de fecha automáticamente cuando solo se busca destino por pasajeros', () => {
+		selectAdult()
+		selectChildren()
+		spaceBeyondPage.clickButtonSelectDest()
+		spaceBeyondPage.get
+			.DepartingInput()
+			.invoke('val')
+			.then((currentTxtDeparting) => {
+				spaceBeyondPage.get
+					.ReturningInput()
+					.invoke('val')
+					.then((currentTxtReturning) => {
+						spaceBeyondPage.get
+							.elementInfoJourneyGallery()
+							.invoke('text')
+							.then((currentJourneyValues) => {
+								expect(currentJourneyValues).to.contain(currentTxtDeparting.split(' ')[0])
+								expect(currentJourneyValues).to.contain(currentTxtReturning.split(' ')[0])
+							})
+					})
+			})
+	})
 	it('8385 | TC4: Validar que el día de "derparting" sea un día anterior al de "returning" cuando ambos se seleccionan el mismo día', () => {})
 })
