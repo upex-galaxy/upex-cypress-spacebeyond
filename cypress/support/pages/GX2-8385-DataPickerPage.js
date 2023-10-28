@@ -2,6 +2,7 @@ class DataPicker {
 	get = {
 		DepartingInput: () => cy.get("[class*='Hero'] [class*='RaqVV']:nth-child(1) [class*='3d9uL']"),
 		ReturningInput: () => cy.get("[class*='Hero'] [class*='RaqVV']:nth-child(2) [class*='3d9uL']"),
+		buttonRightMonth: () => cy.get('#right'),
 		DaysActiveOptions: () => cy.get("[class$='3kAIy'] [data-react-toolbox='day']:not(div[class$='theme__disabled___2N4Gy'])"),
 		ButtonOk: () => cy.get("[class*='theme__button___14VKJ']:nth-child(2)"),
 		ButtonSelectDest: () => cy.get("[class$='button___9VskW']"),
@@ -18,6 +19,9 @@ class DataPicker {
 
 	clickReturningInput() {
 		this.get.ReturningInput().click()
+	}
+	clickButtonRightMonth() {
+		this.get.buttonRightMonth().click()
 	}
 
 	clickButtonOk() {
@@ -36,7 +40,7 @@ class DataPicker {
 	clickDayOnDepartingInput() {
 		return this.get.DaysActiveOptions().then(($daysOptions) => {
 			const optionsText = $daysOptions.map((index, element) => element.innerText)
-			const randomIndex = Cypress._.random(2, optionsText.length - 1)
+			const randomIndex = Cypress._.random(0, optionsText.length - 1)
 			cy.wrap($daysOptions).eq(randomIndex).click()
 			return cy.wrap($daysOptions).eq(randomIndex).invoke('text')
 		})
@@ -55,7 +59,7 @@ class DataPicker {
 	ListActiveDay() {
 		return this.get.DaysActiveOptions().then(($daysOptions) => {
 			const ListDaysText = $daysOptions.map((index, element) => element.innerText)
-			const randomIndex = Cypress._.random(2, ListDaysText.length - 1)
+			let randomIndex = Cypress._.random(0, ListDaysText.length - 1)
 			return ListDaysText[randomIndex]
 		})
 	}
@@ -71,6 +75,25 @@ class DataPicker {
 		return this.get.AllAdultsOptions().then((adultOptions) => {
 			let index = Cypress._.random(1, adultOptions.length - 1)
 			cy.wrap(adultOptions)
+				.eq(index)
+				.invoke('text')
+				.then((txt) => {
+					return [txt, index]
+				})
+		})
+	}
+
+	selectNumberChildren({ index: index }) {
+		this.get.AllChildrenOptions().then((childrenOptions) => {
+			cy.wrap(childrenOptions).eq(index).click()
+		})
+	}
+
+	getTxtNumberChildren() {
+		this.get.DropdownChildren().click()
+		return this.get.AllChildrenOptions().then((childrenOptions) => {
+			let index = Cypress._.random(1, childrenOptions.length - 1)
+			cy.wrap(childrenOptions)
 				.eq(index)
 				.invoke('text')
 				.then((txt) => {
