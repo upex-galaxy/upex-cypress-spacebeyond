@@ -3,6 +3,8 @@ import { spaceBeyondPage } from '@pages/GX2-8385-DataPickerPage'
 removeLogs()
 const departing = () => {
 	spaceBeyondPage.clickDepartingInput()
+	spaceBeyondPage.clickButtonRightMonth()
+	cy.wait(1000)
 	spaceBeyondPage.clickDayOnDepartingInput().then((dayValueDeparting) => {
 		Cypress.env('dayDeparting', dayValueDeparting)
 		spaceBeyondPage.clickButtonOk()
@@ -15,17 +17,19 @@ const departing = () => {
 	})
 }
 
-const returning = () => {
-	spaceBeyondPage.ListActiveDay().then((dayRandomReturning) => {
+const returning = ({ dayOptional: day }) => {
+	spaceBeyondPage.ListActiveDay({ dayOptional: day }).then((dayRandomReturning) => {
 		Cypress.env('dayReturning', dayRandomReturning)
 		spaceBeyondPage.clickDayOnReturningInput({ day: dayRandomReturning }).then(() => {
 			spaceBeyondPage.clickButtonOk()
-			spaceBeyondPage.get
-				.ReturningInput()
-				.invoke('val')
-				.then((currentTxtReturning) => {
-					expect(currentTxtReturning.split(' ')[0]).to.eq(dayRandomReturning)
-				})
+			if (day !== 'true') {
+				spaceBeyondPage.get
+					.ReturningInput()
+					.invoke('val')
+					.then((currentTxtReturning) => {
+						expect(currentTxtReturning.split(' ')[0]).to.eq(dayRandomReturning)
+					})
+			}
 		})
 	})
 }
@@ -66,7 +70,7 @@ describe('SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasajer
 		spaceBeyondPage.clickReturningInput()
 		spaceBeyondPage.clickButtonRightMonth()
 		cy.wait(1000)
-		returning()
+		returning({ dayOptional: 'false' })
 		selectAdult()
 		selectChildren()
 		spaceBeyondPage.clickButtonSelectDest()
@@ -87,7 +91,7 @@ describe('SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasajer
 		spaceBeyondPage.clickReturningInput()
 		spaceBeyondPage.clickButtonRightMonth()
 		cy.wait(1000)
-		returning()
+		returning({ dayOptional: 'false' })
 		spaceBeyondPage.clickButtonSelectDest()
 		spaceBeyondPage.get
 			.DropdownAdults()
@@ -118,5 +122,29 @@ describe('SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasajer
 					})
 			})
 	})
-	it('8385 | TC4: Validar que el día de "derparting" sea un día anterior al de "returning" cuando ambos se seleccionan el mismo día', () => {})
+	it('8385 | TC4: Validar que el día de "departing" sea un día anterior al de "returning" cuando ambos se seleccionan el mismo día', () => {
+		departing()
+		cy.wait(1000)
+		spaceBeyondPage.clickReturningInput()
+		cy.wait(1000)
+		returning({ dayOptional: 'true' })
+
+		spaceBeyondPage.get
+			.DepartingInput()
+			.invoke('val')
+			.then((valDeparting) => {
+				let departingValTxt = valDeparting.split(' ')[0]
+				let departingValNumber = parseInt(departingValTxt)
+
+				spaceBeyondPage.get
+					.ReturningInput()
+					.invoke('val')
+					.then((valReturning) => {
+						let returningValTxt = valReturning.split(' ')[0]
+						let returningValNumber = parseInt(returningValTxt)
+
+						expect(departingValNumber).to.lessThan(returningValNumber)
+					})
+			})
+	})
 })

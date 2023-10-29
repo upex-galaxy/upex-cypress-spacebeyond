@@ -40,7 +40,7 @@ class DataPicker {
 	clickDayOnDepartingInput() {
 		return this.get.DaysActiveOptions().then(($daysOptions) => {
 			const optionsText = $daysOptions.map((index, element) => element.innerText)
-			const randomIndex = Cypress._.random(0, optionsText.length - 1)
+			const randomIndex = Cypress._.random(1, optionsText.length - 9)
 			cy.wrap($daysOptions).eq(randomIndex).click()
 			return cy.wrap($daysOptions).eq(randomIndex).invoke('text')
 		})
@@ -56,12 +56,19 @@ class DataPicker {
 			})
 		})
 	}
-	ListActiveDay() {
-		return this.get.DaysActiveOptions().then(($daysOptions) => {
-			const ListDaysText = $daysOptions.map((index, element) => element.innerText)
-			let randomIndex = Cypress._.random(0, ListDaysText.length - 1)
-			return ListDaysText[randomIndex]
-		})
+	ListActiveDay({ dayOptional: day = 'true' }) {
+		return day == 'true'
+			? this.get
+					.DepartingInput()
+					.invoke('val')
+					.then((dayDeparting) => {
+						return dayDeparting.split(' ')[0]
+					})
+			: this.get.DaysActiveOptions().then(($daysOptions) => {
+					const ListDaysText = $daysOptions.map((index, element) => element.innerText)
+					let randomIndex = Cypress._.random(1, ListDaysText.length - 9)
+					return ListDaysText[randomIndex]
+			  })
 	}
 
 	selectNumberAdults({ index: index }) {
