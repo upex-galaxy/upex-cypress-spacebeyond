@@ -59,6 +59,7 @@ describe('GX2-8193-SpaceBeyond | Datepicker | Buscar destino por fecha y grupo d
 		})
 	})
 	it('GX2-8194 | TC4: Validar buscar destino por misma fecha de partida y retorno.', () => {
+		let departingDay, departingMonth, returningMonth, returningDay
 		homePage.selectSameDepartingAndReturningDate().then((data) => {
 			departingDay = data.departingDay
 			departingMonth = data.departingMonth

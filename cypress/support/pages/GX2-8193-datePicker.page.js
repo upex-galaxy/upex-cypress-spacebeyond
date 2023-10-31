@@ -194,7 +194,7 @@ class HomePage {
 					.inputDatePicker()
 					.eq(0)
 					.then((value) => {
-						departingMonth = value[0].value.slice(3, 6)
+						departingMonth = value[0].value.slice(2, 5)
 						departingDay = parseInt(value[0].value.slice(0, 2))
 					})
 				this.get
