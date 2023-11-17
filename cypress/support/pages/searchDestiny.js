@@ -10,12 +10,15 @@ class SearchDestiny {
 		OkBtn: () => cy.contains('button', 'Ok').click(),
 		adults: () => cy.get('[value*="Adults"]'),
 		passengerDropdownList: () => cy.get('ul[class*="WhiteDropDown__values___3lOeL"]'),
+		adultDropdownList: () => cy.get('input[class*="WhiteDropDown__inputInputElement___2wTPU"]').eq(0),
 		children: () => cy.get('[value*="Children"]'),
 		childrenDropdownList: () => cy.get('ul[class*="WhiteDropDown__values___3lOeL"]'),
 		selectDestinationBtn: () => cy.contains('button', 'Select Destination'),
 		YearList: () => cy.get('.theme__calendarWrapper___15gNf > div > ul > li'),
 		activeYear: () => cy.get('li[class="theme__active___2k63V"]'),
 		galleryTitle: () => cy.get('h3[class=Gallery__headline-2___3amRj]'),
+		departingDatePicker: () => cy.get('input[class*="WhiteDatePicker__inputElement___3d9uL"]').eq(0),
+		returningDatePicker: () => cy.get('input[class*="WhiteDatePicker__inputElement___3d9uL"]').eq(1),
 	}
 
 	clickDepartingDate() {
@@ -38,9 +41,9 @@ class SearchDestiny {
 					arrayDays.push(day.text())
 				})
 				.then(() => {
-					random = arrayDays[Math.floor(Math.random() * arrayDays.length)]
+					random = arrayDays[Math.floor(Math.random() * arrayDays.length - 1)]
 					Cypress.env('randomDay', random)
-					searchDestiny.get.dayCalendar().children().eq(Cypress.env('randomDay')).click()
+					searchDestiny.get.dayCalendar().children().eq(Cypress.env('randomDay'), { timeout: 10000 }).click()
 				})
 		})
 	}
@@ -67,7 +70,7 @@ class SearchDestiny {
 				// busco posición ultimo mes
 				const mesDiciembre = arrayMonth.indexOf('December')
 				// random entre mes actual y ultimo mes
-				const randomMonth = Math.floor(Math.random() * mesDiciembre)
+				const randomMonth = Math.floor(Math.random() * mesDiciembre - 1)
 
 				for (let random = 0; random <= randomMonth; random++) {
 					searchDestiny.get.rightBtn().click()
@@ -119,24 +122,76 @@ class SearchDestiny {
 		this.get.selectDestinationBtn().click()
 	}
 	getSumPassenger() {
-		cy.get('input[class*="theme__inputElement___27dyY"]')
+		return cy
+			.get('input[class*="theme__inputElement___27dyY"]')
 			.eq(2)
 			.invoke('val')
 			.then((val) => {
 				Cypress.env('adultQty', val)
 				cy.log(Cypress.env('adultQty'))
 			})
-		cy.get('input[class*="theme__inputElement___27dyY"]')
-			.eq(3)
+			.then(() => {
+				cy.get('input[class*="theme__inputElement___27dyY"]')
+					.eq(3)
+					.invoke('val')
+					.then((val) => {
+						Cypress.env('childrenQty', val)
+						cy.log(Cypress.env('childrenQty'))
+						let qtyAdults = parseInt(Cypress.env('adultQty'))
+						let qtyChildren = parseInt(Cypress.env('childrenQty'))
+						let suma = qtyAdults + qtyChildren
+						Cypress.env('sumPassenger', suma)
+						cy.log(Cypress.env('sumPassenger'))
+					})
+			})
+	}
+	getDeparture() {
+		return cy
+			.get('input[type=text]')
+			.eq(0)
 			.invoke('val')
 			.then((val) => {
-				Cypress.env('childrenQty', val)
-				cy.log(Cypress.env('childrenQty'))
-				let qtyAdults = parseInt(Cypress.env('adultQty'))
-				let qtyChildren = parseInt(Cypress.env('childrenQty'))
-				let suma = qtyAdults + qtyChildren
-				Cypress.env('sumPassenger', suma)
-				cy.log(Cypress.env('sumPassenger'))
+				let textMonth = val.split(' ')[1]
+				let day = val.split(' ')[0]
+				let month = textMonth.substring(0, 3)
+				let departDay = month + ' ' + parseInt(day)
+				Cypress.env('departureDay', departDay)
+			})
+	}
+	getReturn() {
+		return cy
+			.get('input[type=text]')
+			.eq(1)
+			.invoke('val')
+			.then((val) => {
+				let textMonth = val.split(' ')[1]
+				Cypress.env('day', val.split(' ')[0])
+				let month = textMonth.substring(0, 3)
+				let returnDay = month + ' ' + parseInt(Cypress.env('day'))
+				Cypress.env('returnDay', returnDay)
+			})
+	}
+	selectSameDepartingDay() {
+		this.get
+			.actualMonth()
+			.eq(0)
+			.within(() => {
+				cy.get('div[class=theme__days___3kAIy] > div')
+				cy.get('[class*="theme__active___2k63V"]').then((text) => {
+					let nextDay = parseInt(Cypress.env('text1', text.text()))
+					Cypress.env('nextDay', nextDay)
+					cy.contains('div', Cypress.env('nextDay') + 1).click()
+				})
+			})
+	}
+	selectSameReturnDay() {
+		this.get
+			.actualMonth()
+			.eq(1)
+			.within(() => {
+				cy.get('div[class=theme__days___3kAIy]').within(() => {
+					cy.contains('div', Cypress.env('nextDay') + 1).click()
+				})
 			})
 	}
 }

@@ -15,10 +15,11 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
-import 'cypress-wait-until';
+import 'cypress-wait-until'
 import 'cypress-plugin-api'
-import 'cypress-xpath';
-
+import 'cypress-xpath'
+import { removeLogs } from '@helper/RemoveLogs'
+removeLogs()
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
