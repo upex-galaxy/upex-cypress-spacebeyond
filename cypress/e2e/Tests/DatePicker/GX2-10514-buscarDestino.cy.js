@@ -1,5 +1,5 @@
 import { buscarDestinoPage } from '@pages/GX2-10514-buscarDestino.Page'
-import { faker } from '@faker-js/faker'
+
 describe('GX2-10514 | SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasajeros', () => {
 	beforeEach('Precondición', () => {
 		cy.visit('https://demo.testim.io/')
@@ -18,15 +18,31 @@ describe('GX2-10514 | SpaceBeyond | Datepicker | Buscar destino por fecha y grup
 		cy.get('[class^="theme__dropdown___co-4M"]').first().click()
 		cy.get('div[data-react-toolbox="dropdown"] ul').contains('2').click()
 */
-		
-		buscarDestinoPage.selectDeparting() 
-		buscarDestinoPage.randomDays() 
-		buscarDestinoPage.getTextForAssert()
 
+		buscarDestinoPage.selectDeparting()
+		buscarDestinoPage.randomDays()
+		buscarDestinoPage.getTextForAssertDeparting()
 		buscarDestinoPage.selectReturning()
-		buscarDestinoPage.randomDays() 
-		buscarDestinoPage.getTextForAssert()
+		buscarDestinoPage.randomDays()
+		buscarDestinoPage.getTextForAssertReturning()
+	
+		buscarDestinoPage.selectDropAdults()
+		buscarDestinoPage.randomSelectAdults()
 		
+		buscarDestinoPage.selectDropChildren()
+		buscarDestinoPage.randomSelectChildren()
+			
+		buscarDestinoPage.get.buttonDestination()
+			.first()
+					.click()
+					.then(() => {
+						const TotalTrav = buscarDestinoPage.totalPassenger()
+						cy.log(TotalTrav)
+						cy.get('h3').should('contain', `${TotalTrav} travelers`)
+						const dates = buscarDestinoPage.setDates().dateDeparting - buscarDestinoPage.setDates().dateReturning
+						cy.get('h3').should('have.to', `${dates}`)
+					})
+			
 	})
 	it('10515 | TC2 : Validar buscar destino solo por fecha de partida y retorno. ', () => {})
 	it('10515 | TC3 : Validar buscar destino destino solo por cantidad y tipo de pasajeros ', () => {})
