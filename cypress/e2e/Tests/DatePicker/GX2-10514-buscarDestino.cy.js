@@ -1,4 +1,18 @@
 import { buscarDestinoPage } from '@pages/GX2-10514-buscarDestino.Page'
+const selectTravelAndGetInformation = () => {
+	buscarDestinoPage.selectDeparting()
+	buscarDestinoPage.randomDaysDeparting(3)
+	
+	buscarDestinoPage.selectReturning()
+	buscarDestinoPage.randomDaysReturning(2)
+	
+}
+const selectPassenger = () => {
+	buscarDestinoPage.selectDropAdults()
+	buscarDestinoPage.randomSelectAdults()
+	buscarDestinoPage.selectDropChildren()
+	buscarDestinoPage.randomSelectChildren()
+}
 
 describe('GX2-10514 | SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de pasajeros', () => {
 	beforeEach('Precondición', () => {
@@ -6,32 +20,8 @@ describe('GX2-10514 | SpaceBeyond | Datepicker | Buscar destino por fecha y grup
 		cy.url().should('contain', 'testim')
 	})
 	it('10515 | TC1 : Validar buscar destino por fecha de partida y retorno junto con tipo de pasajero ', () => {
-		//buscarDestinoPage.clickDataPicker()
-		/*	cy.get('[data-react-toolbox="date-picker"] input').eq(0).click()
-		cy.get('[data-react-toolbox="day"][class*=theme__active] span').click()
-		cy.get('[data-react-toolbox="button"]').contains('Ok').click()
-
-		cy.get('[data-react-toolbox="date-picker"]').eq(1).click()
-		cy.get('#right').click()
-		cy.get('[data-react-toolbox="day"] span').contains('15').click()
-		cy.get('[data-react-toolbox="button"]').contains('Ok').click()
-		cy.get('[class^="theme__dropdown___co-4M"]').first().click()
-		cy.get('div[data-react-toolbox="dropdown"] ul').contains('2').click()
-*/
-
-		buscarDestinoPage.selectDeparting()
-		buscarDestinoPage.randomDays()
-		buscarDestinoPage.getTextForAssertDeparting()
-		buscarDestinoPage.selectReturning()
-		buscarDestinoPage.randomDays()
-		buscarDestinoPage.getTextForAssertReturning()
-
-		buscarDestinoPage.selectDropAdults()
-		buscarDestinoPage.randomSelectAdults()
-
-		buscarDestinoPage.selectDropChildren()
-		buscarDestinoPage.randomSelectChildren()
-
+		selectTravelAndGetInformation()
+		selectPassenger()
 		buscarDestinoPage.get
 			.buttonDestination()
 			.first()
@@ -40,41 +30,42 @@ describe('GX2-10514 | SpaceBeyond | Datepicker | Buscar destino por fecha y grup
 				const TotalTrav = buscarDestinoPage.totalPassenger()
 				cy.log(TotalTrav)
 				cy.get('h3').should('contain', `${TotalTrav} travelers`)
-				const dates = buscarDestinoPage.setDates().dateDeparting - buscarDestinoPage.setDates().dateReturning
-				cy.get('h3').should('have.to', `${dates}`)
+				const monthDeparting = buscarDestinoPage.getTextMonthDeparting()
+				const dayDeparting = buscarDestinoPage.getTextDayDeparting()
+				const monthReturning = buscarDestinoPage.getTextMonthReturning()
+				const dayReturning = buscarDestinoPage.getTextDayReturning()
+				cy.log(monthDeparting)
+				cy.get('h3').should('contain', `${monthDeparting} ${dayDeparting}`)
+				cy.get('h3').should('contain', `${monthReturning} ${dayReturning}`)
 			})
 	})
 	it('10515 | TC2 : Validar buscar destino solo por fecha de partida y retorno. ', () => {
-		buscarDestinoPage.selectDeparting()
-		buscarDestinoPage.randomDays()
-		buscarDestinoPage.getTextForAssertDeparting()
-		buscarDestinoPage.selectReturning()
-		buscarDestinoPage.randomDays()
-		buscarDestinoPage.getTextForAssertReturning()
-		buscarDestinoPage.get
-			.buttonDestination()
-			.first()
-			.click()
-			.then(() => {
-				const dates = buscarDestinoPage.setDates().dateDeparting - buscarDestinoPage.setDates().dateReturning
-				cy.get('h3').should('have.to', `${dates}`)
-			})
+			selectTravelAndGetInformation()
+			buscarDestinoPage.get
+				.buttonDestination()
+				.first()
+				.click()
+				.then(() => {
+					const monthDeparting = buscarDestinoPage.getTextMonthDeparting()
+					const dayDeparting = buscarDestinoPage.getTextDayDeparting()
+					const monthReturning = buscarDestinoPage.getTextMonthReturning()
+					const dayReturning = buscarDestinoPage.getTextDayReturning()
+					cy.log(monthDeparting)
+					cy.get('h3').should('contain', `${monthDeparting} ${dayDeparting}`)
+					cy.get('h3').should('contain', `${monthReturning} ${dayReturning}`)
+				})
 	})
 	it('10515 | TC3 : Validar buscar destino destino solo por cantidad y tipo de pasajeros ', () => {
-		buscarDestinoPage.selectDropAdults()
-		buscarDestinoPage.randomSelectAdults()
-
-		buscarDestinoPage.selectDropChildren()
-		buscarDestinoPage.randomSelectChildren()
-
-		buscarDestinoPage.get
-			.buttonDestination()
-			.first()
-			.click()
-			.then(() => {
-				const TotalTrav = buscarDestinoPage.totalPassenger()
-				cy.log(TotalTrav)
-				cy.get('h3').should('contain', `${TotalTrav} travelers`)
-			})
+			selectPassenger()
+			buscarDestinoPage.get
+				.buttonDestination()
+				.first()
+				.click()
+				.then(() => {
+					const TotalTrav = buscarDestinoPage.totalPassenger()
+					cy.log(TotalTrav)
+					cy.get('h3').should('contain', `${TotalTrav} travelers`)
+				})
 	})
+	
 })

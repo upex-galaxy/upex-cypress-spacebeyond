@@ -9,6 +9,7 @@ class BuscarDestino {
 		selectAdults: () => cy.get('[data-react-toolbox="dropdown"]'),
 		assertSelectAdult: () => cy.get('[data-react-toolbox="dropdown"] input'),
 		listDropdown: () => cy.get("ul[class*='WhiteDropDown']"),
+		titleMonth: () => cy.get('span.theme__title___2Ue3-'),
 	}
 
 	selectDeparting() {
@@ -27,56 +28,86 @@ class BuscarDestino {
 		cy.get("[data-react-toolbox='button']").contains('Ok').click()
 	}
 
-	selectDay() {
-		this.get.onlyDaysEnabled().then(($days) => {
-			const numDays = $days.length - 1
-			const dayRandom = Math.floor(Math.random() * numDays)
-			this.get.buttonRight().click()
-			cy.wrap($days)
-				.eq(dayRandom)
-				.then(($Day) => {
-					const textDay = $Day.text()
-					cy.log(textDay)
-					cy.wrap($Day).click()
-				})
-		})
-	}
-	getTextForAssertDeparting() {
-		cy.wait(500)
-		this.get
-			.datePicker()
-			.eq(0)
-			.its('val')
-			.then((val) => {
-				Cypress.env('valueDateDeparting', val)
-				cy.log(val)
-			})
-	}
-	getTextForAssertReturning() {
-		cy.wait(500)
-		this.get
-			.datePicker()
-			.eq(0)
-			.its('val')
-			.then((val) => {
-				Cypress.env('valueDateReturning', val)
-				cy.log(val)
-			})
-	}
-
-	randomDays() {
+	randomDaysDeparting(num) {
 		this.get.wrapDatePicker().within(() => {
-			this.get.buttonRight().click()
-			this.get.onlyDaysEnabled().then((days) => {
-				cy.log(days)
-				if (assert(days.length > 0)) {
-					cy.log('>0')
-					this.selectDay()
-				} 
+			for (let i = 0; i < num; i++) {
+				this.get.buttonRight().click()
+			}
+			cy.wait(500)
+			this.get.titleMonth().then(($month) => {
+				cy.wrap($month).then(($Month) => {
+					const textDate = $Month.text()
+					cy.log('el texto del mes es:' + textDate)
+					Cypress.env('textOnlyMonthDeparting', textDate)
+				})
+			})
+			this.get.onlyDaysEnabled().then(($days) => {
+				const numDays = $days.length - 1
+				cy.log('la cantidad de dias es:' + numDays)
+				const dayRandom = Math.floor(Math.random() * numDays)
+				cy.wrap($days)
+					.eq(dayRandom)
+					.then(($Day) => {
+						const textDay = $Day.text()
+						cy.log('el texto del dia es:' + textDay)
+						Cypress.env('textOnlyDayDeparting', textDay)
+						cy.wrap($Day).click()
+					})
 			})
 			this.buttonConfirm()
 		})
 	}
+	getTextMonthDeparting() {
+		const onlyMonthDeparting = Cypress.env('textOnlyMonthDeparting').substring(0, 3)
+		return onlyMonthDeparting
+	}
+	getTextDayDeparting() {
+		const dayDeparting = Cypress.env('textOnlyDayDeparting')
+		return dayDeparting
+	}
+	randomDaysReturning(num) {
+		this.get
+			.wrapDatePicker()
+			.first()
+			.within(() => {
+				for (let i = 0; i < num; i++) {
+					this.get.buttonRight().click()
+				}
+				cy.wait(500)
+				this.get.titleMonth().then(($month) => {
+					cy.wrap($month).then(($Month) => {
+						const textDate = $Month.text()
+						cy.log('el texto del mes es:' + textDate)
+						const onlyMonth = textDate.substring(0, 3)
+						Cypress.env('textOnlyMonthReturning', onlyMonth)
+						cy.log('solo el mes es:' + onlyMonth)
+					})
+				})
+				this.get.onlyDaysEnabled().then(($days) => {
+					const numDays = $days.length - 1
+					cy.log('la cantidad de dias es:' + numDays)
+					const dayRandom = Math.floor(Math.random() * numDays)
+					cy.wrap($days)
+						.eq(dayRandom)
+						.then(($Day) => {
+							const textDay = $Day.text()
+							cy.log('el texto del dia es:' + textDay)
+							Cypress.env('textOnlyDayReturning', textDay)
+							cy.wrap($Day).click()
+						})
+				})
+				this.buttonConfirm()
+			})
+	}
+	getTextMonthReturning() {
+		const onlyMonthReturning = Cypress.env('textOnlyMonthReturning').substring(0, 3)
+		return onlyMonthReturning
+	}
+	getTextDayReturning() {
+		const dayReturning = Cypress.env('textOnlyDayReturning')
+		return dayReturning
+	}
+
 	randomSelectAdults() {
 		this.get
 			.listDropdown()
@@ -117,15 +148,6 @@ class BuscarDestino {
 		const adults = parseInt(Cypress.env('valueSelectAdult'))
 		const children = parseInt(Cypress.env('valueSelectChildren'))
 		return adults + children
-	}
-	setDates() {
-		const departingDate = Cypress.env('DepartingDate')
-		const returningDate = Cypress.env('ReturningDate')
-		let departing = new Date(departingDate)
-		let returning = new Date(returningDate)
-		let dateDeparting = departing.toLocaleDateString('default', { month: 'short', day: 'numeric' })
-		let dateReturning = returning.toLocaleDateString('default', { month: 'short', day: 'numeric' })
-		return { dateDeparting, dateReturning };
 	}
 }
 export const buscarDestinoPage = new BuscarDestino()
