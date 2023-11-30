@@ -25,7 +25,6 @@ describe('GX2-10514 | SpaceBeyond | Datepicker | Buscar destino por fecha y grup
 		buscarDestinoPage.get
 			.buttonDestination()
 			.first()
-			.click()
 			.then(() => {
 				const TotalTrav = buscarDestinoPage.totalPassenger()
 				cy.log(TotalTrav)
@@ -41,22 +40,24 @@ describe('GX2-10514 | SpaceBeyond | Datepicker | Buscar destino por fecha y grup
 	})
 	it('10515 | TC2 : Validar buscar destino solo por fecha de partida y retorno. ', () => {
 			selectTravelAndGetInformation()
-			
+			buscarDestinoPage.get
+				.buttonDestination()
+				.first()
+				.then(() => {
 					const monthDeparting = buscarDestinoPage.getTextMonthDeparting()
 					const dayDeparting = buscarDestinoPage.getTextDayDeparting()
 					const monthReturning = buscarDestinoPage.getTextMonthReturning()
 					const dayReturning = buscarDestinoPage.getTextDayReturning()
-					cy.log(monthDeparting)
+					cy.log(monthReturning)
 					cy.get('h3').should('contain', `${monthDeparting} ${dayDeparting}`)
 					cy.get('h3').should('contain', `${monthReturning} ${dayReturning}`)
-				
+				})
 	})
 	it('10515 | TC3 : Validar buscar destino destino solo por cantidad y tipo de pasajeros ', () => {
 			selectPassenger()
 			buscarDestinoPage.get
 				.buttonDestination()
 				.first()
-				.click()
 				.then(() => {
 					const TotalTrav = buscarDestinoPage.totalPassenger()
 					cy.log(TotalTrav)
