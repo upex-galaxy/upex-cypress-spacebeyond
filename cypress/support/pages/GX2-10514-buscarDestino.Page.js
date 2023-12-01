@@ -41,6 +41,7 @@ class BuscarDestino {
 					Cypress.env('textOnlyMonthDeparting', textDate)
 				})
 			})
+			cy.wait(500)
 			this.get.onlyDaysEnabled().then(($days) => {
 				const numDays = $days.length - 1
 				cy.log('la cantidad de dias es:' + numDays)
@@ -84,7 +85,7 @@ class BuscarDestino {
 					})
 				})
 				this.get.onlyDaysEnabled().then(($days) => {
-					const numDays = $days.length - 1
+					const numDays = ($days.length - 1) / 2
 					cy.log('la cantidad de dias es:' + numDays)
 					const dayRandom = Math.floor(Math.random() * numDays)
 					cy.wrap($days)
