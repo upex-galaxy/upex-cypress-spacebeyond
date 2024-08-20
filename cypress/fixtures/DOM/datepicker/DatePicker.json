@@ -1,7 +1,0 @@
-{
-    
-        "DatePicker":"[data-react-toolbox='date-picker'] input",
-        "Dropdown":"[data-react-toolbox='dropdown']",
-        "Elements":"ul[class*='WhiteDropDown']",
-        "SearchButton":"[class*='CTAButton']"
-}

@@ -18,12 +18,12 @@ jobs:
 
         steps:
             - name: 💻Checkout
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
 
             - name: 💿Install Node.js
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@v4
               with:
-                  node-version: 16
+                  node-version: 20
 
             - name: 🧬Install All Dependencies
               run: |
@@ -40,7 +40,6 @@ jobs:
                         "stepDefinitions": "cypress/e2e/cucumber-test/stepDefinitions/*.{js,ts}",
                         "json": {
                           "enabled": false,
-                          "formatter": "./cucumber-formatter/cucumber-json-formatter",
                           "output": "./reports/cucumber-report.json"
                         },
                         "messages": {
@@ -88,12 +87,12 @@ jobs:
 
         steps:
             - name: 💻Checkout
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
 
             - name: 💿Install Node.js
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@v4
               with:
-                  node-version: 16
+                  node-version: 20
 
             - name: 🧬Install All Dependencies
               run: |
@@ -110,7 +109,6 @@ jobs:
                         "stepDefinitions": "cypress/e2e/cucumber-test/stepDefinitions/*.{js,ts}",
                         "json": {
                           "enabled": false,
-                          "formatter": "./cucumber-formatter/cucumber-json-formatter",
                           "output": "./reports/cucumber-report.json"
                         },
                         "messages": {
