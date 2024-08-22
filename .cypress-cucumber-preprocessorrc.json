@@ -3,7 +3,6 @@
 	"stepDefinitions": "cypress/e2e/cucumber-test/stepDefinitions/*.{js,ts}",
 	"json": {
 		"enabled": false,
-		"formatter": "./cucumber-formatter/cucumber-json-formatter.exe",
 		"output": "./reports/cucumber-report.json"
 	},
 	"messages": {
