@@ -1,33 +1,20 @@
 class Destination {
 	get = {
-		//Inicio de se
-		inputUserName: () => cy.get('form div input[tabindex="1"]'),
-		inputPassword: () => cy.get('form div input[tabindex="2"]'),
-		buttonLogIn: () => cy.get('[tabindex="3"]'),
-		labelHello: () => cy.get('[class="mui-dropdown "]'),
 		//primer formulario
 		selectDestino: () => cy.get('[class*="cardActions"] [class*="button"]'),
 		selectPrecio: () => cy.get('[class*="cardActions"] span'),
 		//segundo formulario
 		inputName1: () => cy.get('div input[type="text"]').eq(4),
-		//inputName1: () => cy.get('class= "theme__hint___2D9g-"').eq(0),
 		inputEmail1: () => cy.get('div input[type="email"]'),
 		inputSecurity1: () => cy.get('div input[type="text"]').eq(5),
 		inputPhone1: () => cy.get('div input[type="tel"]'),
 		labelPriceCheckout: () => cy.get('[class*="OrderSummary__headline-1"]'),
-		buttonSubmit: () => cy.get('[class*="CustomerInfo__dropzone-icon___1knA"]'),
+		//buttonSubmit: () => cy.get('[class*="CustomerInfo__dropzone-icon___1knA"]'),
+		buttonSubmit: () => cy.get('input[type="file"]'),
 		buttonPay: () => cy.get('[class*="pay-button"]'),
+		checkTerms: () => cy.get('[class="theme__check___2B20W"]'),
 	}
 
-	typeUserName(userName) {
-		this.get.inputUserName().type(userName)
-	}
-	typePassword(password) {
-		this.get.inputPassword().type(password)
-	}
-	clickLogIn() {
-		this.get.buttonLogIn().click()
-	}
 	selectRandomDestino() {
 		return this.get
 			.selectDestino()
@@ -56,6 +43,13 @@ class Destination {
 	}
 	typeSocialSecurity(inputSocialSecurity) {
 		this.get.inputSecurity1().type(inputSocialSecurity)
+	}
+	clickSubmit() {
+		this.get.buttonSubmit().attachFile('/images/upexlogo.png')
+	}
+
+	checkTerms() {
+		this.get.checkTerms().click()
 	}
 	clickPay() {
 		this.get.buttonPay().click()
