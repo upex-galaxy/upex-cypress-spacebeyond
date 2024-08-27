@@ -1,4 +1,4 @@
-import { Given, And, When, Then } from '@badeball/cypress-cucumber-preprocessor'
+import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor'
 import { loginSpace } from '@pages/LoginSpace.Page'
 import { removeLogs } from '@helper/RemoveLogs'
 import { faker } from '@faker-js/faker'
@@ -19,7 +19,7 @@ context('SpaceBeyond | Account | Log-In and Log-Out', () => {
 			loginSpace.get.usernameInput().should('have.value', username)
 			loginSpace.get.passwordInput().should('have.value', password)
 		})
-		And('hace clic en el botón "Log In"', () => {
+		When('hace clic en el botón "Log In"', () => {
 			loginSpace.ClickLoginButton()
 		})
 
@@ -27,7 +27,7 @@ context('SpaceBeyond | Account | Log-In and Log-Out', () => {
 			cy.url().should('contain', data.HomeURL)
 		})
 
-		And('el enlace de inicio de sesión de la barra de navegación debe mostrar {string} como bienvenida', (mensaje) => {
+		Then('el enlace de inicio de sesión de la barra de navegación debe mostrar {string} como bienvenida', (mensaje) => {
 			loginSpace.GetLogoutText().then((msj) => {
 				expect(msj).to.include(mensaje)
 			})
