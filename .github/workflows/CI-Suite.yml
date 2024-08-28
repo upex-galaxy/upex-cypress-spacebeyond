@@ -16,33 +16,24 @@ on: # This Run is a template. The correct "Run On" should be: Any except QA and 
             - QA
 
 jobs:
-    Build-Cypress-TestSuite-AfterPush:
+    TestSuite:
         runs-on: ubuntu-latest
 
         steps:
             - name: 💻Checkout
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
 
             - name: 💿Install Node.js
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@v4
               with:
-                  node-version: 16
+                  node-version: 20
+
+            - name: 🍙 Bun Setup
+              uses: oven-sh/setup-bun@v2
 
             - name: 🧬Install All Dependencies
               run: |
-                  yarn
-
-            - name: 💾Download Cucumber-Formatter
-              uses: suisei-cn/actions-download-file@v1.3.0
-              with:
-                  url: '[Linux-cucumber-formatter](https://github.com/cucumber/json-formatter/releases/download/v19.0.0/cucumber-json-formatter-linux-amd64)'
-                  target: cucumber-formatter/
-                  auto-match: true
-
-            - name: 🔧Install Cucumber-Formatter
-              run: |
-                  mv cucumber-formatter/cucumber-json-formatter-linux-amd64 cucumber-formatter/cucumber-json-formatter
-                  chmod +x cucumber-formatter/cucumber-json-formatter
+                  bun install
 
             - name: 🔌Cucumber Preprocessor JSON Setup
               uses: DamianReeves/write-file-action@master
@@ -55,7 +46,6 @@ jobs:
                         "stepDefinitions": "cypress/e2e/cucumber-test/stepDefinitions/*.{js,ts}",
                         "json": {
                           "enabled": true,
-                          "formatter": "./cucumber-formatter/cucumber-json-formatter",
                           "output": "./reports/cucumber-report.json"
                         },
                         "messages": {
@@ -69,7 +59,7 @@ jobs:
               with:
                   browser: chrome
                   command: | #EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-                      yarn run file cypress/e2e/Tests/Accounts/GX3-4775-Account-login-and-logout.cy.js
+                      bun run file cypress/e2e/Tests/Booking/GX3-4839-destination.cy.js
 
             - name: ✅Import Test Results to Xray
               if: always()
@@ -79,13 +69,13 @@ jobs:
                   password: ${{secrets.XRAY_CLIENT_SECRET}}
                   testFormat: 'junit' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
                   testPaths: 'reports/test-results.xml' #OPCIONES: '/test-results.xml' o 'cucumber-report.json'
-                  testExecKey: 'GX3-4779' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
+                  testExecKey: 'GX3-4843' #EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
                   projectKey: 'GX3' #EDITAR KEY DE PROYECTO
 
             - name: 🔧Generate Cucumber HTML Report
               if: always()
               run: |
-                  yarn run report:cucumber
+                  bun run report:cucumber
 
             - name: 📊Upload Artifact 🍵Cucumber HTML Report
               uses: actions/upload-artifact@v3
@@ -95,10 +85,11 @@ jobs:
 
             - name: 📊Upload Artifact ☕Mochawesome HTML Report
               if: always()
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v4
               with:
                   name: mochaTest-report
                   path: mochawesome-report
+                  retention-days: 14
 
             - name: 🔔Slack Notification of Done
               if: always()
