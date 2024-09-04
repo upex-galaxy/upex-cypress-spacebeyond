@@ -9,21 +9,20 @@ class dataPicker {
 		dropDownChildren: () => cy.get('[class*="WhiteDropDown__inputInputElement"]').eq(1),
 		buttonSelectDestination: () => cy.get('[class*="CTAButton__primary___WQCBB Hero_"]'),
 		elementInfoGallery: () => cy.get('.Gallery__headline-2___3amRj'),
+		buttonRightMoth: () => cy.get('[id="right"]'),
 	}
 
 	clickDateDeparting() {
 		this.get.inputDateDeparting().click()
 	}
 	clickDay() {
-		this.get
-			.inputDay()
-			.its('length')
-			.then((cant) => {
-				const randomsDay = Cypress._.random(0, cant - 1)
-				this.get.inputDay().eq(randomsDay).should('exist').click()
-			})
+		this.get.inputDay().then(() => {
+			const randomsDay = Cypress._.random(0, 15)
+			this.get.inputDay().eq(randomsDay).should('exist').click()
+		})
 	}
 	clickButtonOk() {
+		cy.wait(800)
 		this.get.buttonOk().click()
 	}
 
@@ -32,8 +31,18 @@ class dataPicker {
 	}
 
 	clickDateReturn() {
-		this.get.inputDateReturn().click()
-		cy.wait(800)
+		this.get.inputDateReturn().click().wait(800)
+	}
+
+	clickButtonRightMoth() {
+		this.get.buttonRightMoth().click().wait(800)
+	}
+
+	selectDayReturn(indexDay) {
+		this.get
+			.inputDay()
+			.eq(indexDay - 1)
+			.click()
 	}
 
 	selectDropDwOf(selectDropDw) {
