@@ -14,12 +14,15 @@ import 'cypress-downloadfile/lib/downloadFileCommand'
 import { LogInLogOutPage } from '@pages/GX3-4775-Account-login-and-logout.Page'
 //Login SpaceBeyond
 Cypress.Commands.add('loginSpace', (username, password) => {
+
 	cy.fixture('DOM/space/Login.Page').then((the) => {
+
 		username && cy.get(the.username.input).type(username)
 		password && cy.get(the.password.input).type(password)
 		cy.get(the.loginButton).click()
 	})
 })
+
 
 Cypress.Commands.add('login', (username, password) => {
 	LogInLogOutPage.typeUserName(username)

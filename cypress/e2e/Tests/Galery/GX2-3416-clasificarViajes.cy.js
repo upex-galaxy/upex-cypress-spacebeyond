@@ -25,7 +25,7 @@ describe('GX2-3416 Clasificar Viajes por planeta, color y precio', () => {
 
 	it('3417|TC02 Validar destino por seleccion random en dropdown planet color', () => {
 		galeryDestination.selectPlanetColorsRandom().then((planetColor) => {
-			cy.fixture('database/planestsColorNamePrice').then((planetList) => {
+			cy.fixture('data/planestsColorNamePrice').then((planetList) => {
 				const samePlanetColor = planetList.filter(({ color }) => color === planetColor)
 				const namePlanets = samePlanetColor.map(({ name }) => name)
 				galeryDestination.getPlanetName().then((listNamePlanet) => {
@@ -36,7 +36,7 @@ describe('GX2-3416 Clasificar Viajes por planeta, color y precio', () => {
 	})
 
 	it('3417|TC03 Validar destino seleccionado rango de precio', () => {
-		cy.fixture('database/planestsColorNamePrice').then((data) => {
+		cy.fixture('data/planestsColorNamePrice').then((data) => {
 			const numberRandomSlider = Cypress._.random(193, 1800)
 
 			galeryDestination.get
@@ -55,7 +55,7 @@ describe('GX2-3416 Clasificar Viajes por planeta, color y precio', () => {
 		//seleccion planeta random
 		galeryDestination.selectLaunchRandom().then((planetSelected) => {
 			cy.log(planetSelected)
-			cy.fixture('database/planestsColorNamePrice').then((planetList) => {
+			cy.fixture('data/planestsColorNamePrice').then((planetList) => {
 				const namePlanet = planetList.find((objet) => objet.name == planetSelected)
 				let colorPlanet = namePlanet.color
 				cy.log(colorPlanet)

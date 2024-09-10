@@ -3,7 +3,7 @@
 		"target": "ESNext",
 		"allowJs": true,
 		"outDir": "./dist",
-		"moduleResolution": "node",
+		"moduleResolution": "bundler",
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
 		"types": [
@@ -19,7 +19,8 @@
 		"baseUrl": ".",
 		"paths": {
 			"@pages/*": ["./cypress/support/pages/*"],
-			"@helper/*": ["./cypress/support/helper/*"]
+			"@helper/*": ["./cypress/support/helper/*"],
+			"@data/*": ["./cypress/fixtures/data/*"]
 		}
 	},
 	"exclude": ["node_modules", "./dist"],

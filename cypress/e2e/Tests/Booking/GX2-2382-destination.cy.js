@@ -18,7 +18,7 @@ describe('GX2-2382 | TS: ✅SpaceBeyond | Gallery | Clasificar viaje según dest
 		//ya que las cartas no tienen ninguna identificacion por color
 		destinationPage.selectRandomPlanetColor().then((planeColor) => {
 			cy.log(planeColor)
-			cy.fixture('database/planets').then((planetList) => {
+			cy.fixture('data/planets').then((planetList) => {
 				cy.log(planetList)
 				const sameColorPlanets = planetList.filter(({ color }) => color === planeColor)
 				cy.log(sameColorPlanets)
@@ -43,7 +43,7 @@ describe('GX2-2382 | TS: ✅SpaceBeyond | Gallery | Clasificar viaje según dest
 	})
 	it('2383 | TC4: select a random planet color validate that is visible one selected planet random and not visible after by setting a lower maximum price', () => {
 		destinationPage.selectRandomPlanetColor().then((planetColor) => {
-			cy.fixture('database/planets').then((planetList) => {
+			cy.fixture('data/planets').then((planetList) => {
 				const sameColorPlanets = planetList.filter(({ color }) => color === planetColor)
 				cy.log(sameColorPlanets)
 				const planetsByColor = sameColorPlanets.map(({ name }) => name)
@@ -63,7 +63,7 @@ describe('GX2-2382 | TS: ✅SpaceBeyond | Gallery | Clasificar viaje según dest
 	})
 	it('2383 | TC5: select random planet color and validate destination cards empty by selected random planet of different color', () => {
 		destinationPage.selectRandomPlanetColor().then((planetColor) => {
-			cy.fixture('database/planets').then((planetList) => {
+			cy.fixture('data/planets').then((planetList) => {
 				const diffColorPlanetsSelected = planetList.filter(({ color }) => color !== planetColor)
 				cy.log(diffColorPlanetsSelected)
 				const diffPlanetsNameByColorSelected = diffColorPlanetsSelected.map(({ name }) => name)

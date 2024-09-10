@@ -4,7 +4,7 @@ import { LogInLogOutPage } from '@pages/GX3-4775-Account-login-and-logout.Page'
 
 const userName = 'Prueba2'
 const password = 'prueba.234'
-//segundo  formulario
+//segundo  formularioooo
 const inputName = faker.name.firstName()
 const inputEmail = faker.internet.email()
 const inputPhone = faker.phone.number('21########')
