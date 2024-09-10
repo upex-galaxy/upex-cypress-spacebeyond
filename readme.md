@@ -49,7 +49,7 @@ Ahora el Directorio de UPEX Galaxy, será mucho más simple.
 
 ### RESUMEN:
 
-![alt text](image-1.png)
+![image](https://github.com/user-attachments/assets/ff38799f-8202-46c5-8a16-328114e6e4da)
 
 # CÓMO EMPEZAR:
 
