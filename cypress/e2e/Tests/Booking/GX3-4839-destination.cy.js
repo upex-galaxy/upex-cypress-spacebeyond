@@ -7,7 +7,7 @@ const password = 'prueba.234'
 //segundo  formularioooo
 const inputName = faker.name.firstName()
 const inputEmail = faker.internet.email()
-const inputPhone = faker.phone.number('##########')
+const inputPhone = faker.phone.number('21########')
 const inputSocialSecurity = faker.phone.number('###-##-####')
 
 describe('GX3-4839 | SpaceBeyond | Booking | Book a Destination in Checkout', () => {
