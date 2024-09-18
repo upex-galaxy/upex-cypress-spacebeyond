@@ -15,11 +15,8 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
-import 'cypress-wait-until'
 import 'cypress-plugin-api'
-import 'cypress-xpath'
-import { removeLogs } from '@helper/RemoveLogs'
-removeLogs()
+import 'cypress-plugin-steps';
+import '@4tw/cypress-drag-drop';
 
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
+
