@@ -7,6 +7,7 @@ name: 🧪 UPEX CI/CD SanityTest Pipeline
 run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref_name}}
 
 on:
+  push:
   workflow_dispatch:
     inputs:
       system:
@@ -55,9 +56,9 @@ on:
 jobs:
   SanityTest:
     #? El Pipeline "Sanity" es una estrategia de prueba perfecta para verificar que un Módulo entero de la App o una funcionalidad específica funcionen como se espera. Se puede realizar pruebas de cualquier nivel (Unit, Integration, E2E) para esta estrategia de pruebas. También se usa como "Story Testing" para ejecuciones de pruebas de cobertura de US (importar resultados a Jira XRay).
-    runs-on: ${{ github.event.inputs.system }}
+    runs-on: ${{ github.event.inputs.system || 'ubuntu-latest'}}
     environment:
-      name: ${{ github.event.inputs.environment }}
+      name: ${{ github.event.inputs.environment || 'QA'}}
     env:
       MOCHA_REPORT_DIR: cypress/tests_reports/chrome_mocha_report
 
@@ -103,7 +104,7 @@ jobs:
         testPaths: 'cypress/tests_results/junit/chrome_junit_report.xml' #! NO CAMBIAR
         testExecKey: ${{ github.event.inputs.xray_tx }} #! NO CAMBIAR
         projectKey: ${{ github.event.inputs.xray_project }} #! NO CAMBIAR
-        testEnvironments: ${{ github.event.inputs.environment }}
+        testEnvironments: ${{ github.event.inputs.environment || 'QA'}}
 
     - name: 📊 Upload Artifact Mochawesome Report
       if: always()
