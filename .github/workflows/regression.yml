@@ -6,6 +6,7 @@ name: 🧪 UPEX CI/CD Regression Pipeline
 run-name: ${{github.actor}}👨🏻‍🔬 triggered Regression in ${{github.ref_name}}
 
 on:
+  push:
   #* manual trigger:
   workflow_dispatch:
     inputs:
@@ -35,9 +36,9 @@ on:
 jobs:
   SmokeTest:
     #? El Pipeline "Smoke" es una estrategia de prueba perfecta para verificar que todos los servicios de la aplicación funcionen como se espera después de nuevas implementaciones y lanzamientos, y útil antes de correr una Regresión. Se recomienda pruebas a nivel "Integration" para esta estraegia de pruebas.
-    runs-on: ${{ github.event.inputs.system }}
+    runs-on: ${{ github.event.inputs.system || 'ubuntu-latest'}}
     environment:
-      name: ${{ github.event.inputs.environment }}
+      name: ${{ github.event.inputs.environment || 'QA'}}
     env:
       MOCHA_REPORT_DIR: cypress/tests_reports/chrome_mocha_report
 
@@ -72,9 +73,9 @@ jobs:
   RegressionTesting:
     needs: [SmokeTest] #? correrá después de que el SmokeTest haya terminado exitosamente.
     #? El Pipeline "Regression" es una estrategia de prueba perfecta para verificar que todas las funcionalidades de la aplicación funcionen como se espera después de nuevas implementaciones y lanzamientos. Se recomienda pruebas a nivel "End-to-End" para esta estrategia de pruebas.
-    runs-on: ${{ github.event.inputs.system }}
+    runs-on: ${{ github.event.inputs.system || 'ubuntu-latest'}}
     environment:
-      name: ${{ github.event.inputs.environment }}
+      name: ${{ github.event.inputs.environment || 'QA'}}
     env:
       MOCHA_REPORT_DIR: cypress/tests_reports/chrome_mocha_report
 
@@ -120,7 +121,7 @@ jobs:
         testPaths: 'cypress/tests_results/junit/chrome_junit_report.xml' #! NO CAMBIAR
         testExecKey: 'GX3-1526' #! NO CAMBIAR
         projectKey: 'GX3' #! NO CAMBIAR
-        testEnvironments: ${{ github.event.inputs.environment }}
+        testEnvironments: ${{ github.event.inputs.environment || 'QA'}}
 
     - name: 📊 Upload Artifact Mochawesome Report
       if: always()
