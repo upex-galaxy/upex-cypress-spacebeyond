@@ -28,7 +28,7 @@
   resolved "https://registry.yarnpkg.com/@babel/compat-data/-/compat-data-7.25.4.tgz#7d2a80ce229890edcf4cc259d4d696cb4dae2fcb"
   integrity sha512-+LGRog6RAsCJrrrg/IO6LGmpphNe5DiK30dGjCoxxeGv49B10/3XYGxPsAwrDlMFcFEvdAUavDT8r9k/hSyQqQ==
 
-"@babel/core@^7.25.2":
+"@babel/core@7.25.2":
   version "7.25.2"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.25.2.tgz#ed8eec275118d7613e77a352894cd12ded8eba77"
   integrity sha512-BBt3opiCOxUr9euZ5/ro/Xv8/V7yJ5bjYMqG/C1YAo8MIKAnumZalCN+msbci3Pigy4lIQfPUpfMM27HMGaYEA==
@@ -49,7 +49,7 @@
     json5 "^2.2.3"
     semver "^6.3.1"
 
-"@babel/eslint-parser@^7.25.1":
+"@babel/eslint-parser@7.25.1":
   version "7.25.1"
   resolved "https://registry.yarnpkg.com/@babel/eslint-parser/-/eslint-parser-7.25.1.tgz#469cee4bd18a88ff3edbdfbd227bd20e82aa9b82"
   integrity sha512-Y956ghgTT4j7rKesabkh5WeqgSFZVFwaPR0IWFm7KFHFmmJ4afbG49SmfW4S+GyRPx0Dy5jxEWA5t0rpxfElWg==
@@ -720,7 +720,7 @@
   resolved "https://registry.npmjs.org/@types/node/-/node-14.18.43.tgz"
   integrity sha512-n3eFEaoem0WNwLux+k272P0+aq++5o05bA9CfiwKPdYPB5ZambWKdWoeHy7/OJiizMhzg27NLaZ6uzjLTzXceQ==
 
-"@types/node@>=13.7.0", "@types/node@^22.5.5":
+"@types/node@22.5.5", "@types/node@>=13.7.0":
   version "22.5.5"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-22.5.5.tgz#52f939dd0f65fc552a4ad0b392f3c466cc5d7a44"
   integrity sha512-Xjs4y5UPO/CLdzpgR6GirZJx36yScjh73+2NlLlkFRSoQN8B0DpfXPdZGnvVmLRLOsqDpOfTNv7D9trgGhmOIA==
@@ -1487,7 +1487,7 @@ create-require@^1.1.0:
   resolved "https://registry.yarnpkg.com/create-require/-/create-require-1.1.1.tgz#c1d7e8f1e5f6cfc9ff65f9cd352d37348756c333"
   integrity sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==
 
-cross-env@^7.0.3:
+cross-env@7.0.3:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-7.0.3.tgz#865264b29677dc015ba8418918965dd232fc54cf"
   integrity sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==
@@ -1552,7 +1552,7 @@ cypress-plugin-steps@^1.1.1:
   resolved "https://registry.yarnpkg.com/cypress-plugin-steps/-/cypress-plugin-steps-1.1.1.tgz#862938f7383a72cb2ab75bc1448df7371eb0888c"
   integrity sha512-0TYBp8sIJovW9mfsN0uJXVMqW9XV9rqbX5fFwmbBmz0D2vMZShMD9BkBfjNC3Y812hZoTWw4dLE4UmV6fidycA==
 
-cypress@^13.14.2:
+cypress@13.14.2:
   version "13.14.2"
   resolved "https://registry.yarnpkg.com/cypress/-/cypress-13.14.2.tgz#4237eb7b26de2baeaa1f01e585f965d88fca7f39"
   integrity sha512-lsiQrN17vHMB2fnvxIrKLAjOr9bPwsNbPZNrWf99s4u+DVmCY6U+w7O3GGG9FvP4EUVYaDu+guWeNLiUzBrqvA==
@@ -1956,7 +1956,7 @@ eslint-module-utils@^2.9.0:
   dependencies:
     debug "^3.2.7"
 
-eslint-plugin-cypress@^3.5.0:
+eslint-plugin-cypress@3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-cypress/-/eslint-plugin-cypress-3.5.0.tgz#380ef5049ad80ebeca923db69e4aa96e72fcd893"
   integrity sha512-JZQ6XnBTNI8h1B9M7wJSFzc48SYbh7VMMKaNTQOFa3BQlnmXPrVc4PKen8R+fpv6VleiPeej6VxloGb42zdRvw==
@@ -1992,7 +1992,7 @@ eslint-plugin-only-warn@1.1.0:
   resolved "https://registry.npmjs.org/eslint-plugin-only-warn/-/eslint-plugin-only-warn-1.1.0.tgz"
   integrity sha512-2tktqUAT+Q3hCAU0iSf4xAN1k9zOpjK5WO8104mB0rT/dGhOa09582HN5HlbxNbPRZ0THV7nLGvzugcNOSjzfA==
 
-eslint-plugin-prettier@^5.2.1:
+eslint-plugin-prettier@5.2.1:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-5.2.1.tgz#d1c8f972d8f60e414c25465c163d16f209411f95"
   integrity sha512-gH3iR3g4JfF+yYPaJYkN7jEl9QbweL/YfkoRlNnuIEHEz1vHVlCmWOS+eGGiRuzHQXdJFCOTxRgvju9b8VUmrw==
