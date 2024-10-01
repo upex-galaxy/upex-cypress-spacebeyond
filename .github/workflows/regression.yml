@@ -57,18 +57,18 @@ jobs:
         bun-version: latest
 
     - name: 🧬 Install Project Dependencies
-      run: bun install
+      run: yarn install
 
     - name: 🔎 Check Typescript Code
       run: | #? Corre el linter de TypeScript para verificar errores de sintaxis.
-        bun run check:ts
+        yarn run check:ts
 
     - name: 🧪 Cypress Run Sanity Test
       uses: cypress-io/github-action@v4
       with:
         browser: chrome
         command: |
-          bun run test:smoke:ci
+          yarn run test:smoke:ci
 
   RegressionTesting:
     needs: [SmokeTest] #? correrá después de que el SmokeTest haya terminado exitosamente.
@@ -94,22 +94,22 @@ jobs:
         bun-version: latest
 
     - name: 🧬 Install Project Dependencies
-      run: bun install
+      run: yarn install
 
     - name: 🔎 Check Typescript Code
       run: | #? Corre el linter de TypeScript para verificar errores de sintaxis.
-        bun run check:ts
+        yarn run check:ts
 
     - name: 🧪 Cypress Run Sanity Test
       uses: cypress-io/github-action@v4
       with:
         browser: chrome
         command: |
-          bun run regression:chrome:ci
+          yarn run regression:chrome:ci
 
     - name: 📬 Generate JUnit/Mocha Report
       if: always()
-      run: bun run chrome:report
+      run: yarn run chrome:report
 
     - name: ✅ Import Test Results to Xray
       if: always()

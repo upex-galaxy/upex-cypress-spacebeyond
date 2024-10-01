@@ -77,22 +77,22 @@ jobs:
         bun-version: latest
 
     - name: 🧬 Install Project Dependencies
-      run: bun install
+      run: yarn install
 
     - name: 🔎 Check Typescript Code
       run: | #? Corre el linter de TypeScript para verificar errores de sintaxis.
-        bun run check:ts
+        yarn run check:ts
 
     - name: 🧪 Cypress Run Sanity Test
       uses: cypress-io/github-action@v4
       with:
         browser: chrome
         command: |
-          bun run test:sanity:ci ${{ github.event.inputs.test_run }}
+          yarn run test:sanity:ci ${{ github.event.inputs.test_run }}
 
     - name: 📬 Generate JUnit/Mocha Report
       if: always()
-      run: bun run chrome:report
+      run: yarn run chrome:report
 
     - name: ✅ Import Test Results to Xray
       if: always() #? Corre este paso si la variable de entorno está definida
